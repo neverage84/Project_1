@@ -1,0 +1,11 @@
+
+body, html {
+    height: 100%;
+   }
+   
+   .bg {
+       background: url("Images/beer-background-2.jpg") no-repeat center center fixed;
+     
+       background-size: cover;
+       height: 100%;
+   }
