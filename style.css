@@ -12,14 +12,46 @@ body, html {
 
    nav {
        background-color: black;
-       padding: 20px;
+       padding: 30px;
        border-bottom-color: black;
    }
 
-   a {
-       color: white;
-   }
+  
+.MainContent {
+    margin: 0 auto;
+    color: aliceblue;
+    margin-top: 40px;
+}
 
 
 
+.sidebar {
+	display: table-cell;
+	width: 100px;
+	background: black;
+	color: #aaa;
+    padding-top: 20px;
+    border: solid white 1px;
+    height: 600px;
+    opacity: .8;
+    border-radius: 5px;
+   
+}
 
+.img-circle {
+    width: 100px;
+    height: 100px;
+}
+
+h3 {
+    border-bottom: solid white 1px;
+}
+
+.CenterSection {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.FunFacts {
+    margin-left: 10px;
+}
