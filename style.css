@@ -43,15 +43,34 @@ body, html {
     height: 100px;
 }
 
-h3 {
+.underline {
     border-bottom: solid white 1px;
 }
 
 .CenterSection {
     margin-left: 50px;
     margin-right: 50px;
+    background: black;
+	color: #aaa;
+    padding-top: 20px;
+    border: solid white 1px;
+    height: 600px;
+    opacity: .8;
+    border-radius: 5px;
+    padding: 10px;
+    overflow: auto;
 }
 
 .FunFacts {
     margin-left: 10px;
+}
+
+.CenterImages {
+    width: 50px;
+    height: 20px;
+}
+
+.ContentSections {
+    height: 300px;
+    border-bottom: solid white 1px;
 }
