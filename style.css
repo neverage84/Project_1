@@ -11,9 +11,11 @@ body, html {
    }
 
    nav {
-       background-color: black;
-       padding: 30px;
-       border-bottom-color: black;
+    background-color: black;
+    opacity: .8;
+    padding: 30px;
+    border-bottom-color: black;
+    font-size: 24px;
    }
 
   
@@ -73,4 +75,9 @@ body, html {
 .ContentSections {
     height: 300px;
     border-bottom: solid white 1px;
+}
+
+.BeerLogo {
+    width:75px;
+    height: 75px;
 }
