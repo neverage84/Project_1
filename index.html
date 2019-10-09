@@ -22,10 +22,15 @@
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
 
+    
+
 </head>
 
 <body class="bg">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+
+    <!--Had to take this out for ajax to work 
+        
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
@@ -33,7 +38,7 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>-->
 
         <nav class="nav nav-tabs nav-fill">
                 <a class="nav-item nav-link" href="#">Quiz</a>
@@ -63,10 +68,12 @@
                             <img src="https://images-na.ssl-images-amazon.com/images/I/512o-tkHEBL.png" class="CenterImages  ">
                             <h3>Beer Info</h3>
                     </div>
-
-                    <div class="d-flex justify-content-center align-items-center ContentSections">
+<!-- kensen change -->
+                    <div class="d-flex justify-content-center align-items-center ContentSections kensen">
                                 <img src="https://beermaps.com/wp-content/uploads/2019/03/BeerMaps.4.png" class="CenterImages  ">
                                 <h3>Brewery Map</h3>
+
+                                <div id = "main-brewery-view"></div>
                     </div>
                         
                 </div>
@@ -77,15 +84,9 @@
                 
             </div>
         </div>      
-
-
+        <script src="app.js"></script>
+       
 </body>
 
-<!--
-    <a><img src="https://fontmeme.com/permalink/191006/e4a591f2af9d8fa3b9ccf568f8787a59.png" alt="semi-pro-font" border="0"></a>
-<form class="form-inline my-2 my-lg-0 ">
-                <input class="form-control mr-sm-2" type="text" placeholder="Brewery Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
--->
+
 </html>
