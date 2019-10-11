@@ -40,7 +40,15 @@ $(document).ready(function () {
             var nameText = $("<p>").text("Cocktail Name: " + name);
             idDiv.append(nameText);
 
-            // List each of the shows displayed above.
+            var ingredients = [response.drinks[0].strIngredient1 + ", " + response.drinks[0].strIngredient2 + ", " + response.drinks[0].strIngredient4 + ", " + response.drinks[0].strIngredient4];
+            var ingredientsText = $("<p>").text("Ingredients: " + ingredients);
+            idDiv.append(ingredientsText);
+
+            var glass = response.drinks[i].strGlass;
+            var glassText = $("<p>").text("Normally contained in a: " + glass);
+            idDiv.append(glassText);
+
+            // List each of the drinks displayed above.
             $(".quiz-results").prepend(idDiv);
         }
     });
@@ -50,33 +58,4 @@ $(document).ready(function () {
         liquor.push(answer);
     }
 
-
-
-    // var showDiv = $("<div class='show'>");
-
-    // // Store each of the images in its state (animated or still).
-    // var imgURL = response.data[i].images.fixed_height_still.url;
-    // var stillURL = response.data[i].images.fixed_height_still.url;
-    // var animatedURL = response.data[i].images.fixed_height.url;
-    // var image = $("<img>").attr("src", imgURL).attr("class", "gifs").attr("state", "still").attr("clicked-image", animatedURL).attr("still-image", stillURL);
-    // showDiv.append(image);
-
-    // // Store and display the rating data.
-    // var rating = response.data[i].rating;
-    // var ratingText = $("<p>").text("Rating: " + rating.toUpperCase());
-    // showDiv.append(ratingText);
-
-    // // List each of the shows displayed above.
-    // $("#show-view").prepend(showDiv);
-
-    // // Transfer content to HTML
-    // $(".city").html("<h1>" + response.name + " Weather Details</h1>");
-    // $(".wind").text("Wind Speed: " + response.wind.speed);
-    // $(".humidity").text("Humidity: " + response.main.humidity);
-    // $(".temp").text("Temperature (F) " + response.main.temp);
-
-    // // Log the data in the console as well
-    // console.log("Wind Speed: " + response.wind.speed);
-    // console.log("Humidity: " + response.main.humidity);
-    // console.log("Temperature (F): " + response.main.temp);
 });
