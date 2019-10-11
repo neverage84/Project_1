@@ -27,7 +27,9 @@
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
 
+
 </head>
+
 <body class="bg">
     <nav class="nav nav-tabs nav-fill">
         <a class="nav-item nav-link" href="#">Quiz</a>
@@ -35,8 +37,8 @@
         <a><img src="images/Happy-Hour.png" width="50px" height="50px" border="0"></a>
         <a class="nav-item nav-link" href="#">Bars</a>
         <form class="form-inline my-2 my-lg-0 ">
-            <input class="form-control mr-sm-2" type="text" placeholder="Best Long Island Ice Tea">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <input id="SearchField" class="form-control mr-sm-2" type="text" placeholder="Best Long Island Ice Tea">
+            <button id="SubmitButton" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </nav>
     <div class="row MainContent ">
@@ -65,5 +67,9 @@
             <h3 class="underline">Favorite Drinks</h3>
         </div>
     </div>
+    <!-- Google Places API URL -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvcbnSMyaXIVUF_dAd85dXv0aGQb7GTYs&libraries=places">
+    </script>
 </body>
+
 </html>
