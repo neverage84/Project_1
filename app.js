@@ -32,10 +32,7 @@ $(document).ready(function () {
             console.log("Ingredients: " + response.drinks[0].strIngredient1 + ", " + response.drinks[0].strIngredient2 + ", " + response.drinks[0].strIngredient4 + ", " + response.drinks[0].strIngredient4);
 
             var idDiv = $("<div class='id'>");
-            var imgURL = response.drinks[i].strDrinkThumb;
-            var image = $("<img>").attr("src", imgURL).attr("height", "100px").attr("width", "100px");
-            idDiv.append(image);
-
+            
             var name = response.drinks[i].strDrink;
             var nameText = $("<p>").text("Cocktail Name: " + name);
             idDiv.append(nameText);
@@ -48,8 +45,14 @@ $(document).ready(function () {
             var glassText = $("<p>").text("Normally contained in a: " + glass);
             idDiv.append(glassText);
 
+            var idImage = $("<div class='id-image'>");
+            var imgURL = response.drinks[i].strDrinkThumb;
+            var image = $("<img>").attr("src", imgURL).attr("height", "100px").attr("width", "100px");
+            idImage.append(image);
+
             // List each of the drinks displayed above.
-            $(".quiz-results").prepend(idDiv);
+            $(".quiz-results").append(idDiv);
+            $(".quiz-image").append(idImage);
         }
     });
 

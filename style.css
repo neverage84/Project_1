@@ -81,3 +81,14 @@ body, html {
     width:75px;
     height: 75px;
 }
+
+.quiz-results, .quiz-image {
+    float: left;
+    justify-content: center;
+    padding: 10px 40px;
+}
+
+.id {
+    text-align: left;
+    color: #007bff;
+}
