@@ -4,14 +4,14 @@ body, html {
    }
    
    .bg {
-       background: url("Images/beer-background-2.jpg") no-repeat center center fixed;
+       background: url("Images/CocktailMain.jpg") no-repeat center center fixed;
      
        background-size: cover;
        height: 100%;
    }
 
    nav {
-    background-color: #101417;
+    background-color: skyblue;
     opacity: .8;
     padding: 30px;
     border-bottom-color: black;
@@ -30,8 +30,8 @@ body, html {
 .sidebar {
 	display: table-cell;
 	width: 100px;
-	background: black;
-	color: #aaa;
+	background: turquoise;
+	color: white;
     padding-top: 20px;
     border: solid white 1px;
     height: 600px;
@@ -52,8 +52,8 @@ body, html {
 .CenterSection {
     margin-left: 50px;
     margin-right: 50px;
-    background: black;
-	color: #aaa;
+    background: turquoise;
+	color: white;
     padding-top: 20px;
     border: solid white 1px;
     height: 600px;
