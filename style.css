@@ -83,4 +83,14 @@ body, html {
 }
 #map {
     height: 50%;
+
+.quiz-results, .quiz-image {
+    float: left;
+    justify-content: center;
+    padding: 10px 40px;
+}
+
+.id {
+    text-align: left;
+    color: #007bff;
 }
