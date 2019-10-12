@@ -26,6 +26,11 @@ body, html {
 }
 
 
+#map {
+    height: 80%;
+    width:100%;
+}
+
 
 .sidebar {
 	display: table-cell;
@@ -57,7 +62,7 @@ body, html {
     padding-top: 20px;
     border: solid white 1px;
     height: 600px;
-    opacity: .8;
+    opacity: 1;
     border-radius: 5px;
     padding: 10px;
     overflow: auto;
@@ -75,6 +80,13 @@ body, html {
 .ContentSections {
     height: 300px;
     border-bottom: solid white 1px;
+}
+
+.kensen {
+    height: 600px;
+    border-bottom: solid white 1px;
+    width: 100%;
+    
 }
 
 .BeerLogo {
