@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 $(document).ready(function () {
 
     function initAutocomplete() {
@@ -108,7 +107,6 @@ $(document).ready(function () {
     // });
 
 });
-=======
 var liquor = ["bourbon"];
 var lookup = [];
 var lookupIndex = 0;
@@ -189,4 +187,3 @@ function getID(response) {
 // }
 
 $(document).ready(getLiquor);
->>>>>>> b97e0786e8518adbe60033f2bd9c498651f60cb6
