@@ -7,25 +7,40 @@ $(document).ready(function () {
 
     var preferredDrink = "best long island";
 
+    var latitude = 0;
+    var longitude = 0;
+    window.onload = function () {
+        var startPos;
+        var geoSuccess = function (position) {
+            startPos = position;
+            //document.getElementById('startLat').innerHTML = startPos.coords.latitude;
+            //document.getElementById('startLon').innerHTML = startPos.coords.longitude;
+            console.log("Geoposition gives " + startPos.coords.latitude + " for latitutde");
+            console.log("Geoposition gives " + startPos.coords.longitude + " for longitude");
+            latitude = startPos.coords.latitude;
+            longitude = startPos.coords.longitude;
+        };
+        navigator.geolocation.getCurrentPosition(geoSuccess);
+    };
 
     function displayNearbyBars() {
 
 
         // Not supported on It is not supported on Internet Explorer 10 and below, nor OperaMini.
-        var latitude = 0;
-        var longitude = 0;
+        
 
+        
         function ipLookUp() {
             $.ajax('http://ip-api.com/json')
                 .then(
                     function success(response) {
                         console.log('User\'s Location Data is ', response);
                         console.log('User\'s Country', response.country);
-                        console.log(response.lat);
+                        console.log("IP - API gives " + response.lat + " for latitude");
                         latitude = response.lat;
-                        console.log(response.lon);
+                        console.log("IP - API gives " + response.lon + " for longitude");
                         longitude = response.lon;
-
+                        
                         var map;
                         var service;
                         var infowindow = new google.maps.InfoWindow(); // needed to add this, thanks to https://stackoverflow.com/questions/36360313/google-maps-places-api-javascript-cannot-read-property-setcontent-of-undefin
@@ -33,7 +48,7 @@ $(document).ready(function () {
                         function initialize() {
                             console.log(latitude);
                             console.log(longitude);
-                            var currentLocation = new google.maps.LatLng(latitude, longitude); 
+                            var currentLocation = new google.maps.LatLng(latitude, longitude);
 
                             map = new google.maps.Map(document.getElementById('map'), {
                                 center: currentLocation,
@@ -42,8 +57,8 @@ $(document).ready(function () {
 
                             var request = {
                                 location: currentLocation,
-                                radius: '600',
-                                type: ['restaurant']
+                                radius: '300',
+                                type: ['bar']
                             };
 
                             service = new google.maps.places.PlacesService(map);
@@ -69,6 +84,7 @@ $(document).ready(function () {
                                     var place = results[i];
                                     createMarker(results[i]);
                                 }
+                                
                             }
                         }
 
