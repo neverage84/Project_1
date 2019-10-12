@@ -83,14 +83,15 @@ body, html {
 }
 #map {
     height: 50%;
-
-.quiz-results, .quiz-image {
-    float: left;
-    justify-content: center;
-    padding: 10px 40px;
 }
 
-.id {
+.id-image, .cocktail-search {
+    padding: 20px;
     text-align: left;
     color: #007bff;
+} 
+
+.search-text {
+    margin: 0;
+    padding: 0;
 }
