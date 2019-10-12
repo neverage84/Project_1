@@ -27,6 +27,7 @@ $(document).ready(function() {
 
   // Not supported on It is not supported on Internet Explorer 10 and below, nor OperaMini.
 
+
   function ipLookUp() {
     $.ajax("http://ip-api.com/json").then(
       function success(response) {
@@ -61,17 +62,25 @@ $(document).ready(function() {
             map: map,
             position: place.geometry.location
           });
+          console.log(place)
           google.maps.event.addListener(marker, "click", function() {
             infowindow.setContent(place.name);
             infowindow.open(map, this);
           });
         }
+        function createMarkerSelf(){
+            var marker = new google.maps.Marker({
+                position: currentLocation,
+                map: map
+              });
+          }
         function callback(results, status) {
           if (status == google.maps.places.PlacesServiceStatus.OK) {
             for (var i = 0; i < results.length; i++) {
               console.log(results);
               var place = results[i];
               createMarker(results[i]);
+              createMarkerSelf();
             }
           }
         }
@@ -126,18 +135,24 @@ $("#SubmitButton").on("click", function(event) {
 
     var request = {
       location: currentLocation,
-      radius: "1000",
+      radius: "5",
       query: searchInput + " cocktail"
     };
     service = new google.maps.places.PlacesService(map);
     service.textSearch(request, callback);
   }
-
+  function createMarkerSelf(){
+    var marker = new google.maps.Marker({
+        position: currentLocation,
+        map: map
+      });
+  }
   function callback(results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
       for (var i = 0; i < results.length; i++) {
         var place = results[i];
         createMarker(results[i]);
+        createMarkerSelf();
       }
     }
   }
