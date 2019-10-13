@@ -50,7 +50,7 @@ $(document).ready(function () {
                     });
                     var request = {
                         location: currentLocation,
-                        radius: "300",
+                        radius: "500",
                         type: ["bar"]
                     };
                     service = new google.maps.places.PlacesService(map);
@@ -68,18 +68,23 @@ $(document).ready(function () {
                     });
                 }
                 function createMarkerSelf() {
+                   
                     var marker = new google.maps.Marker({
                         position: currentLocation,
-                        map: map
+                        map: map,
+                        icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
                     });
+                    console.log(marker.position);
                 }
                 function callback(results, status) {
+                
+                    createMarkerSelf();
                     if (status == google.maps.places.PlacesServiceStatus.OK) {
                         for (var i = 0; i < results.length; i++) {
                             console.log(results);
                             var place = results[i];
                             createMarker(results[i]);
-                            createMarkerSelf();
+                        
                         }
                     }
                 }
