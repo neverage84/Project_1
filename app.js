@@ -115,7 +115,6 @@ $(document).ready(function () {
     ipLookUp();
 });
 
-var placesList = {};
 
 $("#SubmitButton").on("click", function (event) {
     event.preventDefault();
@@ -196,42 +195,7 @@ $("#SubmitButton").on("click", function (event) {
         }
         initialize();
     });
-    //   var map;
-    //   var service;
-    //   var infowindow;
-
-    //   function initMap() {
-    //     var seattle = new google.maps.LatLng(47.608, -122.33);
-
-    //     infowindow = new google.maps.InfoWindow();
-
-    //     map = new google.maps.Map(document.getElementById("map"), {
-    //       center: seattle,
-    //       zoom: 15
-    //     });
-
-    //     var searchInput = $("#SearchField")
-    //       .val()
-    //       .trim()
-    //       .toLowerCase();
-    //     var request = {
-    //       query: searchInput + "cocktail",
-    //       fields: ["name", "geometry"]
-    //     };
-    //     console.log(searchInput);
-
-    //     var service = new google.maps.places.PlacesService(map);
-
-    //     service.findPlaceFromQuery(request, function(results, status) {
-    //       if (status === google.maps.places.PlacesServiceStatus.OK) {
-    //         for (var i = 0; i < results.length; i++) {
-    //           createMarker(results[i]);
-    //         }
-    //         map.setCenter(results[0].geometry.location);
-    //       }
-    //     });
-    //   }
-    //   initMap();
+   
 
 
     var liquor = ["bourbon"];
@@ -260,7 +224,7 @@ $("#SubmitButton").on("click", function (event) {
             getID(null);
         });
     }
-
+    
     function getID(response) {
         if (response !== null) {
             // console.log(response);
