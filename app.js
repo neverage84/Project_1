@@ -1,4 +1,4 @@
-
+/*
 // ** BAR SEARCH CODE **
 
 $(document).ready(function () {
@@ -206,7 +206,16 @@ $("#SubmitButton").on("click", function (event) {
         }
         initialize();
     });
-   
+})
+*/
+
+
+
+
+
+
+
+
 
 
 
@@ -219,6 +228,7 @@ $("#SubmitButton").on("click", function (event) {
 
 // ** COCKTAIL SEARCH CODE **
 
+$(document).ready(function() {
 
     var liquor = ["bourbon"];
     var lookup = [];
@@ -256,8 +266,11 @@ $("#SubmitButton").on("click", function (event) {
 
             var searchDiv = $("<div class='cocktail-search'>");
             var name = response.drinks[0].strDrink;
-            var nameText = $("<p class='search-text'>").text("Cocktail Name: " + name).css("font-weight", "bold");
+            var nameText = $("<p class='search-text-name'>").text("Cocktail Name: " + name).css("font-weight", "bold");
             searchDiv.append(nameText);
+
+            var star = $("<span class='far fa-star'>" + "</span>")
+            searchDiv.append(star);
 
             var category = response.drinks[0].strCategory;
             var categoryText = $("<p class='search-text'>").text("Category: " + category);

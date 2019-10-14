@@ -174,3 +174,14 @@ a {
     font-style: italic;
     color: #007bff;
 }
+
+.far {
+    font-size: 25px;
+    padding: 0 10px;
+    color:gold;
+  }
+
+  .search-text-name, .far {
+      display: inline-block;
+      margin: 0;
+  }
