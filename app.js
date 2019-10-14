@@ -71,8 +71,12 @@ $(document).ready(function () {
                             });
                             // gets the current day of week
                             var day = new Date();
-                            // converts day to an index number
-                            var dayIndex = day.getDay();
+                            // converts day to an index number, subtracts 1 to match the same index number as Google's API
+                            var dayIndex = day.getDay() - 1;
+                            // if statement to set an index of -1 which would be Sunday, to 6 which is Sunday in Google's API
+                            if(dayIndex === -1){
+                                dayIndex = 6
+                            }
                             console.log(place)
                             google.maps.event.addListener(marker, 'click', function () {
                                 var br = "<br>"
@@ -143,8 +147,12 @@ $("#SubmitButton").on("click", function (event) {
                     });
                     // gets the current day of week
                     var day = new Date();
-                    // converts day to an index number
-                    var dayIndex = day.getDay();
+                    // converts day to an index number, subtracts 1 to match the same index number as Google's API
+                    var dayIndex = day.getDay() - 1;
+                    // if statement to set an index of -1 which would be Sunday, to 6 which is Sunday in Google's API
+                    if(dayIndex === -1){
+                        dayIndex = 6
+                    }
                     console.log(place)
                     google.maps.event.addListener(marker, 'click', function () {
                         var br = "<br>"
@@ -224,7 +232,7 @@ $("#SubmitButton").on("click", function (event) {
             getID(null);
         });
     }
-    
+
     function getID(response) {
         if (response !== null) {
             // console.log(response);
