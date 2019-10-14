@@ -135,17 +135,6 @@ a {
     width: 90%;
 }
 
-.id-image, .cocktail-search {
-    padding: 20px;
-    text-align: left;
-    color: #007bff;
-} 
-
-.search-text {
-    margin: 0;
-    padding: 0;
-}
-
 #headerRight {
     position: absolute;
     right: 0px;
@@ -163,3 +152,25 @@ a {
     margin: 0 auto;
 }
 
+.cocktail-info {
+    border: none;
+    margin-bottom: 115px;
+    padding-bottom: 20px;
+    height: 385px;
+}
+
+.cocktail-search, .search-image {
+    display: inline-block;
+    padding: 20px;
+    text-align: left;
+    color: #007bff;
+}
+.search-text {
+    width: 475px;
+    margin: 0;
+}
+
+#pstyle {
+    font-style: italic;
+    color: #007bff;
+}
