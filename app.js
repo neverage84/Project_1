@@ -50,11 +50,13 @@ $(document).ready(function () {
                     });
                     var request = {
                         location: currentLocation,
-                        radius: "500",
-                        type: ["bar"]
+                        radius: "800",
+                        type: ["bar"],
+                        fields: ['name', 'formatted_address', 'place_id', 'geometry']
                     };
                     service = new google.maps.places.PlacesService(map);
                     service.nearbySearch(request, callback);
+                    
                 }
                 function createMarker(place) {
                     var marker = new google.maps.Marker({
@@ -62,8 +64,17 @@ $(document).ready(function () {
                         position: place.geometry.location
                     });
                     console.log(place);
+                    var openNow = "";
+                    if (place.opening_hours.open_now === true){
+                        openNow = "Yes!"
+                    }
+                    else {
+                        openNow = "No";
+                    }
                     google.maps.event.addListener(marker, "click", function () {
-                        infowindow.setContent(place.name);
+                        infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+                        'Is this place open now? ' +openNow + '<br>' +
+                        'Place Rating: ' + place.rating + '</div>');
                         infowindow.open(map, this);
                     });
                 }
@@ -81,7 +92,7 @@ $(document).ready(function () {
                     createMarkerSelf();
                     if (status == google.maps.places.PlacesServiceStatus.OK) {
                         for (var i = 0; i < results.length; i++) {
-                            console.log(results);
+                            
                             var place = results[i];
                             createMarker(results[i]);
                         
