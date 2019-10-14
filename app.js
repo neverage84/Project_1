@@ -1,3 +1,4 @@
+/*
 $(document).ready(function () {
     // may need to do postal code, city is not specific enough (i.e. fremont isn't recognized, but seattle is)
     // NEED GEOLOCATION API IN ORDER TO GET THE ZIP CODE
@@ -56,7 +57,7 @@ $(document).ready(function () {
                     };
                     service = new google.maps.places.PlacesService(map);
                     service.nearbySearch(request, callback);
-                    
+
                 }
                 function createMarker(place) {
                     var marker = new google.maps.Marker({
@@ -65,7 +66,7 @@ $(document).ready(function () {
                     });
                     console.log(place);
                     var openNow = "";
-                    if (place.opening_hours.open_now === true){
+                    if (place.opening_hours.open_now === true) {
                         openNow = "Yes!"
                     }
                     else {
@@ -73,13 +74,13 @@ $(document).ready(function () {
                     }
                     google.maps.event.addListener(marker, "click", function () {
                         infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-                        'Is this place open now? ' +openNow + '<br>' +
-                        'Place Rating: ' + place.rating + '</div>');
+                            'Is this place open now? ' + openNow + '<br>' +
+                            'Place Rating: ' + place.rating + '</div>');
                         infowindow.open(map, this);
                     });
                 }
                 function createMarkerSelf() {
-                   
+
                     var marker = new google.maps.Marker({
                         position: currentLocation,
                         map: map,
@@ -88,14 +89,14 @@ $(document).ready(function () {
                     console.log(marker.position);
                 }
                 function callback(results, status) {
-                
+
                     createMarkerSelf();
                     if (status == google.maps.places.PlacesServiceStatus.OK) {
                         for (var i = 0; i < results.length; i++) {
-                            
+
                             var place = results[i];
                             createMarker(results[i]);
-                        
+
                         }
                     }
                 }
@@ -131,7 +132,7 @@ $("#SubmitButton").on("click", function (event) {
                 position: place.geometry.location
             });
             console.log(place);
-            if (place.opening_hours.open_now === true){
+            if (place.opening_hours.open_now === true) {
                 openNow = "Yes!"
             }
             else {
@@ -139,8 +140,8 @@ $("#SubmitButton").on("click", function (event) {
             }
             google.maps.event.addListener(marker, "click", function () {
                 infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-                'Is this place open now? ' +openNow + '<br>' +
-                'Place Rating: ' + place.rating + '</div>');
+                    'Is this place open now? ' + openNow + '<br>' +
+                    'Place Rating: ' + place.rating + '</div>');
                 infowindow.open(map, this);
             });
             //   service.getDetails(detailsRequest, callback);
@@ -222,12 +223,15 @@ $("#SubmitButton").on("click", function (event) {
     //     });
     //   }
     //   initMap();
+});
+*/
 
+$(document).ready(function () {
 
     var liquor = ["bourbon"];
     var lookup = [];
     var lookupIndex = 0;
-    var maxResults = 2;  // Set this limit when ready for go live.
+    var maxResults = 3;  // Set this limit when ready for go live.
     var liquorURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + liquor;
     var idURL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
 
@@ -254,8 +258,8 @@ $("#SubmitButton").on("click", function (event) {
     function getID(response) {
         if (response !== null) {
             // console.log(response);
-
-            var searchImage = $("<div class='id-image'>");
+            
+            var searchImage = $("<div class='search-image'>");
             var imgURL = response.drinks[0].strDrinkThumb;
             var image = $("<img>").attr("src", imgURL).attr("height", "100px").attr("width", "100px");
             searchImage.append(image);
@@ -297,10 +301,10 @@ $("#SubmitButton").on("click", function (event) {
         }
     }
 
-    $("#search-submit").on("click", function (event) {
+    $("#SubmitButton").on("click", function (event) {
         event.preventDefault();
 
-        var cocktailSearch = $("#search-input").val();
+        var cocktailSearch = $("#SearchField").val();
 
         var searchURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + cocktailSearch;
 
@@ -334,7 +338,7 @@ $("#SubmitButton").on("click", function (event) {
                 // List each of the drinks displayed above.
                 $(".cocktail-results").append(searchImage)
                 $(".cocktail-results").append(searchDiv);
-                $("#search-input").val("");
+                $("#SearchField").val("");
             }
         });
     })
@@ -346,5 +350,4 @@ $("#SubmitButton").on("click", function (event) {
 
     getLiquor();
 
-
-});
+})

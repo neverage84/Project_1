@@ -135,17 +135,6 @@ a {
     width: 90%;
 }
 
-.id-image, .cocktail-search {
-    padding: 20px;
-    text-align: left;
-    color: #007bff;
-} 
-
-.search-text {
-    margin: 0;
-    padding: 0;
-}
-
 #headerRight {
     position: absolute;
     right: 0px;
@@ -163,3 +152,20 @@ a {
     margin: 0 auto;
 }
 
+.cocktail-info {
+    border: none;
+    margin-bottom: 75px;
+    padding-bottom: 20px;
+    height: 425px;
+}
+
+.cocktail-search, .search-image {
+    display: inline-block;
+    padding: 20px;
+    text-align: left;
+    color: #007bff;
+}
+.search-text {
+    width: 500px;
+    margin: 0;
+} 
