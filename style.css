@@ -154,9 +154,9 @@ a {
 
 .cocktail-info {
     border: none;
-    margin-bottom: 75px;
+    margin-bottom: 115px;
     padding-bottom: 20px;
-    height: 425px;
+    height: 385px;
 }
 
 .cocktail-search, .search-image {
@@ -166,6 +166,11 @@ a {
     color: #007bff;
 }
 .search-text {
-    width: 500px;
+    width: 475px;
     margin: 0;
-} 
+}
+
+#pstyle {
+    font-style: italic;
+    color: #007bff;
+}

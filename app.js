@@ -258,26 +258,35 @@ $(document).ready(function () {
     function getID(response) {
         if (response !== null) {
             // console.log(response);
-            
+
             var searchImage = $("<div class='search-image'>");
             var imgURL = response.drinks[0].strDrinkThumb;
-            var image = $("<img>").attr("src", imgURL).attr("height", "100px").attr("width", "100px");
+            var image = $("<img>").attr("src", imgURL).attr("height", "125px").attr("width", "125px");
             searchImage.append(image);
 
             var searchDiv = $("<div class='cocktail-search'>");
             var name = response.drinks[0].strDrink;
-            var nameText = $("<p class='search-text'>").text("Cocktail Name: " + name);
+            var nameText = $("<p class='search-text'>").text("Cocktail Name: " + name).css("font-weight", "bold");
             searchDiv.append(nameText);
+
+            var category = response.drinks[0].strCategory;
+            var categoryText = $("<p class='search-text'>").text("Category: " + category);
+            searchDiv.append(categoryText);
 
             var ingredients = [response.drinks[0].strIngredient1 + ", " + response.drinks[0].strIngredient2 + ", " + response.drinks[0].strIngredient4 + ", " + response.drinks[0].strIngredient4];
             var ingredientsText = $("<p class='search-text'>").text("Ingredients: " + ingredients);
             searchDiv.append(ingredientsText);
+
+            var instructions = response.drinks[0].strInstructions;
+            var instructionsText = $("<p class='search-text'>").text("Instructions: " + instructions);
+            searchDiv.append(instructionsText);
 
             var glass = response.drinks[0].strGlass;
             var glassText = $("<p class='search-text'>").text("Glassware: " + glass);
             searchDiv.append(glassText);
 
             // List each of the drinks displayed above.
+            // $("#search-parameter").html("<p id='pstyle'>" + "Quiz Results for: '" + cocktailSearch + "'" + "</p>");
             $(".cocktail-results").append(searchImage);
             $(".cocktail-results").append(searchDiv);
         };
@@ -316,27 +325,35 @@ $(document).ready(function () {
             $(".cocktail-image").empty();
 
             for (i = 0; i < response.drinks.length && i < maxResults; i++) {
-                var searchDiv = $("<div class='cocktail-search'>");
+                var searchImage = $("<div class='search-image'>");
+                var imgURL = response.drinks[i].strDrinkThumb;
+                var image = $("<img>").attr("src", imgURL).attr("height", "125px").attr("width", "125px");
+                searchImage.append(image);
 
+                var searchDiv = $("<div class='cocktail-search'>");
                 var name = response.drinks[i].strDrink;
-                var nameText = $("<p class='search-text'>").text("Cocktail Name: " + name);
+                var nameText = $("<p class='search-text'>").text("Cocktail Name: " + name).css("font-weight", "bold");
                 searchDiv.append(nameText);
+
+                var category = response.drinks[i].strCategory;
+                var categoryText = $("<p class='search-text'>").text("Category: " + category);
+                searchDiv.append(categoryText);
 
                 var ingredients = [response.drinks[i].strIngredient1 + ", " + response.drinks[i].strIngredient2 + ", " + response.drinks[i].strIngredient4 + ", " + response.drinks[i].strIngredient4];
                 var ingredientsText = $("<p class='search-text'>").text("Ingredients: " + ingredients);
                 searchDiv.append(ingredientsText);
 
+                var instructions = response.drinks[i].strInstructions;
+                var instructionsText = $("<p class='search-text'>").text("Instructions: " + instructions);
+                searchDiv.append(instructionsText);
+
                 var glass = response.drinks[i].strGlass;
                 var glassText = $("<p class='search-text'>").text("Glassware: " + glass);
                 searchDiv.append(glassText);
 
-                var searchImage = $("<div class='id-image'>");
-                var imgURL = response.drinks[i].strDrinkThumb;
-                var image = $("<img>").attr("src", imgURL).attr("height", "100px").attr("width", "100px");
-                searchImage.append(image);
-
                 // List each of the drinks displayed above.
-                $(".cocktail-results").append(searchImage)
+                $("#search-parameter").html("<p id='pstyle'>" + "Search Results for: '" + cocktailSearch + "'" + "</p>");
+                $(".cocktail-results").append(searchImage);
                 $(".cocktail-results").append(searchDiv);
                 $("#SearchField").val("");
             }
