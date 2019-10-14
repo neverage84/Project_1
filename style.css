@@ -1,4 +1,5 @@
 
+
 body, html {
     height: 100%;
    }
@@ -11,33 +12,65 @@ body, html {
    }
 
    nav {
-    background-color: skyblue;
-    opacity: .8;
-    padding: 30px;
+    background-color: rgba(109, 214, 255, 0.6);
+    padding: 10px;
     border-bottom-color: black;
     font-size: 24px;
+    width: 100%;
+    text-align: center;
+    height: 15%;
    }
 
-  
+
+   .remove-all-margin{
+    margin:0 ! important;
+    }
+
+    .row-no-margin {
+        margin-left: 0px;
+        margin-right: 0px;
+     } 
+    
 .MainContent {
-    margin: 0 auto;
     color: aliceblue;
     margin-top: 40px;
+    width: 100%;
+    
+    
 }
 
+a {
+    visibility: hidden;
+}
 
+#title {
+    font-family: 'Yellowtail', cursive;
+    font-size: 60px;
+}
 
 .sidebar {
-	display: table-cell;
-	width: 100px;
-	background: turquoise;
+	background-color: rgba(64, 224, 208, 0.8);
 	color: white;
     padding-top: 20px;
     border: solid white 1px;
-    height: 600px;
-    opacity: .8;
+    opacity: 1;
     border-radius: 5px;
-   
+}
+
+.FunFacts {
+    margin-top: 10px;
+    height: 43%;
+    width: 48%;
+    float:right;
+}
+
+.FavoriteDrinks {
+    margin-top: 10px;
+    height: 43%;
+    width: 48%;
+    margin-left: 0px;
+    float:left;
+    
 }
 
 .img-circle {
@@ -49,23 +82,39 @@ body, html {
     border-bottom: solid white 1px;
 }
 
-.CenterSection {
-    margin-left: 50px;
-    margin-right: 50px;
-    background: turquoise;
+.CenterLeftSection {
+   
+    margin-right: 0px;
+    background-color: rgba(64, 224, 208, 0.8);
 	color: black;
     padding-top: 20px;
     border: solid white 1px;
-    height: 600px;
-    opacity: .8;
+    height: 1000px;
+    width: 45%;
+    opacity: 1;
     border-radius: 5px;
     padding: 10px;
-    overflow: auto;
+    /*overflow: auto;*/
+    float:left;
 }
 
-.FunFacts {
-    margin-left: 10px;
+.CenterRightSection {
+    
+    margin-right: 0px;
+    background-color: rgba(64, 224, 208, 0.8);
+	color: black;
+    padding-top: 20px;
+    border: solid white 1px;
+    height: 1000px;
+    width: 45%;
+    opacity: 1;
+    border-radius: 5px;
+    padding: 10px;
+    /*overflow: auto;*/
+    float: left;
 }
+
+
 
 .CenterImages {
     width: 50px;
@@ -73,7 +122,7 @@ body, html {
 }
 
 .ContentSections {
-    height: 300px;
+    height: 500px;
     border-bottom: solid white 1px;
 }
 
@@ -82,7 +131,8 @@ body, html {
     height: 75px;
 }
 #map {
-    height: 50%;
+    height: 90%;
+    width: 90%;
 }
 
 .id-image, .cocktail-search {
@@ -95,3 +145,21 @@ body, html {
     margin: 0;
     padding: 0;
 }
+
+#headerRight {
+    position: absolute;
+    right: 0px;
+    height: 100%;
+}
+
+.headerRightContents {
+    position: relative;
+    top: 5%;
+    right: 5%;
+    
+}
+
+#title {
+    margin: 0 auto;
+}
+

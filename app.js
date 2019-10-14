@@ -50,11 +50,13 @@ $(document).ready(function () {
                     });
                     var request = {
                         location: currentLocation,
-                        radius: "300",
-                        type: ["bar"]
+                        radius: "800",
+                        type: ["bar"],
+                        fields: ['name', 'formatted_address', 'place_id', 'geometry']
                     };
                     service = new google.maps.places.PlacesService(map);
                     service.nearbySearch(request, callback);
+                    
                 }
                 function createMarker(place) {
                     var marker = new google.maps.Marker({
@@ -62,24 +64,38 @@ $(document).ready(function () {
                         position: place.geometry.location
                     });
                     console.log(place);
+                    var openNow = "";
+                    if (place.opening_hours.open_now === true){
+                        openNow = "Yes!"
+                    }
+                    else {
+                        openNow = "No";
+                    }
                     google.maps.event.addListener(marker, "click", function () {
-                        infowindow.setContent(place.name);
+                        infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+                        'Is this place open now? ' +openNow + '<br>' +
+                        'Place Rating: ' + place.rating + '</div>');
                         infowindow.open(map, this);
                     });
                 }
                 function createMarkerSelf() {
+                   
                     var marker = new google.maps.Marker({
                         position: currentLocation,
-                        map: map
+                        map: map,
+                        icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
                     });
+                    console.log(marker.position);
                 }
                 function callback(results, status) {
+                
+                    createMarkerSelf();
                     if (status == google.maps.places.PlacesServiceStatus.OK) {
                         for (var i = 0; i < results.length; i++) {
-                            console.log(results);
+                            
                             var place = results[i];
                             createMarker(results[i]);
-                            createMarkerSelf();
+                        
                         }
                     }
                 }
@@ -115,14 +131,18 @@ $("#SubmitButton").on("click", function (event) {
                 position: place.geometry.location
             });
             console.log(place);
+            if (place.opening_hours.open_now === true){
+                openNow = "Yes!"
+            }
+            else {
+                openNow = "No";
+            }
             google.maps.event.addListener(marker, "click", function () {
-                infowindow.setContent(place.name);
+                infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+                'Is this place open now? ' +openNow + '<br>' +
+                'Place Rating: ' + place.rating + '</div>');
                 infowindow.open(map, this);
             });
-            var placeDetails = {
-                placeId: place.place_id,
-                fields: ["name", "rating", "formatted_phone_number", "geometry"]
-            };
             //   service.getDetails(detailsRequest, callback);
 
             //   placesList[place.name] = placeDetails
@@ -150,15 +170,17 @@ $("#SubmitButton").on("click", function (event) {
         function createMarkerSelf() {
             var marker = new google.maps.Marker({
                 position: currentLocation,
-                map: map
+                map: map,
+                icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
             });
         }
         function callback(results, status) {
+            createMarkerSelf();
             if (status == google.maps.places.PlacesServiceStatus.OK) {
                 for (var i = 0; i < results.length; i++) {
                     var place = results[i];
                     createMarker(results[i]);
-                    createMarkerSelf();
+
                 }
             }
         }
