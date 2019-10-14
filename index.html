@@ -9,6 +9,7 @@
 
     <!--CSS-->
     <link rel="stylesheet" href="style.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Yellowtail&display=swap" rel="stylesheet">
     <!--Bootstrap-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -22,11 +23,10 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
-
-
     <!--Firebase-->
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+
 
 
 </head>
@@ -34,60 +34,71 @@
 <body class="bg">
 
 
-    <nav class="nav nav-tabs nav-fill">
-        <a class="nav-item nav-link" href="#">Quiz</a>
-        <a class="nav-item nav-link" href="#">Cocktail Info</a>
-        <a><img src="images/Happy-Hour.png" width="50px" height="50px" border="0"></a>
-        <a class="nav-item nav-link" href="#">Bars</a>
-        <form class="form-inline my-2 my-lg-0 ">
-            <input id="SearchField" class="form-control mr-sm-2 controls" type="text"
-                placeholder="Best Long Island Ice Tea">
-            <button id="SubmitButton" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+    <nav class="nav ">
+        <!--<a class="nav-item nav-link" href="#">Quiz</a>
+        <a class="nav-item nav-link" href="#">Cocktail Search</a>-->
+       
+            
+            <p id="title"><img class="happyHourIcons" src="images/Happy-Hour.png" width="50px" height="50px">Happy Hour<img class="happyHourIcons" src="images/Happy-Hour.png" width="50px" height="50px"></p>
+            
+        
+
+        <!--<a class="nav-item nav-link" href="#">Bars</a>-->
+        <div id = "headerRight">
+            <form class="form-inline my-2 my-lg-0 headerRightContents">
+                <input id="SearchField" class="form-control mr-sm-2 controls" type="text"
+                    placeholder="Best Long Island Ice Tea">
+                <button id="SubmitButton" class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+
     </nav>
-    <div class="row MainContent ">
-        <div class="sidebar text-center col-2 FunFacts">
-            <img src="images/FunFacts.png" class="img-circle">
-            <h3 class="underline">Fun Facts</h3>
-            <div id="FunFactsID"></div>
-        </div>
+    <div class="container-fluid">
+        <div class="row-no-margin MainContent">
 
-
-        <div class="text-center col-7 CenterSection">
-            <div class="d-flex justify-content-center align-items-center ContentSections ">
-                <img src="images/beer-quiz.png" class="CenterImages  ">
+            <div class="text-center col-6 CenterLeftSection">
                 <h3>Quiz: What kind of cocktail are you?</h3>
-            </div>
-            <div class="py-5 justify-content-center align-items-start overflow-auto ContentSections">
-                <img src="https://images-na.ssl-images-amazon.com/images/I/512o-tkHEBL.png" class="CenterImages  ">
+                <div class="d-flex justify-content-center align-items-center ContentSections ">
+                    <img src="images/beer-quiz.png" class="CenterImages  ">
+
+                </div>
                 <h3>Cocktail Info</h3>
-                <form>
-                    <div class="form-row justify-content-center">
-                        <div class="col-7">
-                            <input type="text" class="form-control" id="search-input" placeholder="Cocktail Name"
-                                onfocus="this.value=''">
+                <div class="py-5 justify-content-center align-items-start ContentSections">
+                    <img src="https://images-na.ssl-images-amazon.com/images/I/512o-tkHEBL.png" class="CenterImages  ">
+
+                    <form>
+                        <div class="form-row justify-content-center">
+                            <div class="col-7">
+                                <input type="text" class="form-control" id="search-input" placeholder="Cocktail Name"
+                                    onfocus="this.value=''">
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-primary mb-2" id="search-submit">Go</button>
+                            </div>
                         </div>
-                        <div class="col-auto">
-                            <button type="submit" class="btn btn-primary mb-2" id="search-submit">Go</button>
-                        </div>
-                    </div>
-                </form>
-                <div class="form-row justify-content-center cocktail-results"></div>
+                    </form>
+                    <div class="form-row justify-content-center cocktail-results"></div>
+                </div>
             </div>
+            <div class="text-center col-6 CenterRightSection">
+                <h3>Bars Near You</h3>
+                <div class="d-flex justify-content-center align-items-center ContentSections">
 
-            <div id="map" class="d-flex justify-content-center align-items-center ContentSections">
-                <img src="https://beermaps.com/wp-content/uploads/2019/03/BeerMaps.4.png" class="CenterImages  ">
-                <h3>Bar Map</h3>
+                    <div id="map"></div>
+                </div>
+                <div class="sidebar text-center FavoriteDrinks">
+                    <img src="images/local_bar.png" class="img-circle">
+                    <h3 class="underline">Favorite Drinks</h3>
+                </div>
+                <div class="sidebar text-center FunFacts">
+                    <img src="images/FunFacts.png" class="img-circle">
+                    <h3 class="underline">Fun Facts</h3>
+                    <div id="FunFactsID"></div>
+                </div>
             </div>
-
-        </div>
-
-        <div class="col-2 sidebar text-center">
-            <img src="images/local_bar.png" class="img-circle">
-            <h3 class="underline">Favorite Drinks</h3>
-
         </div>
     </div>
+
     <!-- Google Places API URL -->
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript"
