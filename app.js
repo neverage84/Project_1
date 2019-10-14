@@ -1,4 +1,4 @@
-/*
+
 // ** BAR SEARCH CODE **
 
 $(document).ready(function () {
@@ -61,24 +61,34 @@ $(document).ready(function () {
                     service.nearbySearch(request, callback);
 
                 }
-                function createMarker(place) {
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        position: place.geometry.location
-                    });
-                    console.log(place);
-                    var openNow = "";
-                    if (place.opening_hours.open_now === true) {
-                        openNow = "Yes!"
-                    }
-                    else {
-                        openNow = "No";
-                    }
-                    google.maps.event.addListener(marker, "click", function () {
-                        infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-                            'Is this place open now? ' + openNow + '<br>' +
-                            'Place Rating: ' + place.rating + '</div>');
-                        infowindow.open(map, this);
+                function createMarker(placeMarker) {
+                    var detailsRequest = {
+                        placeId: placeMarker.place_id,
+                        fields: ['name', 'formatted_address', 'place_id', 'geometry', "formatted_phone_number", "opening_hours", "website"]
+                    };
+                    service.getDetails(detailsRequest, function (place, status) {
+                        if (status === google.maps.places.PlacesServiceStatus.OK) {
+                            var marker = new google.maps.Marker({
+                                map: map,
+                                position: place.geometry.location
+                            });
+                            // gets the current day of week
+                            var day = new Date();
+                            // converts day to an index number, subtracts 1 to match the same index number as Google's API
+                            var dayIndex = day.getDay() - 1;
+                            // if statement to set an index of -1 which would be Sunday, to 6 which is Sunday in Google's API
+                            if(dayIndex === -1){
+                                dayIndex = 6
+                            }
+                            console.log(place)
+                            google.maps.event.addListener(marker, 'click', function () {
+                                var br = "<br>"
+                                infowindow.setContent('<div><strong>' + place.name + '</strong>'+ br +
+                                    place.formatted_address + br + place.formatted_phone_number + br +
+                                    place.website + br + place.opening_hours.weekday_text[dayIndex] + '</div>');
+                                infowindow.open(map, this);
+                            });
+                        }
                     });
                 }
                 function createMarkerSelf() {
@@ -112,7 +122,6 @@ $(document).ready(function () {
     ipLookUp();
 });
 
-var placesList = {};
 
 $("#SubmitButton").on("click", function (event) {
     event.preventDefault();
@@ -128,27 +137,35 @@ $("#SubmitButton").on("click", function (event) {
         var service;
         var infowindow = new google.maps.InfoWindow();
 
-        function createMarker(place) {
-            var marker = new google.maps.Marker({
-                map: map,
-                position: place.geometry.location
+        function createMarker(placeMarker) {
+            var detailsRequest = {
+                placeId: placeMarker.place_id,
+                fields: ['name', 'formatted_address', 'place_id', 'geometry', "formatted_phone_number", "opening_hours", "website"]
+            };
+            service.getDetails(detailsRequest, function (place, status) {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: place.geometry.location
+                    });
+                    // gets the current day of week
+                    var day = new Date();
+                    // converts day to an index number, subtracts 1 to match the same index number as Google's API
+                    var dayIndex = day.getDay() - 1;
+                    // if statement to set an index of -1 which would be Sunday, to 6 which is Sunday in Google's API
+                    if(dayIndex === -1){
+                        dayIndex = 6
+                    }
+                    console.log(place)
+                    google.maps.event.addListener(marker, 'click', function () {
+                        var br = "<br>"
+                        infowindow.setContent('<div><strong>' + place.name + '</strong>'+ br +
+                            place.formatted_address + br + place.formatted_phone_number + br +
+                            place.website + br + place.opening_hours.weekday_text[dayIndex] + '</div>');
+                        infowindow.open(map, this);
+                    });
+                }
             });
-            console.log(place);
-            if (place.opening_hours.open_now === true) {
-                openNow = "Yes!"
-            }
-            else {
-                openNow = "No";
-            }
-            google.maps.event.addListener(marker, "click", function () {
-                infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-                    'Is this place open now? ' + openNow + '<br>' +
-                    'Place Rating: ' + place.rating + '</div>');
-                infowindow.open(map, this);
-            });
-            //   service.getDetails(detailsRequest, callback);
-
-            //   placesList[place.name] = placeDetails
         }
 
         function initialize() {
@@ -164,7 +181,7 @@ $("#SubmitButton").on("click", function (event) {
 
             var request = {
                 location: currentLocation,
-                radius: "5",
+                radius: "400",
                 query: searchInput + " cocktail"
             };
             service = new google.maps.places.PlacesService(map);
@@ -189,62 +206,7 @@ $("#SubmitButton").on("click", function (event) {
         }
         initialize();
     });
-    //   var map;
-    //   var service;
-    //   var infowindow;
-
-    //   function initMap() {
-    //     var seattle = new google.maps.LatLng(47.608, -122.33);
-
-    //     infowindow = new google.maps.InfoWindow();
-
-    //     map = new google.maps.Map(document.getElementById("map"), {
-    //       center: seattle,
-    //       zoom: 15
-    //     });
-
-    //     var searchInput = $("#SearchField")
-    //       .val()
-    //       .trim()
-    //       .toLowerCase();
-    //     var request = {
-    //       query: searchInput + "cocktail",
-    //       fields: ["name", "geometry"]
-    //     };
-    //     console.log(searchInput);
-
-    //     var service = new google.maps.places.PlacesService(map);
-
-    //     service.findPlaceFromQuery(request, function(results, status) {
-    //       if (status === google.maps.places.PlacesServiceStatus.OK) {
-    //         for (var i = 0; i < results.length; i++) {
-    //           createMarker(results[i]);
-    //         }
-    //         map.setCenter(results[0].geometry.location);
-    //       }
-    //     });
-    //   }
-    //   initMap();
-});
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   
 
 
 
@@ -257,7 +219,6 @@ $("#SubmitButton").on("click", function (event) {
 
 // ** COCKTAIL SEARCH CODE **
 
-$(document).ready(function () {
 
     var liquor = ["bourbon"];
     var lookup = [];
