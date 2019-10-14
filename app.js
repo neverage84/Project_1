@@ -1,3 +1,6 @@
+/*
+// ** BAR SEARCH CODE **
+
 $(document).ready(function () {
     // may need to do postal code, city is not specific enough (i.e. fremont isn't recognized, but seattle is)
     // NEED GEOLOCATION API IN ORDER TO GET THE ZIP CODE
@@ -56,7 +59,7 @@ $(document).ready(function () {
                     };
                     service = new google.maps.places.PlacesService(map);
                     service.nearbySearch(request, callback);
-                    
+
                 }
                 function createMarker(place) {
                     var marker = new google.maps.Marker({
@@ -65,7 +68,7 @@ $(document).ready(function () {
                     });
                     console.log(place);
                     var openNow = "";
-                    if (place.opening_hours.open_now === true){
+                    if (place.opening_hours.open_now === true) {
                         openNow = "Yes!"
                     }
                     else {
@@ -73,13 +76,13 @@ $(document).ready(function () {
                     }
                     google.maps.event.addListener(marker, "click", function () {
                         infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-                        'Is this place open now? ' +openNow + '<br>' +
-                        'Place Rating: ' + place.rating + '</div>');
+                            'Is this place open now? ' + openNow + '<br>' +
+                            'Place Rating: ' + place.rating + '</div>');
                         infowindow.open(map, this);
                     });
                 }
                 function createMarkerSelf() {
-                   
+
                     var marker = new google.maps.Marker({
                         position: currentLocation,
                         map: map,
@@ -88,14 +91,14 @@ $(document).ready(function () {
                     console.log(marker.position);
                 }
                 function callback(results, status) {
-                
+
                     createMarkerSelf();
                     if (status == google.maps.places.PlacesServiceStatus.OK) {
                         for (var i = 0; i < results.length; i++) {
-                            
+
                             var place = results[i];
                             createMarker(results[i]);
-                        
+
                         }
                     }
                 }
@@ -131,7 +134,7 @@ $("#SubmitButton").on("click", function (event) {
                 position: place.geometry.location
             });
             console.log(place);
-            if (place.opening_hours.open_now === true){
+            if (place.opening_hours.open_now === true) {
                 openNow = "Yes!"
             }
             else {
@@ -139,8 +142,8 @@ $("#SubmitButton").on("click", function (event) {
             }
             google.maps.event.addListener(marker, "click", function () {
                 infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-                'Is this place open now? ' +openNow + '<br>' +
-                'Place Rating: ' + place.rating + '</div>');
+                    'Is this place open now? ' + openNow + '<br>' +
+                    'Place Rating: ' + place.rating + '</div>');
                 infowindow.open(map, this);
             });
             //   service.getDetails(detailsRequest, callback);
@@ -222,12 +225,44 @@ $("#SubmitButton").on("click", function (event) {
     //     });
     //   }
     //   initMap();
+});
+*/
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ** COCKTAIL SEARCH CODE **
+
+$(document).ready(function () {
 
     var liquor = ["bourbon"];
     var lookup = [];
     var lookupIndex = 0;
-    var maxResults = 2;  // Set this limit when ready for go live.
+    var maxResults = 3;  // Set this limit when ready for go live.
     var liquorURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + liquor;
     var idURL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
 
@@ -240,8 +275,6 @@ $("#SubmitButton").on("click", function (event) {
             // console.log(response);
 
             for (i = 0; i < response.drinks.length && i < maxResults; i++) {
-                // console.log(response.drinks[i]);
-
                 console.log("Cocktail Name: " + response.drinks[i].strDrink);
                 console.log("ID: " + response.drinks[i].idDrink);
                 lookup.push(response.drinks[i].idDrink);
@@ -255,25 +288,34 @@ $("#SubmitButton").on("click", function (event) {
         if (response !== null) {
             // console.log(response);
 
-            var searchImage = $("<div class='id-image'>");
+            var searchImage = $("<div class='search-image'>");
             var imgURL = response.drinks[0].strDrinkThumb;
-            var image = $("<img>").attr("src", imgURL).attr("height", "100px").attr("width", "100px");
+            var image = $("<img>").attr("src", imgURL).attr("height", "125px").attr("width", "125px");
             searchImage.append(image);
 
             var searchDiv = $("<div class='cocktail-search'>");
             var name = response.drinks[0].strDrink;
-            var nameText = $("<p class='search-text'>").text("Cocktail Name: " + name);
+            var nameText = $("<p class='search-text'>").text("Cocktail Name: " + name).css("font-weight", "bold");
             searchDiv.append(nameText);
+
+            var category = response.drinks[0].strCategory;
+            var categoryText = $("<p class='search-text'>").text("Category: " + category);
+            searchDiv.append(categoryText);
 
             var ingredients = [response.drinks[0].strIngredient1 + ", " + response.drinks[0].strIngredient2 + ", " + response.drinks[0].strIngredient4 + ", " + response.drinks[0].strIngredient4];
             var ingredientsText = $("<p class='search-text'>").text("Ingredients: " + ingredients);
             searchDiv.append(ingredientsText);
+
+            var instructions = response.drinks[0].strInstructions;
+            var instructionsText = $("<p class='search-text'>").text("Instructions: " + instructions);
+            searchDiv.append(instructionsText);
 
             var glass = response.drinks[0].strGlass;
             var glassText = $("<p class='search-text'>").text("Glassware: " + glass);
             searchDiv.append(glassText);
 
             // List each of the drinks displayed above.
+            // $("#search-parameter").html("<p id='pstyle'>" + "Quiz Results for: '" + cocktailSearch + "'" + "</p>");
             $(".cocktail-results").append(searchImage);
             $(".cocktail-results").append(searchDiv);
         };
@@ -297,10 +339,10 @@ $("#SubmitButton").on("click", function (event) {
         }
     }
 
-    $("#search-submit").on("click", function (event) {
+    $("#SubmitButton").on("click", function (event) {
         event.preventDefault();
 
-        var cocktailSearch = $("#search-input").val();
+        var cocktailSearch = $("#SearchField").val();
 
         var searchURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + cocktailSearch;
 
@@ -312,39 +354,47 @@ $("#SubmitButton").on("click", function (event) {
             $(".cocktail-image").empty();
 
             for (i = 0; i < response.drinks.length && i < maxResults; i++) {
-                var searchDiv = $("<div class='cocktail-search'>");
+                var searchImage = $("<div class='search-image'>");
+                var imgURL = response.drinks[i].strDrinkThumb;
+                var image = $("<img>").attr("src", imgURL).attr("height", "125px").attr("width", "125px");
+                searchImage.append(image);
 
+                var searchDiv = $("<div class='cocktail-search'>");
                 var name = response.drinks[i].strDrink;
-                var nameText = $("<p class='search-text'>").text("Cocktail Name: " + name);
+                var nameText = $("<p class='search-text'>").text("Cocktail Name: " + name).css("font-weight", "bold");
                 searchDiv.append(nameText);
+
+                var category = response.drinks[i].strCategory;
+                var categoryText = $("<p class='search-text'>").text("Category: " + category);
+                searchDiv.append(categoryText);
 
                 var ingredients = [response.drinks[i].strIngredient1 + ", " + response.drinks[i].strIngredient2 + ", " + response.drinks[i].strIngredient4 + ", " + response.drinks[i].strIngredient4];
                 var ingredientsText = $("<p class='search-text'>").text("Ingredients: " + ingredients);
                 searchDiv.append(ingredientsText);
 
+                var instructions = response.drinks[i].strInstructions;
+                var instructionsText = $("<p class='search-text'>").text("Instructions: " + instructions);
+                searchDiv.append(instructionsText);
+
                 var glass = response.drinks[i].strGlass;
                 var glassText = $("<p class='search-text'>").text("Glassware: " + glass);
                 searchDiv.append(glassText);
 
-                var searchImage = $("<div class='id-image'>");
-                var imgURL = response.drinks[i].strDrinkThumb;
-                var image = $("<img>").attr("src", imgURL).attr("height", "100px").attr("width", "100px");
-                searchImage.append(image);
-
                 // List each of the drinks displayed above.
-                $(".cocktail-results").append(searchImage)
+                $("#search-parameter").html("<p id='pstyle'>" + "Search Results for: '" + cocktailSearch + "'" + "</p>");
+                $(".cocktail-results").append(searchImage);
                 $(".cocktail-results").append(searchDiv);
-                $("#search-input").val("");
+                $("#SearchField").val("");
             }
         });
     })
 
     // function quiz() {
     //     liquor = [""];
-    //     liquor.push(answer);
+    //     // var userChoice = $()
+    //     liquor.push(userChoice);
     // }
 
     getLiquor();
 
-
-});
+})
