@@ -155,15 +155,17 @@ $("#SubmitButton").on("click", function (event) {
         function createMarkerSelf() {
             var marker = new google.maps.Marker({
                 position: currentLocation,
-                map: map
+                map: map,
+                icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
             });
         }
         function callback(results, status) {
+            createMarkerSelf();
             if (status == google.maps.places.PlacesServiceStatus.OK) {
                 for (var i = 0; i < results.length; i++) {
                     var place = results[i];
                     createMarker(results[i]);
-                    createMarkerSelf();
+
                 }
             }
         }
