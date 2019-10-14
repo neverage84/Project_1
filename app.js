@@ -56,30 +56,36 @@ $(document).ready(function () {
                     };
                     service = new google.maps.places.PlacesService(map);
                     service.nearbySearch(request, callback);
-                    
+
                 }
-                function createMarker(place) {
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        position: place.geometry.location
-                    });
-                    console.log(place);
-                    var openNow = "";
-                    if (place.opening_hours.open_now === true){
-                        openNow = "Yes!"
-                    }
-                    else {
-                        openNow = "No";
-                    }
-                    google.maps.event.addListener(marker, "click", function () {
-                        infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-                        'Is this place open now? ' +openNow + '<br>' +
-                        'Place Rating: ' + place.rating + '</div>');
-                        infowindow.open(map, this);
+                function createMarker(placeMarker) {
+                    var detailsRequest = {
+                        placeId: placeMarker.place_id,
+                        fields: ['name', 'formatted_address', 'place_id', 'geometry', "formatted_phone_number", "opening_hours", "website"]
+                    };
+                    service.getDetails(detailsRequest, function (place, status) {
+                        if (status === google.maps.places.PlacesServiceStatus.OK) {
+                            var marker = new google.maps.Marker({
+                                map: map,
+                                position: place.geometry.location
+                            });
+                            // gets the current day of week
+                            var day = new Date();
+                            // converts day to an index number
+                            var dayIndex = day.getDay();
+                            console.log(place)
+                            google.maps.event.addListener(marker, 'click', function () {
+                                var br = "<br>"
+                                infowindow.setContent('<div><strong>' + place.name + '</strong>'+ br +
+                                    place.formatted_address + br + place.formatted_phone_number + br +
+                                    place.website + br + place.opening_hours.weekday_text[dayIndex] + '</div>');
+                                infowindow.open(map, this);
+                            });
+                        }
                     });
                 }
                 function createMarkerSelf() {
-                   
+
                     var marker = new google.maps.Marker({
                         position: currentLocation,
                         map: map,
@@ -88,14 +94,14 @@ $(document).ready(function () {
                     console.log(marker.position);
                 }
                 function callback(results, status) {
-                
+
                     createMarkerSelf();
                     if (status == google.maps.places.PlacesServiceStatus.OK) {
                         for (var i = 0; i < results.length; i++) {
-                            
+
                             var place = results[i];
                             createMarker(results[i]);
-                        
+
                         }
                     }
                 }
@@ -125,27 +131,31 @@ $("#SubmitButton").on("click", function (event) {
         var service;
         var infowindow = new google.maps.InfoWindow();
 
-        function createMarker(place) {
-            var marker = new google.maps.Marker({
-                map: map,
-                position: place.geometry.location
+        function createMarker(placeMarker) {
+            var detailsRequest = {
+                placeId: placeMarker.place_id,
+                fields: ['name', 'formatted_address', 'place_id', 'geometry', "formatted_phone_number", "opening_hours", "website"]
+            };
+            service.getDetails(detailsRequest, function (place, status) {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: place.geometry.location
+                    });
+                    // gets the current day of week
+                    var day = new Date();
+                    // converts day to an index number
+                    var dayIndex = day.getDay();
+                    console.log(place)
+                    google.maps.event.addListener(marker, 'click', function () {
+                        var br = "<br>"
+                        infowindow.setContent('<div><strong>' + place.name + '</strong>'+ br +
+                            place.formatted_address + br + place.formatted_phone_number + br +
+                            place.website + br + place.opening_hours.weekday_text[dayIndex] + '</div>');
+                        infowindow.open(map, this);
+                    });
+                }
             });
-            console.log(place);
-            if (place.opening_hours.open_now === true){
-                openNow = "Yes!"
-            }
-            else {
-                openNow = "No";
-            }
-            google.maps.event.addListener(marker, "click", function () {
-                infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-                'Is this place open now? ' +openNow + '<br>' +
-                'Place Rating: ' + place.rating + '</div>');
-                infowindow.open(map, this);
-            });
-            //   service.getDetails(detailsRequest, callback);
-
-            //   placesList[place.name] = placeDetails
         }
 
         function initialize() {
@@ -161,7 +171,7 @@ $("#SubmitButton").on("click", function (event) {
 
             var request = {
                 location: currentLocation,
-                radius: "5",
+                radius: "400",
                 query: searchInput + " cocktail"
             };
             service = new google.maps.places.PlacesService(map);
@@ -299,7 +309,6 @@ $("#SubmitButton").on("click", function (event) {
 
     $("#search-submit").on("click", function (event) {
         event.preventDefault();
-
         var cocktailSearch = $("#search-input").val();
 
         var searchURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + cocktailSearch;
