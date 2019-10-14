@@ -48,6 +48,10 @@ a {
     font-size: 60px;
 }
 
+.Quiz{
+    width: 100px;
+    height: 100px;
+}
 .sidebar {
 	background-color: rgba(64, 224, 208, 0.8);
 	color: white;
