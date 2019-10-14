@@ -1,4 +1,6 @@
 /*
+// ** BAR SEARCH CODE **
+
 $(document).ready(function () {
     // may need to do postal code, city is not specific enough (i.e. fremont isn't recognized, but seattle is)
     // NEED GEOLOCATION API IN ORDER TO GET THE ZIP CODE
@@ -226,6 +228,35 @@ $("#SubmitButton").on("click", function (event) {
 });
 */
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ** COCKTAIL SEARCH CODE **
+
 $(document).ready(function () {
 
     var liquor = ["bourbon"];
@@ -244,8 +275,6 @@ $(document).ready(function () {
             // console.log(response);
 
             for (i = 0; i < response.drinks.length && i < maxResults; i++) {
-                // console.log(response.drinks[i]);
-
                 console.log("Cocktail Name: " + response.drinks[i].strDrink);
                 console.log("ID: " + response.drinks[i].idDrink);
                 lookup.push(response.drinks[i].idDrink);
@@ -362,7 +391,8 @@ $(document).ready(function () {
 
     // function quiz() {
     //     liquor = [""];
-    //     liquor.push(answer);
+    //     // var userChoice = $()
+    //     liquor.push(userChoice);
     // }
 
     getLiquor();
