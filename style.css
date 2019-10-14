@@ -48,6 +48,10 @@ a {
     font-size: 60px;
 }
 
+.Quiz{
+    width: 100px;
+    height: 100px;
+}
 .sidebar {
 	background-color: rgba(64, 224, 208, 0.8);
 	color: white;
@@ -89,7 +93,7 @@ a {
 	color: black;
     padding-top: 20px;
     border: solid white 1px;
-    height: 1000px;
+    height: 1100px;
     width: 45%;
     opacity: 1;
     border-radius: 5px;
@@ -105,7 +109,7 @@ a {
 	color: black;
     padding-top: 20px;
     border: solid white 1px;
-    height: 1000px;
+    height: 1100px;
     width: 45%;
     opacity: 1;
     border-radius: 5px;
@@ -176,12 +180,16 @@ a {
 }
 
 .far {
-    font-size: 25px;
     padding: 0 10px;
-    color:gold;
-  }
+    font-size: 25px;
+    color: gold;
+}
 
-  .search-text-name, .far {
-      display: inline-block;
-      margin: 0;
-  }
+.far, .search-text-name {
+    display: inline-block;
+    margin: 0;
+}
+
+#surveyElement {
+    background-color: #007bff;
+}

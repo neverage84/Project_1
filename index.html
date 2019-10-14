@@ -27,7 +27,16 @@
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
 
+    <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/ee7864623d.js" crossorigin="anonymous"></script>
+    
+    <!--Survey.js-->
+    <script src="https://unpkg.com/jquery"></script>
+        <script src="https://surveyjs.azureedge.net/1.1.15/survey.jquery.js"></script>
+        <link href="https://surveyjs.azureedge.net/1.1.15/survey.css" type="text/css" rel="stylesheet"/>
+       
+
+
 
 </head>
 
@@ -58,9 +67,10 @@
         <div class="row-no-margin MainContent">
 
             <div class="text-center col-6 CenterLeftSection">
-                <h3>Quiz: What kind of cocktail are you?</h3>
-                <div class="d-flex justify-content-center align-items-center ContentSections ">
-                    <img src="images/beer-quiz.png" class="CenterImages  ">
+                    <img src="images/cocktail_blue_arrow-1 (1).png" class="Quiz"><h3>Quiz: What kind of cocktail are you?</h3>
+                <div class="d-flex justify-content-center align-items-center ContentSections Noelle">
+                        <div id="surveyElement"></div>
+                        <div id="surveyResult"></div>
                 </div>
                 <h3 class="pt-3">Cocktail Info</h3>
                 <div class="justify-content-center align-items-start overflow-auto cocktail-info ContentSections">
@@ -91,6 +101,9 @@
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript"
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvcbnSMyaXIVUF_dAd85dXv0aGQb7GTYs&libraries=places"></script>
+
+    <!-- Noelle's Survey.JS-->
+    <script type="text/javascript" src="survey.js"></script>
 
 </body>
 
