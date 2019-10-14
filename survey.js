@@ -5,76 +5,43 @@ Survey
 
 var json = {
 title: "Find your next cocktail",
+
 pages: [
     {
-        title: "What operating system do you use?",
+        title: "Which of these drinks do you typically go for?",
         questions: [
             {
-                type: "checkbox",
-                name: "opSystem",
-                title: "OS",
-                hasOther: true,
+                type: "radiogroup",
+                name: "Drinks",
+                title: "Drink Choices",
+                hasOther: false,
                 isRequired: true,
-                choices: ["Windows", "Linux", "Macintosh OSX"]
+                choices: ["The stronger the better", "Something Fruity", "Smooth but dry", "Bitter but great"]
             }
         ]
     }, {
-        title: "What language(s) are you currently using?",
+        title: "Which of these appetizers would you order?",
         questions: [
             {
-                type: "checkbox",
-                name: "langs",
-                title: "Please select from the list",
-                colCount: 4,
+                type: "radiogroup",
+                name: "Appetizers",
+                title: "So tasty",
+                colCount: 2,
                 isRequired: true,
                 choices: [
-                    "Javascript",
-                    "Java",
-                    "Python",
-                    "CSS",
-                    "PHP",
-                    "Ruby",
-                    "C++",
-                    "C",
-                    "Shell",
-                    "C#",
-                    "Objective-C",
-                    "R",
-                    "VimL",
-                    "Go",
-                    "Perl",
-                    "CoffeeScript",
-                    "TeX",
-                    "Swift",
-                    "Scala",
-                    "Emacs Lisp",
-                    "Haskell",
-                    "Lua",
-                    "Clojure",
-                    "Matlab",
-                    "Arduino",
-                    "Makefile",
-                    "Groovy",
-                    "Puppet",
-                    "Rust",
-                    "PowerShell"
+                    "Buffalo Wings",
+                    "Spinach Artichoke Dip",
+                    "Mozzerella Sticks",
+                    "Poke",
+                    "Nachos",
+                    "Light salad",
+                    "I'll wait for the entree",
+                    
+                   
                 ]
             }
         ]
-    }, {
-        title: "Please enter your name and e-mail",
-        questions: [
-            {
-                type: "text",
-                name: "name",
-                title: "Name:"
-            }, {
-                type: "text",
-                name: "email",
-                title: "Your e-mail"
-            }
-        ]
-    }
+    }, 
 ]
 };
 
