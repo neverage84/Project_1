@@ -131,14 +131,18 @@ $("#SubmitButton").on("click", function (event) {
                 position: place.geometry.location
             });
             console.log(place);
+            if (place.opening_hours.open_now === true){
+                openNow = "Yes!"
+            }
+            else {
+                openNow = "No";
+            }
             google.maps.event.addListener(marker, "click", function () {
-                infowindow.setContent(place.name);
+                infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+                'Is this place open now? ' +openNow + '<br>' +
+                'Place Rating: ' + place.rating + '</div>');
                 infowindow.open(map, this);
             });
-            var placeDetails = {
-                placeId: place.place_id,
-                fields: ["name", "rating", "formatted_phone_number", "geometry"]
-            };
             //   service.getDetails(detailsRequest, callback);
 
             //   placesList[place.name] = placeDetails
