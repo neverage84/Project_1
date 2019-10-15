@@ -16,7 +16,7 @@ pages: [
                 title: "Drink Choices",
                 hasOther: false,
                 isRequired: true,
-                choices: ["The stronger the better", "Something Fruity", "Smooth but dry", "Bitter but great", "Something simple - alcohol plus 1 or 2 ingredients"]
+                choices: ["The stronger the better", "Something Fruity", "Smooth but dry", "Bitter but great", "Sour or Tart","Something simple - alcohol plus 1 or 2 ingredients"]
             }
         ]
     }, {
@@ -106,11 +106,17 @@ window.survey = new Survey.Model(json);
 survey
 .onComplete
 .add(function (result) {
-    if (result.data.Drinks === "Something Fruity") { 
+    if (result.data.Drinks === "Something Fruity" && result.data.Relax === "Tropical beach with a sunset") { 
     document
        
-        .querySelector('#surveyResult')
-        .textContent = "Result JSON:\n" + JSON.stringify(result.data, null, 3);
+        $("#surveyElement").hide()
+         
+         $("#IMGID").html("<img src=images/MaiTai.jpeg>" + "<br>" + "<br>" + "<h2> Mai Tai </h2>");
+         $("#DrinkPick").html("<h2> Mai Tai </h2>");
+        //.querySelector('#surveyResult')
+        //.textContent = "Result JSON:\n" + JSON.stringify(result.data, null, 3);
+        //$("#CorrectAnswerID").html("<h2>" + "<br>" + QuestionBase[count].GIFAnswer + "</h2>");
+        //$(".GIFID").html("<img src=" + GIFs[count] + "> ");IMGID"></div>
     }
 
     else {
