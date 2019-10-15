@@ -380,6 +380,11 @@ $(document).ready(function () {
             localStorage.setItem("list", favoritesList);
             document.getElementById("favorites").innerHTML = localStorage.getItem("list");
             console.log(favoritesList);
+<<<<<<< HEAD
+=======
+            document.getElementById("favorites").innerHTML = favoritesList;
+            // $("#favorites").append("<p>" + favoriteDrink + "</p>");
+>>>>>>> 4acd94080a1d24b8ca24b4c3b39f1bdf8289475e
         }
 
         else if (currentState == "filled") {
