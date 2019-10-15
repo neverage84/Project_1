@@ -189,10 +189,11 @@ a {
 }
 
 #radioOptions {
-    font-size: 12px;
+    font-size: 13px;
     text-align: left;
     position: relative;
-    top: 2%
+    top: 2%;
+    right: 3%;
 }
 
 #radioOptions p {
