@@ -2,189 +2,210 @@
 // ** BAR SEARCH CODE **
 
 $(document).ready(function () {
-
-    // Global Map Variables
+    // may need to do postal code, city is not specific enough (i.e. fremont isn't recognized, but seattle is)
+    // NEED GEOLOCATION API IN ORDER TO GET THE ZIP CODE
+    var breweryCity = "seattle"; //assuming this is the user's input
+    //var breweryState = "washington";
+    var preferredDrink = "best long island";
     var latitude;
     var longitude;
     var currentLocation;
-    var map;
-    var service;
-    var infowindow = new google.maps.InfoWindow();
-    var request;
-    var marker;
+    //   window.onload = function() {
+    //     var startPos;
+    //     var geoSuccess = function(position) {
+    //       startPos = position;
+    //       //document.getElementById('startLat').innerHTML = startPos.coords.latitude;
+    //       //document.getElementById('startLon').innerHTML = startPos.coords.longitude;
+    //       console.log(
+    //         "Geoposition gives " + startPos.coords.latitude + " for latitutde"
+    //       );
+    //       console.log(
+    //         "Geoposition gives " + startPos.coords.longitude + " for longitude"
+    //       );
+    //       latitude = startPos.coords.latitude;
+    //       longitude = startPos.coords.longitude;
+    //     };
+    //     navigator.geolocation.getCurrentPosition(geoSuccess);
+    //   };
 
-    // Gets the user location on page load and displays nearby bars
-    window.onload = function () {
-        var startPos;
-        var geoSuccess = function (position) {
-            startPos = position;
-            // document.getElementById('startLat').innerHTML = startPos.coords.latitude;
-            // document.getElementById('startLon').innerHTML = startPos.coords.longitude;
-            console.log("Geoposition gives " + startPos.coords.latitude + " for latitutde");
-            console.log("Geoposition gives " + startPos.coords.longitude + " for longitude");
-            latitude = startPos.coords.latitude;
-            longitude = startPos.coords.longitude;
-            // $("#startLat").attr("style", "display: none;");
-            // $("#startLon").attr("style", "display: none;");
-            initialize();
-        };
-        navigator.geolocation.getCurrentPosition(geoSuccess);
-    };
+    // Not supported on It is not supported on Internet Explorer 10 and below, nor OperaMini.
 
-    // Function to display nearby nearby bars around user location
-    function initialize() {
-        console.log(latitude);
-        console.log(longitude);
-        currentLocation = new google.maps.LatLng(latitude, longitude);
-        map = new google.maps.Map(document.getElementById("map"), {
-            center: currentLocation,
-            zoom: 15
-        });
-        request = {
-            location: currentLocation,
-            radius: "800",
-            type: ["bar"],
-            fields: ['name', 'formatted_address', 'place_id', 'geometry']
-        };
-        service = new google.maps.places.PlacesService(map);
-        service.nearbySearch(request, callback);
-    }
+    function ipLookUp() {
+        $.ajax("http://ip-api.com/json").then(
+            function success(response) {
+                console.log("User's Location Data is ", response);
+                console.log("User's Country", response.country);
+                console.log("IP - API gives " + response.lat + " for latitude");
+                latitude = response.lat;
+                console.log("IP - API gives " + response.lon + " for longitude");
+                longitude = response.lon;
+ o
+                var map;
+                var service;
+                var infowindow = new google.maps.InfoWindow(); // needed to add this, thanks to https://stackoverflow.com/questions/36360313/google-maps-places-api-javascript-cannot-read-property-setcontent-of-undefin
+                function initialize() {
+                    console.log(latitude);
+                    console.log(longitude);
+                    currentLocation = new google.maps.LatLng(latitude, longitude);
+                    map = new google.maps.Map(document.getElementById("map"), {
+                        center: currentLocation,
+                        zoom: 15
+                    });
+                    var request = {
+                        location: currentLocation,
+                        radius: "800",
+                        type: ["bar"],
+                        fields: ['name', 'formatted_address', 'place_id', 'geometry']
+                    };
+                    service = new google.maps.places.PlacesService(map);
+                    service.nearbySearch(request, callback);
 
-    // Creates a marker at returned place results and display place details
-    function createMarker(place) {
-        var detailsRequest = {
-            placeId: place.place_id,
-            fields: ['name', 'formatted_address', 'place_id', 'geometry', "formatted_phone_number", "opening_hours", "website"]
-        };
-        service.getDetails(detailsRequest, function (placeMarker, status) {
-            if (status === google.maps.places.PlacesServiceStatus.OK) {
-                marker = new google.maps.Marker({
-                    map: map,
-                    position: placeMarker.geometry.location
-                });
-                // gets the current day of week
-                var day = new Date();
-                // converts day to an index number, subtracts 1 to match the same index number as Google's API
-                var dayIndex = day.getDay() - 1;
-                // if statement to set an index of -1 which would be Sunday, to 6 which is Sunday in Google's API
-                if (dayIndex === -1) {
-                    dayIndex = 6
                 }
-                console.log(placeMarker)
-                google.maps.event.addListener(marker, 'click', function () {
-                    var br = "<br>"
-                    infowindow.setContent('<div><strong>' + placeMarker.name + '</strong>' + br +
-                        placeMarker.formatted_address + br + placeMarker.formatted_phone_number + br +
-                        placeMarker.website + br + placeMarker.opening_hours.weekday_text[dayIndex] + '</div>');
-                    infowindow.open(map, this);
-                });
+                function createMarker(placeMarker) {
+                    var detailsRequest = {
+                        placeId: placeMarker.place_id,
+                        fields: ['name', 'formatted_address', 'place_id', 'geometry', "formatted_phone_number", "opening_hours", "website"]
+                    };
+                    service.getDetails(detailsRequest, function (place, status) {
+                        if (status === google.maps.places.PlacesServiceStatus.OK) {
+                            var marker = new google.maps.Marker({
+                                map: map,
+                                position: place.geometry.location
+                            });
+                            // gets the current day of week
+                            var day = new Date();
+                            // converts day to an index number, subtracts 1 to match the same index number as Google's API
+                            var dayIndex = day.getDay() - 1;
+                            // if statement to set an index of -1 which would be Sunday, to 6 which is Sunday in Google's API
+                            if(dayIndex === -1){
+                                dayIndex = 6
+                            }
+                            console.log(place)
+                            google.maps.event.addListener(marker, 'click', function () {
+                                var br = "<br>"
+                                infowindow.setContent('<div><strong>' + place.name + '</strong>'+ br +
+                                    place.formatted_address + br + place.formatted_phone_number + br +
+                                    place.website + br + place.opening_hours.weekday_text[dayIndex] + '</div>');
+                                infowindow.open(map, this);
+                            });
+                        }
+                    });
+                }
+                function createMarkerSelf() {
+
+                    var marker = new google.maps.Marker({
+                        position: currentLocation,
+                        map: map,
+                        icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+                    });
+                    console.log(marker.position);
+                }
+                function callback(results, status) {
+
+                    createMarkerSelf();
+                    if (status == google.maps.places.PlacesServiceStatus.OK) {
+                        for (var i = 0; i < results.length; i++) {
+
+                            var place = results[i];
+                            createMarker(results[i]);
+
+                        }
+                    }
+                }
+                initialize();
+            },
+            function fail(data, status) {
+                console.log("Request failed.  Returned status of", status);
             }
-        });
+        );
     }
+    ipLookUp();
+});
 
-    // Creates a marker at user location
-    function createMarkerSelf() {
-        marker = new google.maps.Marker({
-            position: currentLocation,
-            map: map,
-            icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
-        });
-    }
 
-    // Callback function to return place results and display them as markers on the map
-    function callback(results, status) {
-        createMarkerSelf();
-        if (status == google.maps.places.PlacesServiceStatus.OK) {
-            for (var i = 0; i < results.length; i++) {
-                var place = results[i];
-                createMarker(results[i]);
-            }
-        }
-    }
+$("#SubmitButton").on("click", function (event) {
+    event.preventDefault();
+    $.ajax("http://ip-api.com/json").then(function success(response) {
+        console.log("User's Location Data is ", response);
+        console.log("User's Country", response.country);
+        console.log("IP - API gives " + response.lat + " for latitude");
+        latitude = response.lat;
+        console.log("IP - API gives " + response.lon + " for longitude");
+        longitude = response.lon;
+        console.log("Button Works");
+        var map;
+        var service;
+        var infowindow = new google.maps.InfoWindow();
 
-    $("#SubmitButton").on("click", function (event) {
-        event.preventDefault();
-        if ($("#barOption").is(":checked")) {
-            
-            // Function to take the user search input and display results on the map
-            function initializeSearch() {
-                currentLocation = new google.maps.LatLng(latitude, longitude);
-                map = new google.maps.Map(document.getElementById("map"), {
-                    center: currentLocation,
-                    zoom: 13
-                });
-                var searchInput = $("#SearchField")
-                    .val()
-                    .trim()
-                    .toLowerCase();
-
-                request = {
-                    location: currentLocation,
-                    radius: "400",
-                    query: searchInput + " cocktail"
-                };
-                service = new google.maps.places.PlacesService(map);
-                service.textSearch(request, callback);
-            }
-            initializeSearch();
-            $("#SearchField").val("");
-        } else if ($("#drinkOption").is(":checked")) {
-            var cocktailSearch = $("#SearchField").val();
-
-            var searchURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + cocktailSearch;
-
-            $.ajax({
-                url: searchURL,
-                method: "GET"
-            }).then(function (response) {
-                $(".cocktail-results").empty();
-                $(".cocktail-image").empty();
-
-                for (i = 0; i < response.drinks.length && i < maxResults; i++) {
-                    var searchImage = $("<div class='search-image'>");
-                    var imgURL = response.drinks[i].strDrinkThumb;
-                    var image = $("<img>").attr("src", imgURL).attr("height", "125px").attr("width", "125px");
-                    searchImage.append(image);
-
-                    var searchDiv = $("<div class='cocktail-search'>");
-                    var name = response.drinks[i].strDrink;
-                    var nameText = $("<p class='search-text'>").text("Cocktail Name: " + name).css("font-weight", "bold");
-                    searchDiv.append(nameText);
-
-                    var category = response.drinks[i].strCategory;
-                    var categoryText = $("<p class='search-text'>").text("Category: " + category);
-                    searchDiv.append(categoryText);
-
-                    var ingredients = [response.drinks[i].strIngredient1 + ", " + response.drinks[i].strIngredient2 + ", " + response.drinks[i].strIngredient4 + ", " + response.drinks[i].strIngredient4];
-                    var ingredientsText = $("<p class='search-text'>").text("Ingredients: " + ingredients);
-                    searchDiv.append(ingredientsText);
-
-                    var instructions = response.drinks[i].strInstructions;
-                    var instructionsText = $("<p class='search-text'>").text("Instructions: " + instructions);
-                    searchDiv.append(instructionsText);
-
-                    var glass = response.drinks[i].strGlass;
-                    var glassText = $("<p class='search-text'>").text("Glassware: " + glass);
-                    searchDiv.append(glassText);
-
-                    // List each of the drinks displayed above.
-                    $("#search-parameter").html("<p id='pstyle'>" + "Search Results for: '" + cocktailSearch + "'" + "</p>");
-                    $(".cocktail-results").append(searchImage);
-                    $(".cocktail-results").append(searchDiv);
-                    $("#SearchField").val("");
+        function createMarker(placeMarker) {
+            var detailsRequest = {
+                placeId: placeMarker.place_id,
+                fields: ['name', 'formatted_address', 'place_id', 'geometry', "formatted_phone_number", "opening_hours", "website"]
+            };
+            service.getDetails(detailsRequest, function (place, status) {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: place.geometry.location
+                    });
+                    // gets the current day of week
+                    var day = new Date();
+                    // converts day to an index number, subtracts 1 to match the same index number as Google's API
+                    var dayIndex = day.getDay() - 1;
+                    // if statement to set an index of -1 which would be Sunday, to 6 which is Sunday in Google's API
+                    if(dayIndex === -1){
+                        dayIndex = 6
+                    }
+                    console.log(place)
+                    google.maps.event.addListener(marker, 'click', function () {
+                        var br = "<br>"
+                        infowindow.setContent('<div><strong>' + place.name + '</strong>'+ br +
+                            place.formatted_address + br + place.formatted_phone_number + br +
+                            place.website + br + place.opening_hours.weekday_text[dayIndex] + '</div>');
+                        infowindow.open(map, this);
+                    });
                 }
             });
-
-            // function quiz() {
-            //     liquor = [""];
-            //     // var userChoice = $()
-            //     liquor.push(userChoice);
-            // }
-
-            getLiquor();
         }
+
+        function initialize() {
+            currentLocation = new google.maps.LatLng(latitude, longitude);
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: currentLocation,
+                zoom: 15
+            });
+            var searchInput = $("#SearchField")
+                .val()
+                .trim()
+                .toLowerCase();
+
+            var request = {
+                location: currentLocation,
+                radius: "400",
+                query: searchInput + " cocktail"
+            };
+            service = new google.maps.places.PlacesService(map);
+            service.textSearch(request, callback);
+        }
+        function createMarkerSelf() {
+            var marker = new google.maps.Marker({
+                position: currentLocation,
+                map: map,
+                icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+            });
+        }
+        function callback(results, status) {
+            createMarkerSelf();
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+                for (var i = 0; i < results.length; i++) {
+                    var place = results[i];
+                    createMarker(results[i]);
+
+                }
+            }
+        }
+        initialize();
     });
-<<<<<<< HEAD
 })
 */
 
@@ -195,8 +216,6 @@ $(document).ready(function () {
 
 
 
-=======
->>>>>>> 57d927c58f70f77d6d6d1e2fbe992bccfe796fca
 
 
 
@@ -207,32 +226,7 @@ $(document).ready(function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // ** COCKTAIL SEARCH CODE **
+// ** COCKTAIL SEARCH CODE **
 
 $(document).ready(function () {
 
@@ -319,7 +313,6 @@ $(document).ready(function () {
             // All done!
         }
     }
-<<<<<<< HEAD
 
     $("#SubmitButton").on("click", function (event) {
         event.preventDefault();
@@ -387,11 +380,6 @@ $(document).ready(function () {
             localStorage.setItem("list", favoritesList);
             document.getElementById("favorites").innerHTML = localStorage.getItem("list");
             console.log(favoritesList);
-<<<<<<< HEAD
-=======
-            document.getElementById("favorites").innerHTML = favoritesList;
-            // $("#favorites").append("<p>" + favoriteDrink + "</p>");
->>>>>>> 4acd94080a1d24b8ca24b4c3b39f1bdf8289475e
         }
 
         else if (currentState == "filled") {
@@ -417,6 +405,3 @@ $(document).ready(function () {
     $(document).on("click", ".fa-star", favorites);
 
 })
-=======
-});
->>>>>>> 57d927c58f70f77d6d6d1e2fbe992bccfe796fca

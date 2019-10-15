@@ -63,14 +63,14 @@ a {
 
 .FunFacts {
     margin-top: 10px;
-    height: 48%;
+    height: 45%;
     width: 48%;
     float:right;
 }
 
 .FavoriteDrinks {
     margin-top: 10px;
-    height: 48%;
+    height: 45%;
     width: 48%;
     margin-left: 0px;
     float:left;
@@ -98,7 +98,7 @@ a {
 	color: black;
     padding-top: 20px;
     border: solid white 1px;
-    height: 1100px;
+    height: 1200px;
     width: 45%;
     opacity: 1;
     border-radius: 5px;
@@ -114,7 +114,7 @@ a {
 	color: black;
     padding-top: 20px;
     border: solid white 1px;
-    height: 1100px;
+    height: 1200px;
     width: 45%;
     opacity: 1;
     border-radius: 5px;
@@ -198,8 +198,6 @@ a {
 #surveyElement {
     background-color: #007bff;
 }
-<<<<<<< HEAD
-=======
 
 #radioOptions {
     font-size: 13px;
@@ -221,4 +219,3 @@ a {
 #radioOptions input[type="radio"] {
     vertical-align: text-bottom;
 }
->>>>>>> 57d927c58f70f77d6d6d1e2fbe992bccfe796fca
