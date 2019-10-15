@@ -82,6 +82,11 @@ a {
     height: 100px;
 }
 
+.MapImage {
+    width: 200px;
+    height: 100px;
+}
+
 .underline {
     border-bottom: solid white 1px;
 }

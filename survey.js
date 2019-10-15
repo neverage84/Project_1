@@ -50,9 +50,19 @@ window.survey = new Survey.Model(json);
 survey
 .onComplete
 .add(function (result) {
+    if (result.data.Drinks === "Something Fruity") { 
     document
+       
         .querySelector('#surveyResult')
         .textContent = "Result JSON:\n" + JSON.stringify(result.data, null, 3);
+    }
+
+    else {
+        document
+       
+        .querySelector('#surveyResult')
+        .textContent = "NOPE";
+    }
 });
 
 survey.showProgressBar = 'bottom';
