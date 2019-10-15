@@ -2,210 +2,132 @@
 // ** BAR SEARCH CODE **
 
 $(document).ready(function () {
-    // may need to do postal code, city is not specific enough (i.e. fremont isn't recognized, but seattle is)
-    // NEED GEOLOCATION API IN ORDER TO GET THE ZIP CODE
-    var breweryCity = "seattle"; //assuming this is the user's input
-    //var breweryState = "washington";
-    var preferredDrink = "best long island";
+
+    // Global Map Variables
     var latitude;
     var longitude;
     var currentLocation;
-    //   window.onload = function() {
-    //     var startPos;
-    //     var geoSuccess = function(position) {
-    //       startPos = position;
-    //       //document.getElementById('startLat').innerHTML = startPos.coords.latitude;
-    //       //document.getElementById('startLon').innerHTML = startPos.coords.longitude;
-    //       console.log(
-    //         "Geoposition gives " + startPos.coords.latitude + " for latitutde"
-    //       );
-    //       console.log(
-    //         "Geoposition gives " + startPos.coords.longitude + " for longitude"
-    //       );
-    //       latitude = startPos.coords.latitude;
-    //       longitude = startPos.coords.longitude;
-    //     };
-    //     navigator.geolocation.getCurrentPosition(geoSuccess);
-    //   };
+    var map;
+    var service;
+    var infowindow = new google.maps.InfoWindow();
+    var request;
+    var marker;
 
-    // Not supported on It is not supported on Internet Explorer 10 and below, nor OperaMini.
+    // Gets the user location on page load and displays nearby bars
+    window.onload = function () {
+        var startPos;
+        var geoSuccess = function (position) {
+            startPos = position;
+            // document.getElementById('startLat').innerHTML = startPos.coords.latitude;
+            // document.getElementById('startLon').innerHTML = startPos.coords.longitude;
+            console.log("Geoposition gives " + startPos.coords.latitude + " for latitutde");
+            console.log("Geoposition gives " + startPos.coords.longitude + " for longitude");
+            latitude = startPos.coords.latitude;
+            longitude = startPos.coords.longitude;
+            // $("#startLat").attr("style", "display: none;");
+            // $("#startLon").attr("style", "display: none;");
+            initialize();
+        };
+        navigator.geolocation.getCurrentPosition(geoSuccess);
+    };
 
-    function ipLookUp() {
-        $.ajax("http://ip-api.com/json").then(
-            function success(response) {
-                console.log("User's Location Data is ", response);
-                console.log("User's Country", response.country);
-                console.log("IP - API gives " + response.lat + " for latitude");
-                latitude = response.lat;
-                console.log("IP - API gives " + response.lon + " for longitude");
-                longitude = response.lon;
-
-                var map;
-                var service;
-                var infowindow = new google.maps.InfoWindow(); // needed to add this, thanks to https://stackoverflow.com/questions/36360313/google-maps-places-api-javascript-cannot-read-property-setcontent-of-undefin
-                function initialize() {
-                    console.log(latitude);
-                    console.log(longitude);
-                    currentLocation = new google.maps.LatLng(latitude, longitude);
-                    map = new google.maps.Map(document.getElementById("map"), {
-                        center: currentLocation,
-                        zoom: 15
-                    });
-                    var request = {
-                        location: currentLocation,
-                        radius: "800",
-                        type: ["bar"],
-                        fields: ['name', 'formatted_address', 'place_id', 'geometry']
-                    };
-                    service = new google.maps.places.PlacesService(map);
-                    service.nearbySearch(request, callback);
-
-                }
-                function createMarker(placeMarker) {
-                    var detailsRequest = {
-                        placeId: placeMarker.place_id,
-                        fields: ['name', 'formatted_address', 'place_id', 'geometry', "formatted_phone_number", "opening_hours", "website"]
-                    };
-                    service.getDetails(detailsRequest, function (place, status) {
-                        if (status === google.maps.places.PlacesServiceStatus.OK) {
-                            var marker = new google.maps.Marker({
-                                map: map,
-                                position: place.geometry.location
-                            });
-                            // gets the current day of week
-                            var day = new Date();
-                            // converts day to an index number, subtracts 1 to match the same index number as Google's API
-                            var dayIndex = day.getDay() - 1;
-                            // if statement to set an index of -1 which would be Sunday, to 6 which is Sunday in Google's API
-                            if (dayIndex === -1) {
-                                dayIndex = 6
-                            }
-                            console.log(place)
-                            google.maps.event.addListener(marker, 'click', function () {
-                                var br = "<br>"
-                                infowindow.setContent('<div><strong>' + place.name + '</strong>' + br +
-                                    place.formatted_address + br + place.formatted_phone_number + br +
-                                    place.website + br + place.opening_hours.weekday_text[dayIndex] + '</div>');
-                                infowindow.open(map, this);
-                            });
-                        }
-                    });
-                }
-                function createMarkerSelf() {
-
-                    var marker = new google.maps.Marker({
-                        position: currentLocation,
-                        map: map,
-                        icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
-                    });
-                    console.log(marker.position);
-                }
-                function callback(results, status) {
-
-                    createMarkerSelf();
-                    if (status == google.maps.places.PlacesServiceStatus.OK) {
-                        for (var i = 0; i < results.length; i++) {
-
-                            var place = results[i];
-                            createMarker(results[i]);
-
-                        }
-                    }
-                }
-                initialize();
-            },
-            function fail(data, status) {
-                console.log("Request failed.  Returned status of", status);
-            }
-        );
+    // Function to display nearby nearby bars around user location
+    function initialize() {
+        console.log(latitude);
+        console.log(longitude);
+        currentLocation = new google.maps.LatLng(latitude, longitude);
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: currentLocation,
+            zoom: 15
+        });
+        request = {
+            location: currentLocation,
+            radius: "800",
+            type: ["bar"],
+            fields: ['name', 'formatted_address', 'place_id', 'geometry']
+        };
+        service = new google.maps.places.PlacesService(map);
+        service.nearbySearch(request, callback);
     }
-    ipLookUp();
+
+    // Creates a marker at returned place results and display place details
+    function createMarker(place) {
+        var detailsRequest = {
+            placeId: place.place_id,
+            fields: ['name', 'formatted_address', 'place_id', 'geometry', "formatted_phone_number", "opening_hours", "website"]
+        };
+        service.getDetails(detailsRequest, function (placeMarker, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                marker = new google.maps.Marker({
+                    map: map,
+                    position: placeMarker.geometry.location
+                });
+                // gets the current day of week
+                var day = new Date();
+                // converts day to an index number, subtracts 1 to match the same index number as Google's API
+                var dayIndex = day.getDay() - 1;
+                // if statement to set an index of -1 which would be Sunday, to 6 which is Sunday in Google's API
+                if (dayIndex === -1) {
+                    dayIndex = 6
+                }
+                console.log(placeMarker)
+                google.maps.event.addListener(marker, 'click', function () {
+                    var br = "<br>"
+                    infowindow.setContent('<div><strong>' + placeMarker.name + '</strong>' + br +
+                        placeMarker.formatted_address + br + placeMarker.formatted_phone_number + br +
+                        placeMarker.website + br + placeMarker.opening_hours.weekday_text[dayIndex] + '</div>');
+                    infowindow.open(map, this);
+                });
+            }
+        });
+    }
+
+    // Creates a marker at user location
+    function createMarkerSelf() {
+        marker = new google.maps.Marker({
+            position: currentLocation,
+            map: map,
+            icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+        });
+    }
+
+    // Callback function to return place results and display them as markers on the map
+    function callback(results, status) {
+        createMarkerSelf();
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+            for (var i = 0; i < results.length; i++) {
+                var place = results[i];
+                createMarker(results[i]);
+            }
+        }
+    }
+
     $("#SubmitButton").on("click", function (event) {
         event.preventDefault();
         if ($("#barOption").is(":checked")) {
-            $.ajax("http://ip-api.com/json").then(function success(response) {
-                console.log("User's Location Data is ", response);
-                console.log("User's Country", response.country);
-                console.log("IP - API gives " + response.lat + " for latitude");
-                latitude = response.lat;
-                console.log("IP - API gives " + response.lon + " for longitude");
-                longitude = response.lon;
-                console.log("Button Works");
-                var map;
-                var service;
-                var infowindow = new google.maps.InfoWindow();
+            
+            // Function to take the user search input and display results on the map
+            function initializeSearch() {
+                currentLocation = new google.maps.LatLng(latitude, longitude);
+                map = new google.maps.Map(document.getElementById("map"), {
+                    center: currentLocation,
+                    zoom: 13
+                });
+                var searchInput = $("#SearchField")
+                    .val()
+                    .trim()
+                    .toLowerCase();
 
-                function createMarker(placeMarker) {
-                    var detailsRequest = {
-                        placeId: placeMarker.place_id,
-                        fields: ['name', 'formatted_address', 'place_id', 'geometry', "formatted_phone_number", "opening_hours", "website"]
-                    };
-                    service.getDetails(detailsRequest, function (place, status) {
-                        if (status === google.maps.places.PlacesServiceStatus.OK) {
-                            var marker = new google.maps.Marker({
-                                map: map,
-                                position: place.geometry.location
-                            });
-                            // gets the current day of week
-                            var day = new Date();
-                            // converts day to an index number, subtracts 1 to match the same index number as Google's API
-                            var dayIndex = day.getDay() - 1;
-                            // if statement to set an index of -1 which would be Sunday, to 6 which is Sunday in Google's API
-                            if (dayIndex === -1) {
-                                dayIndex = 6
-                            }
-                            console.log(place)
-                            google.maps.event.addListener(marker, 'click', function () {
-                                var br = "<br>"
-                                infowindow.setContent('<div><strong>' + place.name + '</strong>' + br +
-                                    place.formatted_address + br + place.formatted_phone_number + br +
-                                    place.website + br + place.opening_hours.weekday_text[dayIndex] + '</div>');
-                                infowindow.open(map, this);
-                            });
-                        }
-                    });
-                }
-
-                function initialize() {
-                    currentLocation = new google.maps.LatLng(latitude, longitude);
-                    map = new google.maps.Map(document.getElementById("map"), {
-                        center: currentLocation,
-                        zoom: 15
-                    });
-                    var searchInput = $("#SearchField")
-                        .val()
-                        .trim()
-                        .toLowerCase();
-
-                    var request = {
-                        location: currentLocation,
-                        radius: "400",
-                        query: searchInput + " cocktail"
-                    };
-                    service = new google.maps.places.PlacesService(map);
-                    service.textSearch(request, callback);
-                }
-                function createMarkerSelf() {
-                    var marker = new google.maps.Marker({
-                        position: currentLocation,
-                        map: map,
-                        icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
-                    });
-                }
-                function callback(results, status) {
-                    createMarkerSelf();
-                    if (status == google.maps.places.PlacesServiceStatus.OK) {
-                        for (var i = 0; i < results.length; i++) {
-                            var place = results[i];
-                            createMarker(results[i]);
-
-                        }
-                    }
-                }
-                initialize();
-                $("#SearchField").val("");
-            });
-
+                request = {
+                    location: currentLocation,
+                    radius: "400",
+                    query: searchInput + " cocktail"
+                };
+                service = new google.maps.places.PlacesService(map);
+                service.textSearch(request, callback);
+            }
+            initializeSearch();
+            $("#SearchField").val("");
         } else if ($("#drinkOption").is(":checked")) {
             var cocktailSearch = $("#SearchField").val();
 
@@ -296,7 +218,7 @@ $(document).ready(function () {
 
 
 
-    
+
     // ** COCKTAIL SEARCH CODE **
 
 
