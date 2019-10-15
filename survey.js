@@ -113,10 +113,6 @@ survey
          
          $("#IMGID").html("<img src=images/MaiTai.jpeg>" + "<br>" + "<br>" + "<h2> Mai Tai </h2>");
          
-        //.querySelector('#surveyResult')
-        //.textContent = "Result JSON:\n" + JSON.stringify(result.data, null, 3);
-        //$("#CorrectAnswerID").html("<h2>" + "<br>" + QuestionBase[count].GIFAnswer + "</h2>");
-        //$(".GIFID").html("<img src=" + GIFs[count] + "> ");IMGID"></div>
     }
     if (result.data.Drinks === "Something Fruity" && result.data.Relax === "Around people I'm comfortable with") { 
         document
@@ -146,3 +142,5 @@ survey
 survey.showProgressBar = 'bottom';
 
 $("#surveyElement").Survey({model: survey});
+
+
