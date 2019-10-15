@@ -378,7 +378,7 @@ $(document).ready(function () {
             var favoriteDrink = $(this).attr("name");
             favoritesList.push(favoriteDrink);
             console.log(favoritesList);
-            favoritesList.innerText(favoriteDrink);
+            document.getElementById("favorites").innerHTML = favoritesList;
             // $("#favorites").append("<p>" + favoriteDrink + "</p>");
         }
 
