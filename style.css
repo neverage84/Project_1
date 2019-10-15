@@ -63,14 +63,14 @@ a {
 
 .FunFacts {
     margin-top: 10px;
-    height: 43%;
+    height: 48%;
     width: 48%;
     float:right;
 }
 
 .FavoriteDrinks {
     margin-top: 10px;
-    height: 43%;
+    height: 48%;
     width: 48%;
     margin-left: 0px;
     float:left;
@@ -179,13 +179,13 @@ a {
     color: #007bff;
 }
 
-.far {
+.fa-star {
     padding: 0 10px;
     font-size: 25px;
     color: gold;
 }
 
-.far, .search-text-name {
+.fa-star, .search-text-name {
     display: inline-block;
     margin: 0;
 }

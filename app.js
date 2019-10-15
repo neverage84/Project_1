@@ -228,7 +228,7 @@ $("#SubmitButton").on("click", function (event) {
 
 // ** COCKTAIL SEARCH CODE **
 
-$(document).ready(function() {
+$(document).ready(function () {
 
     var liquor = ["bourbon"];
     var lookup = [];
@@ -236,6 +236,7 @@ $(document).ready(function() {
     var maxResults = 3;  // Set this limit when ready for go live.
     var liquorURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + liquor;
     var idURL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
+    var favoritesList = [];
 
     function getLiquor() {
         // AJAX call to gather liquor information
@@ -269,8 +270,8 @@ $(document).ready(function() {
             var nameText = $("<p class='search-text-name'>").text("Cocktail Name: " + name).css("font-weight", "bold");
             searchDiv.append(nameText);
 
-            var star = $("<span class='far fa-star'>" + "</span>")
-            searchDiv.append(star);
+            var unfilledStar = $("<span class='fa-star far'>" + "</span>").attr("state", "unfilled").attr("name", name);
+            searchDiv.append(unfilledStar);
 
             var category = response.drinks[0].strCategory;
             var categoryText = $("<p class='search-text'>").text("Category: " + category);
@@ -335,8 +336,11 @@ $(document).ready(function() {
 
                 var searchDiv = $("<div class='cocktail-search'>");
                 var name = response.drinks[i].strDrink;
-                var nameText = $("<p class='search-text'>").text("Cocktail Name: " + name).css("font-weight", "bold");
+                var nameText = $("<p class='search-text-name'>").text("Cocktail Name: " + name).css("font-weight", "bold");
                 searchDiv.append(nameText);
+
+                var unfilledStar = $("<span class='fa-star far'>" + "</span>").attr("state", "unfilled").attr("name", name);
+                searchDiv.append(unfilledStar);
 
                 var category = response.drinks[i].strCategory;
                 var categoryText = $("<p class='search-text'>").text("Category: " + category);
@@ -363,6 +367,30 @@ $(document).ready(function() {
         });
     })
 
+    // Create a mark a drink as a favorite if clicked.
+    function favorites() {
+        console.log("testing favorites");
+
+        var currentState = $(this).attr("state");
+
+        if (currentState == "unfilled") {
+            $(this).attr("state", "filled").removeClass("far").addClass("fas");
+            var favoriteDrink = $(this).attr("name");
+            favoritesList.push(favoriteDrink);
+            console.log(favoritesList);
+            favoritesList.innerText(favoriteDrink);
+            // $("#favorites").append("<p>" + favoriteDrink + "</p>");
+        }
+
+        else if (currentState == "filled") {
+            $(this).attr("state", "unfilled").removeClass("fas").addClass("far");
+            var favoriteDrink = $(this).attr("name");
+            console.log(favoriteDrink);
+            // $("#favorites").remove("<p>" + $(this).attr("name") + "</p>");
+            $("#favorites").remove(favoriteDrink);
+        }
+    }
+
     // function quiz() {
     //     liquor = [""];
     //     // var userChoice = $()
@@ -370,5 +398,6 @@ $(document).ready(function() {
     // }
 
     getLiquor();
+    $(document).on("click", ".fa-star", favorites);
 
 })
