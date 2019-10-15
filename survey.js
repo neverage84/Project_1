@@ -112,7 +112,7 @@ survey
         $("#surveyElement").hide()
          
          $("#IMGID").html("<img src=images/MaiTai.jpeg>" + "<br>" + "<br>" + "<h2> Mai Tai </h2>");
-         $("#DrinkPick").html("<h2> Mai Tai </h2>");
+         
         //.querySelector('#surveyResult')
         //.textContent = "Result JSON:\n" + JSON.stringify(result.data, null, 3);
         //$("#CorrectAnswerID").html("<h2>" + "<br>" + QuestionBase[count].GIFAnswer + "</h2>");
@@ -121,9 +121,8 @@ survey
 
     else {
         document
-       
-        .querySelector('#surveyResult')
-        .textContent = "NOPE";
+        $("#surveyElement").hide()
+        $("#IMGID").html("<img src=images/LongIslandIceTea.jpeg>" + "<br>" + "<br>" + "<h2> Long Island Ice Tea </h2>");
     }
 });
 
