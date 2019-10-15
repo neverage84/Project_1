@@ -377,17 +377,21 @@ $(document).ready(function () {
             $(this).attr("state", "filled").removeClass("far").addClass("fas");
             var favoriteDrink = $(this).attr("name");
             favoritesList.push(favoriteDrink);
+            localStorage.setItem("list", favoritesList);
+            document.getElementById("favorites").innerHTML = localStorage.getItem("list");
             console.log(favoritesList);
-            favoritesList.innerText(favoriteDrink);
-            // $("#favorites").append("<p>" + favoriteDrink + "</p>");
         }
 
         else if (currentState == "filled") {
             $(this).attr("state", "unfilled").removeClass("fas").addClass("far");
             var favoriteDrink = $(this).attr("name");
-            console.log(favoriteDrink);
-            // $("#favorites").remove("<p>" + $(this).attr("name") + "</p>");
-            $("#favorites").remove(favoriteDrink);
+            var i = favoritesList.indexOf(favoriteDrink);
+            if (i != -1) {
+                favoritesList.splice(i, 1);
+            }
+            localStorage.setItem("list", favoritesList);
+            document.getElementById("favorites").innerHTML = localStorage.getItem("list");
+            console.log(favoritesList);
         }
     }
 
