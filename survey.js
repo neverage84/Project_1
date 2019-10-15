@@ -118,6 +118,23 @@ survey
         //$("#CorrectAnswerID").html("<h2>" + "<br>" + QuestionBase[count].GIFAnswer + "</h2>");
         //$(".GIFID").html("<img src=" + GIFs[count] + "> ");IMGID"></div>
     }
+    if (result.data.Drinks === "Something Fruity" && result.data.Relax === "Around people I'm comfortable with") { 
+        document
+           
+            $("#surveyElement").hide()
+             
+             $("#IMGID").html("<img src=images/daiquiri.jpeg>" + "<br>" + "<br>" + "<h2> Daiquiri </h2>");
+             
+        }
+    if (result.data.Drinks === "Something Fruity" && result.data.Relax === "Cabin in the forest") { 
+            document
+               
+                $("#surveyElement").hide()
+                 
+                 $("#IMGID").html("<img src=images/MalibuSunset.jpeg>" + "<br>" + "<br>" + "<h2> Malibu Sunset </h2>");
+                 
+            }
+    
 
     else {
         document
