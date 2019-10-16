@@ -27,6 +27,12 @@
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
 
+    <!--Survey.js-->
+    <script src="https://unpkg.com/jquery"></script>
+    <script src="https://surveyjs.azureedge.net/1.1.15/survey.jquery.js"></script>
+    <link href="https://surveyjs.azureedge.net/1.1.15/survey.css" type="text/css" rel="stylesheet" />
+
+
 
 
 </head>
@@ -37,14 +43,20 @@
     <nav class="nav ">
         <!--<a class="nav-item nav-link" href="#">Quiz</a>
         <a class="nav-item nav-link" href="#">Cocktail Search</a>-->
-       
-            
-            <p id="title"><img class="happyHourIcons" src="images/Happy-Hour.png" width="50px" height="50px">Happy Hour<img class="happyHourIcons" src="images/Happy-Hour.png" width="50px" height="50px"></p>
-            
-        
+
+
+        <p id="title"><img class="happyHourIcons" src="images/Happy-Hour.png" width="50px" height="50px">Happy Hour<img
+                class="happyHourIcons" src="images/Happy-Hour.png" width="50px" height="50px"></p>
+
+
 
         <!--<a class="nav-item nav-link" href="#">Bars</a>-->
-        <div id = "headerRight">
+        <div id="headerRight">
+            <form id="radioOptions">
+                <p>I'm searching for a: </p>
+                <label><input type="radio" name="searchType" id="barOption" value="bar" checked="checked">Bar</label>
+                <label><input type="radio" name="searchType" id="drinkOption" value="drink">Drink</label>
+            </form>
             <form class="form-inline my-2 my-lg-0 headerRightContents">
                 <input id="SearchField" class="form-control mr-sm-2 controls" type="text"
                     placeholder="Best Long Island Ice Tea">
@@ -57,30 +69,22 @@
         <div class="row-no-margin MainContent">
 
             <div class="text-center col-6 CenterLeftSection">
+                <img src="images/cocktail_blue_arrow-1 (1).png" class="Quiz">
                 <h3>Quiz: What kind of cocktail are you?</h3>
-                <div class="d-flex justify-content-center align-items-center ContentSections ">
-                    <img src="images/beer-quiz.png" class="CenterImages  ">
-
+                <div class="d-flex justify-content-center align-items-center ContentSections Noelle">
+                  <div id="IMGID"></div>
+                  <div id="surveyElement"></div>
+                  <div id="surveyResult"></div>
                 </div>
-                <h3>Cocktail Info</h3>
-                <div class="py-5 justify-content-center align-items-start ContentSections">
-                    <img src="https://images-na.ssl-images-amazon.com/images/I/512o-tkHEBL.png" class="CenterImages  ">
-
-                    <form>
-                        <div class="form-row justify-content-center">
-                            <div class="col-7">
-                                <input type="text" class="form-control" id="search-input" placeholder="Cocktail Name"
-                                    onfocus="this.value=''">
-                            </div>
-                            <div class="col-auto">
-                                <button type="submit" class="btn btn-primary mb-2" id="search-submit">Go</button>
-                            </div>
-                        </div>
-                    </form>
+                <img src="images/cocktailsvariety.png" class="MapImage">
+                <h3 class="pt-3">Cocktail Info</h3>
+                <div class="justify-content-center align-items-start overflow-auto cocktail-info ContentSections">
+                    <div id="search-parameter"></div>
                     <div class="form-row justify-content-center cocktail-results"></div>
                 </div>
             </div>
             <div class="text-center col-6 CenterRightSection">
+                <img src="images/bar-open.png" class="MapImage">
                 <h3>Bars Near You</h3>
                 <div class="d-flex justify-content-center align-items-center ContentSections">
                     <div id="startLat"></div>
@@ -104,6 +108,11 @@
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript"
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvcbnSMyaXIVUF_dAd85dXv0aGQb7GTYs&libraries=places"></script>
+
+    <!-- Noelle's Survey.JS-->
+    <script type="text/javascript" src="survey.js"></script>
+    <!-- Fun Facts JS-->
+    <script type="text/javascript" src="funfacts.js"></script>
 
 </body>
 

@@ -48,6 +48,10 @@ a {
     font-size: 60px;
 }
 
+.Quiz{
+    width: 100px;
+    height: 100px;
+}
 .sidebar {
 	background-color: rgba(64, 224, 208, 0.8);
 	color: white;
@@ -75,6 +79,11 @@ a {
 
 .img-circle {
     width: 100px;
+    height: 100px;
+}
+
+.MapImage {
+    width: 200px;
     height: 100px;
 }
 
@@ -135,17 +144,6 @@ a {
     width: 90%;
 }
 
-.id-image, .cocktail-search {
-    padding: 20px;
-    text-align: left;
-    color: #007bff;
-} 
-
-.search-text {
-    margin: 0;
-    padding: 0;
-}
-
 #headerRight {
     position: absolute;
     right: 0px;
@@ -154,7 +152,7 @@ a {
 
 .headerRightContents {
     position: relative;
-    top: 5%;
+    top: 2%;
     right: 5%;
     
 }
@@ -163,3 +161,50 @@ a {
     margin: 0 auto;
 }
 
+.cocktail-info {
+    border: none;
+    margin-bottom: 115px;
+    padding-bottom: 20px;
+    height: 385px;
+}
+
+.cocktail-search, .search-image {
+    display: inline-block;
+    padding: 20px;
+    text-align: left;
+    color: #007bff;
+}
+.search-text {
+    width: 475px;
+    margin: 0;
+}
+
+#pstyle {
+    font-style: italic;
+    color: #007bff;
+}
+
+#surveyElement {
+    background-color: #007bff;
+}
+
+#radioOptions {
+    font-size: 13px;
+    text-align: left;
+    position: relative;
+    top: 2%;
+    right: 3%;
+}
+
+#radioOptions p {
+    margin: 0;
+    display: inline-block;
+}
+
+#radioOptions label {
+    margin: 0;
+}
+
+#radioOptions input[type="radio"] {
+    vertical-align: text-bottom;
+}
