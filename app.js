@@ -16,10 +16,34 @@ $(document).ready(function () {
     //Global Fun Facts Variables
     var IntervalID;
     var count = -1;
-    var FunFactsArr = ["a", "b", "c", "d"];
+    var FunFactsArr = ["There exists a cocktail called a Ramboozle, popular in England in the mid 17th century.",
+     " Ernest Hemingway invented a cocktail named “Absinthe and Champagne” or, “Death in the Afternoon.",
+      "There’s an International Bartenders Association which sanctions an official cocktail list for use in the World Cocktail Competition.",
+      "There is a cocktail known as a “Sully,” named after the pilot of US Airways Flight 1549, which consists of two shots of Grey Goose and a splash of water.", 
+      "The “wake-up juice” in Back to the Future 3 is a real cocktail.", 
+      " A “Rich Dead Nazi” is actually a cocktail made of Goldschläger, Jägermeister, and peppermint schnapps. ", 
+      "In Utah, bartenders in restaurants have to mix cocktails behind a curtain.", 
+      "c", 
+      "c", 
+      "c", 
+      "c",
+      "c",
+      "c",
+      "c",
+      "c",
+      "c",
+      "c",
+      "c", 
+    
+    
+    
+    
+    
+    ];
 
     // Gets the user location on page load and displays nearby bars
     window.onload = function () {
+        FunFacts();
         runFunFacts();
         var startPos;
         var geoSuccess = function (position) {
@@ -193,7 +217,7 @@ $(document).ready(function () {
 
     //Fun Fact functions
 function runFunFacts() {
-    IntervalID = setInterval(FunFacts, 10000);
+    IntervalID = setInterval(FunFacts, 30000);
 }
 function FunFacts(){
     count ++;
