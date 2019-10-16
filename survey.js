@@ -121,36 +121,52 @@ window.survey = new Survey.Model(json);
 survey
 .onComplete
 .add(function (result) {
+    
     if (result.data.Drinks === "Something Fruity" && result.data.Relax === "Tropical beach with a sunset") { 
     document
        
         $("#surveyElement").hide()
-         
-         $("#IMGID").html("<img src=images/MaiTai.jpeg>" + "<br>" + "<br>" + "<h2> Mai Tai </h2>");
-         
+        $("#IMGID").html("<img src=images/drinks/OldFashioned.jpeg>" + "<br>" + "<br>" + "<h2> Old Fashioned </h2>")
+      
     }
-    if (result.data.Drinks === "Something Fruity" && result.data.Relax === "Around people I'm comfortable with") { 
+    else if (result.data.Drinks === "Something Fruity" && result.data.Relax === "Around people I'm comfortable with") { 
         document
            
             $("#surveyElement").hide()
              
-             $("#IMGID").html("<img src=images/daiquiri.jpeg>" + "<br>" + "<br>" + "<h2> Daiquiri </h2>");
+             $("#IMGID").html("<img src=images/drinks/daiquiri.jpeg>" + "<br>" + "<br>" + "<h2> Daiquiri </h2>")
              
         }
-    if (result.data.Drinks === "Something Fruity" && result.data.Relax === "Cabin in the forest") { 
+    else if (result.data.Drinks === "Something Fruity" && result.data.Relax === "Cabin in the forest") { 
             document
                
                 $("#surveyElement").hide()
                  
-                 $("#IMGID").html("<img src=images/MalibuSunset.jpeg>" + "<br>" + "<br>" + "<h2> Malibu Sunset </h2>");
+                 $("#IMGID").html("<img src=images/drinks/MalibuSunset.jpeg>" + "<br>" + "<br>" + "<h2> Malibu Sunset </h2>")
                  
             }
+    else if (result.data.Drinks === "Something Fruity" && result.data.Relax === "Drifting aimlessly on a boat") { 
+                document
+                   
+                    $("#surveyElement").hide()
+                     
+                     $("#IMGID").html("<img src=images/drinks/TequilaSunrise.jpeg>" + "<br>" + "<br>" + "<h2> Tequila Sunrise</h2>")
+                     
+                }
+    else if (result.data.Drinks === "Something Fruity" && result.data.Relax === "Drifting aimlessly on a boat") { 
+                    document
+                       
+                        $("#surveyElement").hide()
+                         
+                         $("#IMGID").html("<img src=images/drinks/TequilaSunrise.jpeg>" + "<br>" + "<br>" + "<h2> Tequila Sunrise</h2>")
+                         
+                    }
     
 
     else {
         document
         $("#surveyElement").hide()
-        $("#IMGID").html("<img src=images/LongIslandIceTea.jpeg>" + "<br>" + "<br>" + "<h2> Long Island Ice Tea </h2>");
+        $("#IMGID").html("<img src=images/drinks/LongIslandIceTea.jpeg>" + "<br>" + "<br>" + "<h2> Long Island Ice Tea </h2>");
     }
 });
 
