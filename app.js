@@ -12,6 +12,7 @@ $(document).ready(function () {
     var infowindow = new google.maps.InfoWindow();
     var request;
     var marker;
+    var maxResults = 3;
 
     // Gets the user location on page load and displays nearby bars
     window.onload = function () {
@@ -104,111 +105,82 @@ $(document).ready(function () {
 
     $("#SubmitButton").on("click", function (event) {
         event.preventDefault();
-        if ($("#SearchField").val().length === 0) {
-            console.log("Modal should open");
-            // Get the modal
-            var modal = document.getElementById("myModal");
+        if ($("#barOption").is(":checked")) {
 
-            // Get the <span> element that closes the modal
-            var span = document.getElementsByClassName("close")[0];
+            // Function to take the user search input and display results on the map
+            function initializeSearch() {
+                currentLocation = new google.maps.LatLng(latitude, longitude);
+                map = new google.maps.Map(document.getElementById("map"), {
+                    center: currentLocation,
+                    zoom: 13
+                });
+                var searchInput = $("#SearchField")
+                    .val()
+                    .trim()
+                    .toLowerCase();
 
-            // When the user clicks the button, open the modal 
-            
-                modal.style.display = "block";
-            
+                request = {
+                    location: currentLocation,
+                    radius: "400",
+                    query: searchInput + " cocktail"
+                };
+                service = new google.maps.places.PlacesService(map);
+                service.textSearch(request, callback);
+            }
+            initializeSearch();
+            $("#SearchField").val("");
+        } else if ($("#drinkOption").is(":checked")) {
+            var cocktailSearch = $("#SearchField").val();
 
             // When the user clicks on <span> (x), close the modal
             span.onclick = function () {
                 modal.style.display = "none";
             }
 
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function (event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
+            $.ajax({
+                url: searchURL,
+                method: "GET"
+            }).then(function (response) {
+                $(".cocktail-results").empty();
+                $(".cocktail-image").empty();
+
+                for (i = 0; i < response.drinks.length && i < maxResults; i++) {
+                    var searchImage = $("<div class='search-image'>");
+                    var imgURL = response.drinks[i].strDrinkThumb;
+                    var image = $("<img>").attr("src", imgURL).attr("height", "125px").attr("width", "125px");
+                    searchImage.append(image);
+
+                    var searchDiv = $("<div class='cocktail-search'>");
+                    var name = response.drinks[i].strDrink;
+                    var nameText = $("<p class='search-text-name'>").text("Cocktail Name: " + name).css("font-weight", "bold");
+                    searchDiv.append(nameText);
+
+                    var star = $("<span class='fa-star far'>" + "</span>").attr("state", "unfilled").attr("name", name);
+                    searchDiv.append(star);
+
+                    var category = response.drinks[i].strCategory;
+                    var categoryText = $("<p class='search-text'>").text("Category: " + category);
+                    searchDiv.append(categoryText);
+
+                    var ingredients = [response.drinks[i].strIngredient1 + ", " + response.drinks[i].strIngredient2 + ", " + response.drinks[i].strIngredient4 + ", " + response.drinks[i].strIngredient4];
+                    var ingredientsText = $("<p class='search-text'>").text("Ingredients: " + ingredients);
+                    searchDiv.append(ingredientsText);
+
+                    var instructions = response.drinks[i].strInstructions;
+                    var instructionsText = $("<p class='search-text'>").text("Instructions: " + instructions);
+                    searchDiv.append(instructionsText);
+
+                    var glass = response.drinks[i].strGlass;
+                    var glassText = $("<p class='search-text'>").text("Glassware: " + glass);
+                    searchDiv.append(glassText);
+
+                    // List each of the drinks displayed above.
+                    $("#search-parameter").html("<p id='pstyle'>" + "Search Results for: '" + cocktailSearch + "'" + "</p>");
+                    $(".cocktail-results").append(searchImage);
+                    $(".cocktail-results").append(searchDiv);
+                    $("#SearchField").val("");
                 }
-            }
-        }
-        else {
-            if ($("#barOption").is(":checked")) {
-
-                // Function to take the user search input and display results on the map
-                function initializeSearch() {
-                    currentLocation = new google.maps.LatLng(latitude, longitude);
-                    map = new google.maps.Map(document.getElementById("map"), {
-                        center: currentLocation,
-                        zoom: 13
-                    });
-                    var searchInput = $("#SearchField")
-                        .val()
-                        .trim()
-                        .toLowerCase();
-
-                    request = {
-                        location: currentLocation,
-                        radius: "400",
-                        query: searchInput + " cocktail"
-                    };
-                    service = new google.maps.places.PlacesService(map);
-                    service.textSearch(request, callback);
-                }
-                initializeSearch();
-                $("#SearchField").val("");
-            } else if ($("#drinkOption").is(":checked")) {
-                var cocktailSearch = $("#SearchField").val();
-
-                var searchURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + cocktailSearch;
-
-                $.ajax({
-                    url: searchURL,
-                    method: "GET"
-                }).then(function (response) {
-                    $(".cocktail-results").empty();
-                    $(".cocktail-image").empty();
-
-                    for (i = 0; i < response.drinks.length && i < maxResults; i++) {
-                        var searchImage = $("<div class='search-image'>");
-                        var imgURL = response.drinks[i].strDrinkThumb;
-                        var image = $("<img>").attr("src", imgURL).attr("height", "125px").attr("width", "125px");
-                        searchImage.append(image);
-
-                        var searchDiv = $("<div class='cocktail-search'>");
-                        var name = response.drinks[i].strDrink;
-                        var nameText = $("<p class='search-text'>").text("Cocktail Name: " + name).css("font-weight", "bold");
-                        searchDiv.append(nameText);
-
-                        var category = response.drinks[i].strCategory;
-                        var categoryText = $("<p class='search-text'>").text("Category: " + category);
-                        searchDiv.append(categoryText);
-
-                        var ingredients = [response.drinks[i].strIngredient1 + ", " + response.drinks[i].strIngredient2 + ", " + response.drinks[i].strIngredient4 + ", " + response.drinks[i].strIngredient4];
-                        var ingredientsText = $("<p class='search-text'>").text("Ingredients: " + ingredients);
-                        searchDiv.append(ingredientsText);
-
-                        var instructions = response.drinks[i].strInstructions;
-                        var instructionsText = $("<p class='search-text'>").text("Instructions: " + instructions);
-                        searchDiv.append(instructionsText);
-
-                        var glass = response.drinks[i].strGlass;
-                        var glassText = $("<p class='search-text'>").text("Glassware: " + glass);
-                        searchDiv.append(glassText);
-
-                        // List each of the drinks displayed above.
-                        $("#search-parameter").html("<p id='pstyle'>" + "Search Results for: '" + cocktailSearch + "'" + "</p>");
-                        $(".cocktail-results").append(searchImage);
-                        $(".cocktail-results").append(searchDiv);
-                        $("#SearchField").val("");
-                    }
-                });
-
-                // function quiz() {
-                //     liquor = [""];
-                //     // var userChoice = $()
-                //     liquor.push(userChoice);
-                // }
-
-                getLiquor();
-            }
+            });
         }
 
     });
@@ -249,84 +221,133 @@ $(document).ready(function () {
 
     // ** COCKTAIL SEARCH CODE **
 
+    $(document).ready(function () {
 
-    var liquor = ["bourbon"];
-    var lookup = [];
-    var lookupIndex = 0;
-    var maxResults = 3;  // Set this limit when ready for go live.
-    var liquorURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + liquor;
-    var idURL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
+        var liquor = ["bourbon"];
+        var lookup = [];
+        var lookupIndex = 0;
+        var maxResults = 3;  // Set this limit when ready for go live.
+        var liquorURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + liquor;
+        var idURL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
+        var favoritesList = [];
 
-    function getLiquor() {
-        // AJAX call to gather liquor information
-        $.ajax({
-            url: liquorURL,
-            method: "GET"
-        }).then(function (response) {
-            // console.log(response);
-
-            for (i = 0; i < response.drinks.length && i < maxResults; i++) {
-                console.log("Cocktail Name: " + response.drinks[i].strDrink);
-                console.log("ID: " + response.drinks[i].idDrink);
-                lookup.push(response.drinks[i].idDrink);
-                console.log(lookup);
-            };
-            getID(null);
-        });
-    }
-
-    function getID(response) {
-        if (response !== null) {
-            // console.log(response);
-
-            var searchImage = $("<div class='search-image'>");
-            var imgURL = response.drinks[0].strDrinkThumb;
-            var image = $("<img>").attr("src", imgURL).attr("height", "125px").attr("width", "125px");
-            searchImage.append(image);
-
-            var searchDiv = $("<div class='cocktail-search'>");
-            var name = response.drinks[0].strDrink;
-            var nameText = $("<p class='search-text'>").text("Cocktail Name: " + name).css("font-weight", "bold");
-            searchDiv.append(nameText);
-
-            var category = response.drinks[0].strCategory;
-            var categoryText = $("<p class='search-text'>").text("Category: " + category);
-            searchDiv.append(categoryText);
-
-            var ingredients = [response.drinks[0].strIngredient1 + ", " + response.drinks[0].strIngredient2 + ", " + response.drinks[0].strIngredient4 + ", " + response.drinks[0].strIngredient4];
-            var ingredientsText = $("<p class='search-text'>").text("Ingredients: " + ingredients);
-            searchDiv.append(ingredientsText);
-
-            var instructions = response.drinks[0].strInstructions;
-            var instructionsText = $("<p class='search-text'>").text("Instructions: " + instructions);
-            searchDiv.append(instructionsText);
-
-            var glass = response.drinks[0].strGlass;
-            var glassText = $("<p class='search-text'>").text("Glassware: " + glass);
-            searchDiv.append(glassText);
-
-            // List each of the drinks displayed above.
-            // $("#search-parameter").html("<p id='pstyle'>" + "Quiz Results for: '" + cocktailSearch + "'" + "</p>");
-            $(".cocktail-results").append(searchImage);
-            $(".cocktail-results").append(searchDiv);
-        };
-
-        // Reset the variable nextID.
-        var nextID = 0;
-
-        if (lookupIndex < lookup.length) {
-            nextID = lookup[lookupIndex];
-            lookupIndex++;
-        }
-
-        if (nextID > 0) {
+        function getLiquor() {
+            // AJAX call to gather liquor information
             $.ajax({
-                url: idURL + nextID,
+                url: liquorURL,
                 method: "GET"
-            }).then(getID);
+            }).then(function (response) {
+                // console.log(response);
 
-        } else {
-            // All done!
+                for (i = 0; i < response.drinks.length && i < maxResults; i++) {
+                    console.log("Cocktail Name: " + response.drinks[i].strDrink);
+                    console.log("ID: " + response.drinks[i].idDrink);
+                    lookup.push(response.drinks[i].idDrink);
+                    console.log(lookup);
+                };
+                getID(null);
+            });
         }
-    }
+
+        function getID(response) {
+            if (response !== null) {
+                // console.log(response);
+
+                var searchImage = $("<div class='search-image'>");
+                var imgURL = response.drinks[0].strDrinkThumb;
+                var image = $("<img>").attr("src", imgURL).attr("height", "125px").attr("width", "125px");
+                searchImage.append(image);
+
+                var searchDiv = $("<div class='cocktail-search'>");
+                var name = response.drinks[0].strDrink;
+                var nameText = $("<p class='search-text-name'>").text("Cocktail Name: " + name).css("font-weight", "bold");
+                searchDiv.append(nameText);
+
+                var star = $("<span class='fa-star far'>" + "</span>").attr("state", "unfilled").attr("name", name);
+                searchDiv.append(star);
+
+                var category = response.drinks[0].strCategory;
+                var categoryText = $("<p class='search-text'>").text("Category: " + category);
+                searchDiv.append(categoryText);
+
+                var ingredients = [response.drinks[0].strIngredient1 + ", " + response.drinks[0].strIngredient2 + ", " + response.drinks[0].strIngredient4 + ", " + response.drinks[0].strIngredient4];
+                var ingredientsText = $("<p class='search-text'>").text("Ingredients: " + ingredients);
+                searchDiv.append(ingredientsText);
+
+                var instructions = response.drinks[0].strInstructions;
+                var instructionsText = $("<p class='search-text'>").text("Instructions: " + instructions);
+                searchDiv.append(instructionsText);
+
+                var glass = response.drinks[0].strGlass;
+                var glassText = $("<p class='search-text'>").text("Glassware: " + glass);
+                searchDiv.append(glassText);
+
+                // List each of the drinks displayed above.
+                // $("#search-parameter").html("<p id='pstyle'>" + "Quiz Results for: '" + cocktailSearch + "'" + "</p>");
+                $(".cocktail-results").append(searchImage);
+                $(".cocktail-results").append(searchDiv);
+            };
+
+            // Reset the variable nextID.
+            var nextID = 0;
+
+            if (lookupIndex < lookup.length) {
+                nextID = lookup[lookupIndex];
+                lookupIndex++;
+            }
+
+            if (nextID > 0) {
+                $.ajax({
+                    url: idURL + nextID,
+                    method: "GET"
+                }).then(getID);
+
+            } else {
+                // All done!
+            }
+        }
+
+        // Create a way to mark a drink as a favorite if clicked.
+        function favorites() {
+            console.log("testing favorites");
+
+            var currentState = $(this).attr("state");
+
+            if (currentState == "unfilled") {
+                $(this).attr("state", "filled").removeClass("far").addClass("fas");
+                var favoriteDrink = $(this).attr("name");
+                favoritesList.push(favoriteDrink);
+                localStorage.setItem("list", favoritesList);
+                // document.getElementById("favorites").innerHTML = "<p>" + favoritesList.join("<br>") + "</p>";
+                document.getElementById("favorites").innerHTML = localStorage.getItem("list");
+            }
+
+            else if (currentState == "filled") {
+                $(this).attr("state", "unfilled").removeClass("fas").addClass("far");
+                var favoriteDrink = $(this).attr("name");
+                var removeDrink = favoritesList.indexOf(favoriteDrink);
+                if (removeDrink != -1) {
+                    favoritesList.splice(removeDrink, 1);
+                }
+                localStorage.setItem("list", favoritesList);
+                // document.getElementById("favorites").innerHTML = "<p>" + favoritesList.join("<br>") + "</p>";
+                document.getElementById("favorites").innerHTML = localStorage.getItem("list");
+                console.log(favoritesList);
+            }
+        }
+
+        // function quiz() {
+        //     liquor = [""];
+        //     // var userChoice = $()
+        //     liquor.push(userChoice);
+        // }
+
+        getLiquor();
+        $(document).on("click", ".fa-star", favorites);
+    })
+
+
+
+
+
 });
