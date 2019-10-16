@@ -270,8 +270,8 @@ $(document).ready(function () {
             var nameText = $("<p class='search-text-name'>").text("Cocktail Name: " + name).css("font-weight", "bold");
             searchDiv.append(nameText);
 
-            var unfilledStar = $("<span class='fa-star far'>" + "</span>").attr("state", "unfilled").attr("name", name);
-            searchDiv.append(unfilledStar);
+            var star = $("<span class='fa-star far'>" + "</span>").attr("state", "unfilled").attr("name", name);
+            searchDiv.append(star);
 
             var category = response.drinks[0].strCategory;
             var categoryText = $("<p class='search-text'>").text("Category: " + category);
@@ -314,60 +314,62 @@ $(document).ready(function () {
         }
     }
 
-    $("#SubmitButton").on("click", function (event) {
-        event.preventDefault();
+    function userSearch() {
+        $("#SubmitButton").on("click", function (event) {
+            event.preventDefault();
 
-        var cocktailSearch = $("#SearchField").val();
+            var cocktailSearch = $("#SearchField").val();
 
-        var searchURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + cocktailSearch;
+            var searchURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + cocktailSearch;
 
-        $.ajax({
-            url: searchURL,
-            method: "GET"
-        }).then(function (response) {
-            $(".cocktail-results").empty();
-            $(".cocktail-image").empty();
+            $.ajax({
+                url: searchURL,
+                method: "GET"
+            }).then(function (response) {
+                $(".cocktail-results").empty();
+                $(".cocktail-image").empty();
 
-            for (i = 0; i < response.drinks.length && i < maxResults; i++) {
-                var searchImage = $("<div class='search-image'>");
-                var imgURL = response.drinks[i].strDrinkThumb;
-                var image = $("<img>").attr("src", imgURL).attr("height", "125px").attr("width", "125px");
-                searchImage.append(image);
+                for (i = 0; i < response.drinks.length && i < maxResults; i++) {
+                    var searchImage = $("<div class='search-image'>");
+                    var imgURL = response.drinks[i].strDrinkThumb;
+                    var image = $("<img>").attr("src", imgURL).attr("height", "125px").attr("width", "125px");
+                    searchImage.append(image);
 
-                var searchDiv = $("<div class='cocktail-search'>");
-                var name = response.drinks[i].strDrink;
-                var nameText = $("<p class='search-text-name'>").text("Cocktail Name: " + name).css("font-weight", "bold");
-                searchDiv.append(nameText);
+                    var searchDiv = $("<div class='cocktail-search'>");
+                    var name = response.drinks[i].strDrink;
+                    var nameText = $("<p class='search-text-name'>").text("Cocktail Name: " + name).css("font-weight", "bold");
+                    searchDiv.append(nameText);
 
-                var unfilledStar = $("<span class='fa-star far'>" + "</span>").attr("state", "unfilled").attr("name", name);
-                searchDiv.append(unfilledStar);
+                    var star = $("<span class='fa-star far'>" + "</span>").attr("state", "unfilled").attr("name", name);
+                    searchDiv.append(star);
 
-                var category = response.drinks[i].strCategory;
-                var categoryText = $("<p class='search-text'>").text("Category: " + category);
-                searchDiv.append(categoryText);
+                    var category = response.drinks[i].strCategory;
+                    var categoryText = $("<p class='search-text'>").text("Category: " + category);
+                    searchDiv.append(categoryText);
 
-                var ingredients = [response.drinks[i].strIngredient1 + ", " + response.drinks[i].strIngredient2 + ", " + response.drinks[i].strIngredient4 + ", " + response.drinks[i].strIngredient4];
-                var ingredientsText = $("<p class='search-text'>").text("Ingredients: " + ingredients);
-                searchDiv.append(ingredientsText);
+                    var ingredients = [response.drinks[i].strIngredient1 + ", " + response.drinks[i].strIngredient2 + ", " + response.drinks[i].strIngredient4 + ", " + response.drinks[i].strIngredient4];
+                    var ingredientsText = $("<p class='search-text'>").text("Ingredients: " + ingredients);
+                    searchDiv.append(ingredientsText);
 
-                var instructions = response.drinks[i].strInstructions;
-                var instructionsText = $("<p class='search-text'>").text("Instructions: " + instructions);
-                searchDiv.append(instructionsText);
+                    var instructions = response.drinks[i].strInstructions;
+                    var instructionsText = $("<p class='search-text'>").text("Instructions: " + instructions);
+                    searchDiv.append(instructionsText);
 
-                var glass = response.drinks[i].strGlass;
-                var glassText = $("<p class='search-text'>").text("Glassware: " + glass);
-                searchDiv.append(glassText);
+                    var glass = response.drinks[i].strGlass;
+                    var glassText = $("<p class='search-text'>").text("Glassware: " + glass);
+                    searchDiv.append(glassText);
 
-                // List each of the drinks displayed above.
-                $("#search-parameter").html("<p id='pstyle'>" + "Search Results for: '" + cocktailSearch + "'" + "</p>");
-                $(".cocktail-results").append(searchImage);
-                $(".cocktail-results").append(searchDiv);
-                $("#SearchField").val("");
-            }
+                    // List each of the drinks displayed above.
+                    $("#search-parameter").html("<p id='pstyle'>" + "Search Results for: '" + cocktailSearch + "'" + "</p>");
+                    $(".cocktail-results").append(searchImage);
+                    $(".cocktail-results").append(searchDiv);
+                    $("#SearchField").val("");
+                };
+            });
         });
-    })
+    }
 
-    // Create a mark a drink as a favorite if clicked.
+    // Create a way to mark a drink as a favorite if clicked.
     function favorites() {
         console.log("testing favorites");
 
@@ -378,23 +380,29 @@ $(document).ready(function () {
             var favoriteDrink = $(this).attr("name");
             favoritesList.push(favoriteDrink);
             localStorage.setItem("list", favoritesList);
-            document.getElementById("favorites").innerHTML = localStorage.getItem("list");
-            console.log(favoritesList);
+            document.getElementById("favorites").innerHTML = "<p>" + favoritesList.join("<br>") + "</p>";
+            // document.getElementById("favorites").innerHTML = localStorage.getItem("list");
         }
 
         else if (currentState == "filled") {
             $(this).attr("state", "unfilled").removeClass("fas").addClass("far");
             var favoriteDrink = $(this).attr("name");
-            var i = favoritesList.indexOf(favoriteDrink);
-            if (i != -1) {
-                favoritesList.splice(i, 1);
+            var removeDrink = favoritesList.indexOf(favoriteDrink);
+            if (removeDrink != -1) {
+                favoritesList.splice(removeDrink, 1);
             }
             localStorage.setItem("list", favoritesList);
-            document.getElementById("favorites").innerHTML = localStorage.getItem("list");
+            document.getElementById("favorites").innerHTML = "<p>" + favoritesList.join("<br>") + "</p>";
+            // document.getElementById("favorites").innerHTML = localStorage.getItem("list");
             console.log(favoritesList);
         }
     }
 
+    function drinkOption() {
+        if (document.querySelector('input[id = "drinkOption"]:checked')) {
+            userSearch();
+        }
+    }
     // function quiz() {
     //     liquor = [""];
     //     // var userChoice = $()
@@ -403,5 +411,5 @@ $(document).ready(function () {
 
     getLiquor();
     $(document).on("click", ".fa-star", favorites);
-
+    $(document).on("click", "#drinkOption", drinkOption);
 })
