@@ -8,6 +8,19 @@ title: "Find your next cocktail",
 
 pages: [
     {
+        title: "Which of these liquors do you prefer?",
+        questions: [
+            {
+                type: "radiogroup",
+                name: "Liquor",
+                title: "Liquor Type",
+                hasOther: false,
+                isRequired: true,
+                choices: ["Vodka", "Gin", "Rum", "Bourbon", "Whiskey","Scotch"]
+            }
+        ]
+    }, 
+    {
         title: "Which of these drinks do you typically go for?",
         questions: [
             {
@@ -19,7 +32,9 @@ pages: [
                 choices: ["The stronger the better", "Something Fruity", "Smooth but dry", "Bitter but great", "Sour or Tart","Something simple - alcohol plus 1 or 2 ingredients"]
             }
         ]
-    }, {
+    },
+     
+    {
         title: "Which of these appetizers would you order?",
         questions: [
             {
