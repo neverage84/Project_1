@@ -14,8 +14,72 @@ $(document).ready(function () {
     var marker;
     var maxResults = 3;
 
+    //Global Fun Facts Variables
+    var IntervalID;
+    var count = -1;
+    var FunFactsArr = ["There exists a cocktail called a Ramboozle, popular in England in the mid 17th century.",
+     " Ernest Hemingway invented a cocktail named “Absinthe and Champagne” or, “Death in the Afternoon.",
+      "There’s an International Bartenders Association which sanctions an official cocktail list for use in the World Cocktail Competition.",
+      "There is a cocktail known as a “Sully,” named after the pilot of US Airways Flight 1549, which consists of two shots of Grey Goose and a splash of water.", 
+      "The “wake-up juice” in Back to the Future 3 is a real cocktail.", 
+      " A “Rich Dead Nazi” is actually a cocktail made of Goldschläger, Jägermeister, and peppermint schnapps. ", 
+      "In Utah, bartenders in restaurants have to mix cocktails behind a curtain.", 
+      "The Caesar is a cocktail only popular in Canada. It is a mixture of vodka and Clamato (clam broth + tomato juice).", 
+      "The Brandy Daisy, a cocktail of citrus juice and brandy, was the forerunner of the Margarita. Margarita is the Spanish name for Daisy.", 
+      "The cocktail “screwdriver” origins from Persian Oil Workers in the 1920s. When lacking a spoon to stir, they used screwdrivers.", 
+      "A martini cocktail should be stirred, and a shaken martini is called a Bradford. This is why Bond always has to specify his martini be made the wrong way. ",
+      "During prohibition, honey and fruit juices were heavily used to mask the poor quality of liquor.",
+      "The “Toronto Cocktail” was first recorded in 1922, at a time when alcohol was illegal in Ontario.",
+      "Cocktail glasses (tumblers) are thicker on the bottom so non-liquid ingredients can be “muddled” in the glass before liquids are added.",
+      "Cocktail umbrella’s contained hidden scrolls of Chinese newspaper which can be read like fortune cookies.",
+      "An attempt to set the Guinness World Record for the world’s most expensive cocktail was thwarted when a customer dropped and broke the bottle of Cognac that was worth $77,000.",
+      "There was a real, radium-based, alcoholic drink known as the “Atomic Cocktail” that was served in missile shaped bottles.",
+      "There exists a cocktail called a Ramboozle, popular in England in the mid 17th century.",
+     " Ernest Hemingway invented a cocktail named “Absinthe and Champagne” or, “Death in the Afternoon.",
+      "There’s an International Bartenders Association which sanctions an official cocktail list for use in the World Cocktail Competition.",
+      "There is a cocktail known as a “Sully,” named after the pilot of US Airways Flight 1549, which consists of two shots of Grey Goose and a splash of water.", 
+      "The “wake-up juice” in Back to the Future 3 is a real cocktail.", 
+      " A “Rich Dead Nazi” is actually a cocktail made of Goldschläger, Jägermeister, and peppermint schnapps. ", 
+      "In Utah, bartenders in restaurants have to mix cocktails behind a curtain.", 
+      "The Caesar is a cocktail only popular in Canada. It is a mixture of vodka and Clamato (clam broth + tomato juice).", 
+      "The Brandy Daisy, a cocktail of citrus juice and brandy, was the forerunner of the Margarita. Margarita is the Spanish name for Daisy.", 
+      "The cocktail “screwdriver” origins from Persian Oil Workers in the 1920s. When lacking a spoon to stir, they used screwdrivers.", 
+      "A martini cocktail should be stirred, and a shaken martini is called a Bradford. This is why Bond always has to specify his martini be made the wrong way. ",
+      "During prohibition, honey and fruit juices were heavily used to mask the poor quality of liquor.",
+      "The “Toronto Cocktail” was first recorded in 1922, at a time when alcohol was illegal in Ontario.",
+      "Cocktail glasses (tumblers) are thicker on the bottom so non-liquid ingredients can be “muddled” in the glass before liquids are added.",
+      "Cocktail umbrella’s contained hidden scrolls of Chinese newspaper which can be read like fortune cookies.",
+      "An attempt to set the Guinness World Record for the world’s most expensive cocktail was thwarted when a customer dropped and broke the bottle of Cognac that was worth $77,000.",
+      "There was a real, radium-based, alcoholic drink known as the “Atomic Cocktail” that was served in missile shaped bottles.",
+      "There exists a cocktail called a Ramboozle, popular in England in the mid 17th century.",
+     " Ernest Hemingway invented a cocktail named “Absinthe and Champagne” or, “Death in the Afternoon.",
+      "There’s an International Bartenders Association which sanctions an official cocktail list for use in the World Cocktail Competition.",
+      "There is a cocktail known as a “Sully,” named after the pilot of US Airways Flight 1549, which consists of two shots of Grey Goose and a splash of water.", 
+      "The “wake-up juice” in Back to the Future 3 is a real cocktail.", 
+      " A “Rich Dead Nazi” is actually a cocktail made of Goldschläger, Jägermeister, and peppermint schnapps. ", 
+      "In Utah, bartenders in restaurants have to mix cocktails behind a curtain.", 
+      "The Caesar is a cocktail only popular in Canada. It is a mixture of vodka and Clamato (clam broth + tomato juice).", 
+      "The Brandy Daisy, a cocktail of citrus juice and brandy, was the forerunner of the Margarita. Margarita is the Spanish name for Daisy.", 
+      "The cocktail “screwdriver” origins from Persian Oil Workers in the 1920s. When lacking a spoon to stir, they used screwdrivers.", 
+      "A martini cocktail should be stirred, and a shaken martini is called a Bradford. This is why Bond always has to specify his martini be made the wrong way. ",
+      "During prohibition, honey and fruit juices were heavily used to mask the poor quality of liquor.",
+      "The “Toronto Cocktail” was first recorded in 1922, at a time when alcohol was illegal in Ontario.",
+      "Cocktail glasses (tumblers) are thicker on the bottom so non-liquid ingredients can be “muddled” in the glass before liquids are added.",
+      "Cocktail umbrella’s contained hidden scrolls of Chinese newspaper which can be read like fortune cookies.",
+      "An attempt to set the Guinness World Record for the world’s most expensive cocktail was thwarted when a customer dropped and broke the bottle of Cognac that was worth $77,000.",
+      "There was a real, radium-based, alcoholic drink known as the “Atomic Cocktail” that was served in missile shaped bottles."
+       
+    
+    
+    
+    
+    
+    ];
+
     // Gets the user location on page load and displays nearby bars
     window.onload = function () {
+        FunFacts();
+        runFunFacts();
         var startPos;
         var geoSuccess = function (position) {
             startPos = position;
@@ -181,8 +245,16 @@ $(document).ready(function () {
         }
     });
 
-
-
+    //Fun Fact functions
+function runFunFacts() {
+    IntervalID = setInterval(FunFacts, 30000);
+}
+function FunFacts(){
+    count ++;
+    $("#FunFactsID").html(FunFactsArr[count]);
+   
+    
+}
 
 
 
@@ -347,3 +419,5 @@ $(document).ready(function () {
 
 
 });
+
+
