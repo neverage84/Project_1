@@ -15,6 +15,7 @@ $(document).ready(function () {
 
     // Gets the user location on page load and displays nearby bars
     window.onload = function () {
+        runFunFacts();
         var startPos;
         var geoSuccess = function (position) {
             startPos = position;
@@ -302,3 +303,26 @@ $(document).ready(function () {
         }
     }
 });
+
+
+
+var IntervalID;
+var count = -1;
+var FunFactsArr = ["a", "b", "c", "d"];
+
+
+
+
+   
+    
+
+
+//Fun Fact functions
+function runFunFacts() {
+    IntervalID = setInterval(FunFacts, 10000);
+}
+function FunFacts(){
+    count ++;
+    $("#FunFactsID").html(FunFactsArr[count]);
+    
+}

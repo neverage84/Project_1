@@ -16,6 +16,7 @@ function runFunFacts() {
 }
 function FunFacts(){
     count ++;
-    $("#FunFactsID").html(FunFactsArr[count]);
+    alert(FunFactsArr[count]);
+    $("#FunFactsID").text(FunFactsArr[count]);
     
 }

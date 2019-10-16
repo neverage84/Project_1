@@ -126,7 +126,7 @@ survey
     document
        
         $("#surveyElement").hide()
-        $("#IMGID").html("<img src=images/drinks/OldFashioned.jpeg>" + "<br>" + "<br>" + "<h2> Old Fashioned </h2>")
+        $("#IMGID").html("<img src=images/drinks/MaiTai.jpeg>" + "<br>" + "<br>" + "<h2> Mai Tai </h2>")
       
     }
     else if (result.data.Drinks === "Something Fruity" && result.data.Relax === "Around people I'm comfortable with") { 
@@ -153,12 +153,12 @@ survey
                      $("#IMGID").html("<img src=images/drinks/TequilaSunrise.jpeg>" + "<br>" + "<br>" + "<h2> Tequila Sunrise</h2>")
                      
                 }
-    else if (result.data.Drinks === "Something Fruity" && result.data.Relax === "Drifting aimlessly on a boat") { 
+    else if (result.data.Drinks === "Smooth but dry" && result.data.Stress === "Gonna squeeze in a nap") { 
                     document
                        
                         $("#surveyElement").hide()
                          
-                         $("#IMGID").html("<img src=images/drinks/TequilaSunrise.jpeg>" + "<br>" + "<br>" + "<h2> Tequila Sunrise</h2>")
+                         $("#IMGID").html("<img src=images/drinks/OldFashioned.jpeg>" + "<br>" + "<br>" + "<h2> Old Fashioned</h2>")
                          
                     }
     
