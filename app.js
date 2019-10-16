@@ -225,7 +225,6 @@ $(document).ready(function () {
         var maxResults = 3;  // Set this limit when ready for go live.
         var liquorURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + liquor;
         var idURL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
-        var favoritesList = [];
 
         function getLiquor() {
             // AJAX call to gather liquor information
@@ -259,7 +258,7 @@ $(document).ready(function () {
                 var nameText = $("<p class='search-text-name'>").text("Cocktail Name: " + name).css("font-weight", "bold");
                 searchDiv.append(nameText);
 
-                var star = $("<span class='fa-star far'>" + "</span>").attr("state", "unfilled").attr("name", name);
+                var star = $("<span class='fa-star far' title='Add To Favorites'>" + "</span>").attr("state", "unfilled").attr("name", name);
                 searchDiv.append(star);
 
                 var category = response.drinks[0].strCategory;
@@ -305,27 +304,22 @@ $(document).ready(function () {
 
         // Create a way to mark a drink as a favorite if clicked.
         function favorites() {
-            console.log("testing favorites");
-
             var currentState = $(this).attr("state");
             var favoriteDrink = $(this).attr("name");
+            var formattedFavoriteDrink = favoriteDrink.split(" ").join("-").replace("'","");
             if (currentState == "unfilled") {
-                $(this).attr("state", "filled").removeClass("far").addClass("fas");  
-                var newDiv = $("<div id='" + favoriteDrink + "'>");
+                $(this).attr("state", "filled").attr("title", "Remove From Favorites").removeClass("far").addClass("fas");  
+                var newDiv = $("<div id='" + formattedFavoriteDrink + "'>");
                 newDiv.text(favoriteDrink);
                $("#favoritesContainer").append(newDiv);
                 localStorage.setItem("list", favoritesList);
-                document.getElementById("favorites").innerHTML = localStorage.getItem("list");
             }
-
             else if (currentState == "filled") {
-                $(this).attr("state", "unfilled").removeClass("fas").addClass("far");
-                if($("#favoritesContainer").has("#" + favoriteDrink).length){
-                    $("#" + favoriteDrink).remove();
+                $(this).attr("state", "unfilled").attr("title", "Add To Favorites").removeClass("fas").addClass("far");
+                if($("#favoritesContainer").has("#" + formattedFavoriteDrink).length){
+                    $("#" + formattedFavoriteDrink).remove();
                 }
                 localStorage.setItem("list", favoritesList);
-                document.getElementById("favorites").innerHTML = localStorage.getItem("list");
-                console.log(favoritesList);
             }
         }
 
