@@ -131,61 +131,64 @@ $(document).ready(function () {
             $("#SearchField").val("");
         } else if ($("#drinkOption").is(":checked")) {
             var cocktailSearch = $("#SearchField").val();
-
-            var searchURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + cocktailSearch;
-
-            $.ajax({
-                url: searchURL,
-                method: "GET"
-            }).then(function (response) {
-                $(".cocktail-results").empty();
-                $(".cocktail-image").empty();
-
-                for (i = 0; i < response.drinks.length && i < maxResults; i++) {
-                    var searchImage = $("<div class='search-image'>");
-                    var imgURL = response.drinks[i].strDrinkThumb;
-                    var image = $("<img>").attr("src", imgURL).attr("height", "125px").attr("width", "125px");
-                    searchImage.append(image);
-
-                    var searchDiv = $("<div class='cocktail-search'>");
-                    var name = response.drinks[i].strDrink;
-                    var nameText = $("<p class='search-text-name'>").text("Cocktail Name: " + name).css("font-weight", "bold");
-                    searchDiv.append(nameText);
-
-                    var star = $("<span class='fa-star far'>" + "</span>").attr("state", "unfilled").attr("name", name);
-                    // checks to see if a drink has already been added to favorites
-                    var favoriteDrinkID = name.split(" ").join("-").replace("'", "");
-                    if ($("#favoritesContainer #" + favoriteDrinkID).length > 0) {
-                        star.attr("state", "filled").attr("title", "Remove From Favorites").removeClass("far").addClass("fas");
-                    }
-                    searchDiv.append(star);
-
-                    var category = response.drinks[i].strCategory;
-                    var categoryText = $("<p class='search-text'>").text("Category: " + category);
-                    searchDiv.append(categoryText);
-
-                    var ingredients = [response.drinks[i].strIngredient1 + ", " + response.drinks[i].strIngredient2 + ", " + response.drinks[i].strIngredient4 + ", " + response.drinks[i].strIngredient4];
-                    var ingredientsText = $("<p class='search-text'>").text("Ingredients: " + ingredients);
-                    searchDiv.append(ingredientsText);
-
-                    var instructions = response.drinks[i].strInstructions;
-                    var instructionsText = $("<p class='search-text'>").text("Instructions: " + instructions);
-                    searchDiv.append(instructionsText);
-
-                    var glass = response.drinks[i].strGlass;
-                    var glassText = $("<p class='search-text'>").text("Glassware: " + glass);
-                    searchDiv.append(glassText);
-
-                    // List each of the drinks displayed above.
-                    $("#search-parameter").html("<p id='pstyle'>" + "Search Results for: '" + cocktailSearch + "'" + "</p>");
-                    $(".cocktail-results").append(searchImage);
-                    $(".cocktail-results").append(searchDiv);
-                    $("#SearchField").val("");
-                }
-            });
+            drinkSearch(cocktailSearch);
         }
     });
 
+    // function that takes a drink name as an input and searches the cocktail API for that drink name
+    function drinkSearch(drinkName) {
+
+        var searchURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drinkName;
+        $.ajax({
+            url: searchURL,
+            method: "GET"
+        }).then(function (response) {
+            $(".cocktail-results").empty();
+            $(".cocktail-image").empty();
+
+            for (i = 0; i < response.drinks.length && i < maxResults; i++) {
+                var searchImage = $("<div class='search-image'>");
+                var imgURL = response.drinks[i].strDrinkThumb;
+                var image = $("<img>").attr("src", imgURL).attr("height", "125px").attr("width", "125px");
+                searchImage.append(image);
+
+                var searchDiv = $("<div class='cocktail-search'>");
+                var name = response.drinks[i].strDrink;
+                var nameText = $("<p class='search-text-name'>").text("Cocktail Name: " + name).css("font-weight", "bold");
+                searchDiv.append(nameText);
+
+                var star = $("<span class='fa-star far'>" + "</span>").attr("state", "unfilled").attr("name", name);
+                // checks to see if a drink has already been added to favorites
+                var favoriteDrinkID = name.split(" ").join("-").replace("'", "");
+                if ($("#favoritesContainer #" + favoriteDrinkID).length > 0) {
+                    star.attr("state", "filled").attr("title", "Remove From Favorites").removeClass("far").addClass("fas");
+                }
+                searchDiv.append(star);
+
+                var category = response.drinks[i].strCategory;
+                var categoryText = $("<p class='search-text'>").text("Category: " + category);
+                searchDiv.append(categoryText);
+
+                var ingredients = [response.drinks[i].strIngredient1 + ", " + response.drinks[i].strIngredient2 + ", " + response.drinks[i].strIngredient4 + ", " + response.drinks[i].strIngredient4];
+                var ingredientsText = $("<p class='search-text'>").text("Ingredients: " + ingredients);
+                searchDiv.append(ingredientsText);
+
+                var instructions = response.drinks[i].strInstructions;
+                var instructionsText = $("<p class='search-text'>").text("Instructions: " + instructions);
+                searchDiv.append(instructionsText);
+
+                var glass = response.drinks[i].strGlass;
+                var glassText = $("<p class='search-text'>").text("Glassware: " + glass);
+                searchDiv.append(glassText);
+
+                // List each of the drinks displayed above.
+                $("#search-parameter").html("<p id='pstyle'>" + "Search Results for: '" + drinkName + "'" + "</p>");
+                $(".cocktail-results").append(searchImage);
+                $(".cocktail-results").append(searchDiv);
+                $("#SearchField").val("");
+            }
+        });
+    }
 
 
 
@@ -221,131 +224,136 @@ $(document).ready(function () {
 
     // ** COCKTAIL SEARCH CODE **
 
-    $(document).ready(function () {
-
-        var liquor = ["bourbon"];
-        var lookup = [];
-        var lookupIndex = 0;
-        var maxResults = 3;  // Set this limit when ready for go live.
-        var liquorURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + liquor;
-        var idURL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
 
 
-        function getLiquor() {
-            // AJAX call to gather liquor information
-            $.ajax({
-                url: liquorURL,
-                method: "GET"
-            }).then(function (response) {
-                // console.log(response);
+    var liquor = ["bourbon"];
+    var lookup = [];
+    var lookupIndex = 0;
+    var maxResults = 3;  // Set this limit when ready for go live.
+    var liquorURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + liquor;
+    var idURL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
 
-                for (i = 0; i < response.drinks.length && i < maxResults; i++) {
-                    console.log("Cocktail Name: " + response.drinks[i].strDrink);
-                    console.log("ID: " + response.drinks[i].idDrink);
-                    lookup.push(response.drinks[i].idDrink);
-                    console.log(lookup);
-                };
-                getID(null);
-            });
-        }
 
-        function getID(response) {
-            if (response !== null) {
-                // console.log(response);
+    function getLiquor() {
+        // AJAX call to gather liquor information
+        $.ajax({
+            url: liquorURL,
+            method: "GET"
+        }).then(function (response) {
+            // console.log(response);
 
-                var searchImage = $("<div class='search-image'>");
-                var imgURL = response.drinks[0].strDrinkThumb;
-                var image = $("<img>").attr("src", imgURL).attr("height", "125px").attr("width", "125px");
-                searchImage.append(image);
-
-                var searchDiv = $("<div class='cocktail-search'>");
-                var name = response.drinks[0].strDrink
-                var nameText = $("<p class='search-text-name'>").text("Cocktail Name: " + name).css("font-weight", "bold");
-                searchDiv.append(nameText);
-                console.log(name)
-                var star = $("<span class='fa-star far' title='Add To Favorites'>" + "</span>").attr("state", "unfilled").attr("name", name);
-                // checks to see if a drink has already been added to favorites
-                var favoriteDrinkID = name.split(" ").join("-").replace("'", "");
-                if ($("#favoritesContainer #" + favoriteDrinkID).length > 0) {
-                    star.attr("state", "filled").attr("title", "Remove From Favorites").removeClass("far").addClass("fas");
-                }
-                searchDiv.append(star);
-
-                var category = response.drinks[0].strCategory;
-                var categoryText = $("<p class='search-text'>").text("Category: " + category);
-                searchDiv.append(categoryText);
-
-                var ingredients = [response.drinks[0].strIngredient1 + ", " + response.drinks[0].strIngredient2 + ", " + response.drinks[0].strIngredient4 + ", " + response.drinks[0].strIngredient4];
-                var ingredientsText = $("<p class='search-text'>").text("Ingredients: " + ingredients);
-                searchDiv.append(ingredientsText);
-
-                var instructions = response.drinks[0].strInstructions;
-                var instructionsText = $("<p class='search-text'>").text("Instructions: " + instructions);
-                searchDiv.append(instructionsText);
-
-                var glass = response.drinks[0].strGlass;
-                var glassText = $("<p class='search-text'>").text("Glassware: " + glass);
-                searchDiv.append(glassText);
-
-                // List each of the drinks displayed above.
-                // $("#search-parameter").html("<p id='pstyle'>" + "Quiz Results for: '" + cocktailSearch + "'" + "</p>");
-                $(".cocktail-results").append(searchImage);
-                $(".cocktail-results").append(searchDiv);
+            for (i = 0; i < response.drinks.length && i < maxResults; i++) {
+                console.log("Cocktail Name: " + response.drinks[i].strDrink);
+                console.log("ID: " + response.drinks[i].idDrink);
+                lookup.push(response.drinks[i].idDrink);
+                console.log(lookup);
             };
+            getID(null);
+        });
+    }
 
-            // Reset the variable nextID.
-            var nextID = 0;
+    function getID(response) {
+        if (response !== null) {
+            // console.log(response);
 
-            if (lookupIndex < lookup.length) {
-                nextID = lookup[lookupIndex];
-                lookupIndex++;
+            var searchImage = $("<div class='search-image'>");
+            var imgURL = response.drinks[0].strDrinkThumb;
+            var image = $("<img>").attr("src", imgURL).attr("height", "125px").attr("width", "125px");
+            searchImage.append(image);
+
+            var searchDiv = $("<div class='cocktail-search'>");
+            var name = response.drinks[0].strDrink
+            var nameText = $("<p class='search-text-name'>").text("Cocktail Name: " + name).css("font-weight", "bold");
+            searchDiv.append(nameText);
+            console.log(name)
+            var star = $("<span class='fa-star far' title='Add To Favorites'>" + "</span>").attr("state", "unfilled").attr("name", name);
+            // checks to see if a drink has already been added to favorites
+            var favoriteDrinkID = name.split(" ").join("-").replace("'", "");
+            if ($("#favoritesContainer #" + favoriteDrinkID).length > 0) {
+                star.attr("state", "filled").attr("title", "Remove From Favorites").removeClass("far").addClass("fas");
             }
+            searchDiv.append(star);
 
-            if (nextID > 0) {
-                $.ajax({
-                    url: idURL + nextID,
-                    method: "GET"
-                }).then(getID);
+            var category = response.drinks[0].strCategory;
+            var categoryText = $("<p class='search-text'>").text("Category: " + category);
+            searchDiv.append(categoryText);
 
-            } else {
-                // All done!
-            }
+            var ingredients = [response.drinks[0].strIngredient1 + ", " + response.drinks[0].strIngredient2 + ", " + response.drinks[0].strIngredient4 + ", " + response.drinks[0].strIngredient4];
+            var ingredientsText = $("<p class='search-text'>").text("Ingredients: " + ingredients);
+            searchDiv.append(ingredientsText);
+
+            var instructions = response.drinks[0].strInstructions;
+            var instructionsText = $("<p class='search-text'>").text("Instructions: " + instructions);
+            searchDiv.append(instructionsText);
+
+            var glass = response.drinks[0].strGlass;
+            var glassText = $("<p class='search-text'>").text("Glassware: " + glass);
+            searchDiv.append(glassText);
+
+            // List each of the drinks displayed above.
+            // $("#search-parameter").html("<p id='pstyle'>" + "Quiz Results for: '" + cocktailSearch + "'" + "</p>");
+            $(".cocktail-results").append(searchImage);
+            $(".cocktail-results").append(searchDiv);
+        };
+
+        // Reset the variable nextID.
+        var nextID = 0;
+
+        if (lookupIndex < lookup.length) {
+            nextID = lookup[lookupIndex];
+            lookupIndex++;
         }
 
-        // Create a way to mark a drink as a favorite if clicked.
-        function favorites() {
-            var favoritesContainer = $("#favoritesContainer");
-            var currentState = $(this).attr("state");
-            var favoriteDrink = $(this).attr("name");
-            var formattedFavoriteDrink = favoriteDrink.split(" ").join("-").replace("'", "");
-            if (currentState == "unfilled") {
-                $(this).attr("state", "filled").attr("title", "Remove From Favorites").removeClass("far").addClass("fas");
-                var newDiv = $("<div id='" + formattedFavoriteDrink + "'>");
-                var newButton = $('<button type="button" class="btn btn-link">')
-                newButton.text(favoriteDrink);
-                newDiv.append(newButton)
-                favoritesContainer.append(newDiv);
-                localStorage.setItem("favorites", favoritesContainer.html());
-            }
-            else if (currentState == "filled") {
-                $(this).attr("state", "unfilled").attr("title", "Add To Favorites").removeClass("fas").addClass("far");
-                if (favoritesContainer.has("#" + formattedFavoriteDrink).length) {
-                    $("#" + formattedFavoriteDrink).remove();
-                }
-                localStorage.setItem("favorites", favoritesContainer.html());
-            }
+        if (nextID > 0) {
+            $.ajax({
+                url: idURL + nextID,
+                method: "GET"
+            }).then(getID);
+
+        } else {
+            // All done!
         }
+    }
 
-        // function quiz() {
-        //     liquor = [""];
-        //     // var userChoice = $()
-        //     liquor.push(userChoice);
-        // }
+    // Create a way to mark a drink as a favorite if clicked.
+    function favorites() {
+        var favoritesContainer = $("#favoritesContainer");
+        var currentState = $(this).attr("state");
+        var favoriteDrink = $(this).attr("name");
+        var formattedFavoriteDrinkID = favoriteDrink.split(" ").join("-").replace("'", "");
+        if (currentState == "unfilled") {
+            $(this).attr("state", "filled").attr("title", "Remove From Favorites").removeClass("far").addClass("fas")
+            var newDiv = $("<div id='" + formattedFavoriteDrinkID + "'>");
+            var newButton = $('<button type="button" class="btn btn-light my-1 favorite-button">')
+            newButton.text(favoriteDrink);
+            newDiv.append(newButton)
+            favoritesContainer.append(newDiv);
+            localStorage.setItem("favorites", favoritesContainer.html());
+        }
+        else if (currentState == "filled") {
+            $(this).attr("state", "unfilled").attr("title", "Add To Favorites").removeClass("fas").addClass("far");
+            if (favoritesContainer.has("#" + formattedFavoriteDrinkID).length) {
+                $("#" + formattedFavoriteDrinkID).remove();
+            }
+            localStorage.setItem("favorites", favoritesContainer.html());
+        }
+    }
 
-        getLiquor();
-        $(document).on("click", ".fa-star", favorites);
-        $("#favoritesContainer").html(localStorage.getItem("favorites"));
+    // function quiz() {
+    //     liquor = [""];
+    //     // var userChoice = $()
+    //     liquor.push(userChoice);
+    // }
+
+    getLiquor();
+    $(document).on("click", ".fa-star", favorites);
+    $("#favoritesContainer").html(localStorage.getItem("favorites"));
+
+    $(document).on("click", ".favorite-button", function () {
+        var favoriteButtonText = $(this).text();
+        drinkSearch(favoriteButtonText);
     });
+
 
 
 
