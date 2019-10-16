@@ -152,7 +152,7 @@ a {
 
 .headerRightContents {
     position: relative;
-    top: 5%;
+    top: 2%;
     right: 5%;
     
 }
@@ -186,4 +186,25 @@ a {
 
 #surveyElement {
     background-color: #007bff;
+}
+
+#radioOptions {
+    font-size: 13px;
+    text-align: left;
+    position: relative;
+    top: 2%;
+    right: 3%;
+}
+
+#radioOptions p {
+    margin: 0;
+    display: inline-block;
+}
+
+#radioOptions label {
+    margin: 0;
+}
+
+#radioOptions input[type="radio"] {
+    vertical-align: text-bottom;
 }
