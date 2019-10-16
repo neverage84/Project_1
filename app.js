@@ -380,8 +380,8 @@ $(document).ready(function () {
             var favoriteDrink = $(this).attr("name");
             favoritesList.push(favoriteDrink);
             localStorage.setItem("list", favoritesList);
-            document.getElementById("favorites").innerHTML = "<p>" + favoritesList.join("<br>") + "</p>";
-            // document.getElementById("favorites").innerHTML = localStorage.getItem("list");
+            // document.getElementById("favorites").innerHTML = "<p>" + favoritesList.join("<br>") + "</p>";
+            document.getElementById("favorites").innerHTML = localStorage.getItem("list");
         }
 
         else if (currentState == "filled") {
@@ -392,8 +392,8 @@ $(document).ready(function () {
                 favoritesList.splice(removeDrink, 1);
             }
             localStorage.setItem("list", favoritesList);
-            document.getElementById("favorites").innerHTML = "<p>" + favoritesList.join("<br>") + "</p>";
-            // document.getElementById("favorites").innerHTML = localStorage.getItem("list");
+            // document.getElementById("favorites").innerHTML = "<p>" + favoritesList.join("<br>") + "</p>";
+            document.getElementById("favorites").innerHTML = localStorage.getItem("list");
             console.log(favoritesList);
         }
     }
