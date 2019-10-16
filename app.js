@@ -19,14 +19,10 @@ $(document).ready(function () {
         var startPos;
         var geoSuccess = function (position) {
             startPos = position;
-            // document.getElementById('startLat').innerHTML = startPos.coords.latitude;
-            // document.getElementById('startLon').innerHTML = startPos.coords.longitude;
             console.log("Geoposition gives " + startPos.coords.latitude + " for latitutde");
             console.log("Geoposition gives " + startPos.coords.longitude + " for longitude");
             latitude = startPos.coords.latitude;
             longitude = startPos.coords.longitude;
-            // $("#startLat").attr("style", "display: none;");
-            // $("#startLon").attr("style", "display: none;");
             initialize();
         };
         navigator.geolocation.getCurrentPosition(geoSuccess);
@@ -106,7 +102,6 @@ $(document).ready(function () {
     $("#SubmitButton").on("click", function (event) {
         event.preventDefault();
         if ($("#barOption").is(":checked")) {
-
             // Function to take the user search input and display results on the map
             function initializeSearch() {
                 currentLocation = new google.maps.LatLng(latitude, longitude);
@@ -191,40 +186,7 @@ $(document).ready(function () {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // ** COCKTAIL SEARCH CODE **
-
-
 
     var liquor = ["bourbon"];
     var lookup = [];
@@ -347,16 +309,11 @@ $(document).ready(function () {
 
     getLiquor();
     $(document).on("click", ".fa-star", favorites);
-    $("#favoritesContainer").html(localStorage.getItem("favorites"));
+    $("#favoritesContainer").html(localStorage.getItem("favorites")); // displays favorites container stored in local storage on page load
 
+    // function to search for a favorited drink when clicked
     $(document).on("click", ".favorite-button", function () {
         var favoriteButtonText = $(this).text();
         drinkSearch(favoriteButtonText);
     });
-
-
-
-
-
-
 });
