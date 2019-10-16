@@ -218,6 +218,22 @@ else if (result.data.Drinks === "Sour or Tart" && result.data.Relax === "Cabin i
                  $("#IMGID").html("<img src=images/drinks/piscoSour.jpeg>" + "<br>" + "<br>" + "<h2> Pisco Sour </h2>")
                  
             }
+else if (result.data.Drinks === "Sour or Tart" && result.data.Relax === "Tropical beach with a sunset") { 
+                document
+                   
+                    $("#surveyElement").hide()
+                     
+                     $("#IMGID").html("<img src=images/drinks/JackRose.jpeg>" + "<br>" + "<br>" + "<h2> Jack Rose </h2>")
+                     
+                }
+else if (result.data.Drinks === "Sour or Tart" && result.data.Relax === "My own home is best place on earth") { 
+                    document
+                       
+                        $("#surveyElement").hide()
+                         
+                         $("#IMGID").html("<img src=images/drinks/WhiskeySour.jpeg>" + "<br>" + "<br>" + "<h2> Whiskey Sour </h2>")
+                         
+                    }
     else {
         document
         $("#surveyElement").hide()
