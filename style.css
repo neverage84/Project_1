@@ -63,14 +63,14 @@ a {
 
 .FunFacts {
     margin-top: 10px;
-    height: 43%;
+    height: 45%;
     width: 48%;
     float:right;
 }
 
 .FavoriteDrinks {
     margin-top: 10px;
-    height: 43%;
+    height: 45%;
     width: 48%;
     margin-left: 0px;
     float:left;
@@ -98,7 +98,7 @@ a {
 	color: black;
     padding-top: 20px;
     border: solid white 1px;
-    height: 1000px;
+    height: 1200px;
     width: 45%;
     opacity: 1;
     border-radius: 5px;
@@ -114,7 +114,7 @@ a {
 	color: black;
     padding-top: 20px;
     border: solid white 1px;
-    height: 1000px;
+    height: 1200px;
     width: 45%;
     opacity: 1;
     border-radius: 5px;
@@ -182,6 +182,17 @@ a {
 #pstyle {
     font-style: italic;
     color: #007bff;
+}
+
+.fa-star {
+    padding: 0 10px;
+    font-size: 25px;
+    color: gold;
+}
+
+.fa-star, .search-text-name {
+    display: inline-block;
+    margin: 0;
 }
 
 #surveyElement {
