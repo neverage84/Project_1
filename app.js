@@ -13,6 +13,11 @@ $(document).ready(function () {
     var request;
     var marker;
 
+    //Global Fun Facts Variables
+    var IntervalID;
+    var count = -1;
+    var FunFactsArr = ["a", "b", "c", "d"];
+
     // Gets the user location on page load and displays nearby bars
     window.onload = function () {
         runFunFacts();
@@ -186,8 +191,15 @@ $(document).ready(function () {
         }
     });
 
-
-
+    //Fun Fact functions
+function runFunFacts() {
+    IntervalID = setInterval(FunFacts, 10000);
+}
+function FunFacts(){
+    count ++;
+    $("#FunFactsID").html(FunFactsArr[count]);
+    
+}
 
 
 
@@ -305,24 +317,3 @@ $(document).ready(function () {
 });
 
 
-
-var IntervalID;
-var count = -1;
-var FunFactsArr = ["a", "b", "c", "d"];
-
-
-
-
-   
-    
-
-
-//Fun Fact functions
-function runFunFacts() {
-    IntervalID = setInterval(FunFacts, 10000);
-}
-function FunFacts(){
-    count ++;
-    $("#FunFactsID").html(FunFactsArr[count]);
-    
-}
