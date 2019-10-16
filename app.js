@@ -308,25 +308,22 @@ $(document).ready(function () {
             console.log("testing favorites");
 
             var currentState = $(this).attr("state");
-
+            var favoriteDrink = $(this).attr("name");
             if (currentState == "unfilled") {
-                $(this).attr("state", "filled").removeClass("far").addClass("fas");
-                var favoriteDrink = $(this).attr("name");
-                favoritesList.push(favoriteDrink);
+                $(this).attr("state", "filled").removeClass("far").addClass("fas");  
+                var newDiv = $("<div id='" + favoriteDrink + "'>");
+                newDiv.text(favoriteDrink);
+               $("#favoritesContainer").append(newDiv);
                 localStorage.setItem("list", favoritesList);
-                // document.getElementById("favorites").innerHTML = "<p>" + favoritesList.join("<br>") + "</p>";
                 document.getElementById("favorites").innerHTML = localStorage.getItem("list");
             }
 
             else if (currentState == "filled") {
                 $(this).attr("state", "unfilled").removeClass("fas").addClass("far");
-                var favoriteDrink = $(this).attr("name");
-                var removeDrink = favoritesList.indexOf(favoriteDrink);
-                if (removeDrink != -1) {
-                    favoritesList.splice(removeDrink, 1);
+                if($("#favoritesContainer").has("#" + favoriteDrink).length){
+                    $("#" + favoriteDrink).remove();
                 }
                 localStorage.setItem("list", favoritesList);
-                // document.getElementById("favorites").innerHTML = "<p>" + favoritesList.join("<br>") + "</p>";
                 document.getElementById("favorites").innerHTML = localStorage.getItem("list");
                 console.log(favoritesList);
             }
@@ -340,7 +337,7 @@ $(document).ready(function () {
 
         getLiquor();
         $(document).on("click", ".fa-star", favorites);
-    })
+    });
 
 
 
