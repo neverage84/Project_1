@@ -7,42 +7,44 @@ $(document).ready(function () {
     var latitude;
     var longitude;
     var currentLocation;
-    //   window.onload = function() {
-    //     var startPos;
-    //     var geoSuccess = function(position) {
-    //       startPos = position;
-    //       //document.getElementById('startLat').innerHTML = startPos.coords.latitude;
-    //       //document.getElementById('startLon').innerHTML = startPos.coords.longitude;
-    //       console.log(
-    //         "Geoposition gives " + startPos.coords.latitude + " for latitutde"
-    //       );
-    //       console.log(
-    //         "Geoposition gives " + startPos.coords.longitude + " for longitude"
-    //       );
-    //       latitude = startPos.coords.latitude;
-    //       longitude = startPos.coords.longitude;
-    //     };
-    //     navigator.geolocation.getCurrentPosition(geoSuccess);
-    //   };
 
+
+       window.onload = function() {
+         var startPos;
+         var geoSuccess = function(position) {
+           startPos = position;
+           document.getElementById('startLat').innerHTML = startPos.coords.latitude;
+           document.getElementById('startLon').innerHTML = startPos.coords.longitude;
+           console.log("Geoposition gives " + startPos.coords.latitude + " for latitutde");
+           console.log("Geoposition gives " + startPos.coords.longitude + " for longitude");
+           latitude = startPos.coords.latitude;
+           longitude = startPos.coords.longitude;
+           $("#startLat").attr("style", "display: none;");
+           $("#startLon").attr("style", "display: none;");
+           console.log(latitude);
+           console.log(longitude);
+           ipLookUp();
+         };
+         navigator.geolocation.getCurrentPosition(geoSuccess);
+       }
+       
+       
     // Not supported on It is not supported on Internet Explorer 10 and below, nor OperaMini.
-
+    
     function ipLookUp() {
-        $.ajax("http://ip-api.com/json").then(
-            function success(response) {
-                console.log("User's Location Data is ", response);
-                console.log("User's Country", response.country);
-                console.log("IP - API gives " + response.lat + " for latitude");
-                latitude = response.lat;
-                console.log("IP - API gives " + response.lon + " for longitude");
-                longitude = response.lon;
-
+        // $.ajax("http://ip-api.com/json").then(
+        //     function success(response) {
+        //         console.log("User's Location Data is ", response);
+        //         console.log("User's Country", response.country);
+        //         console.log("IP - API gives " + response.lat + " for latitude");
+        //         latitude = response.lat;
+        //         console.log("IP - API gives " + response.lon + " for longitude");
+        //         longitude = response.lon;
+    
                 var map;
                 var service;
                 var infowindow = new google.maps.InfoWindow(); // needed to add this, thanks to https://stackoverflow.com/questions/36360313/google-maps-places-api-javascript-cannot-read-property-setcontent-of-undefin
                 function initialize() {
-                    console.log(latitude);
-                    console.log(longitude);
                     currentLocation = new google.maps.LatLng(latitude, longitude);
                     map = new google.maps.Map(document.getElementById("map"), {
                         center: currentLocation,
@@ -100,13 +102,13 @@ $(document).ready(function () {
                     }
                 }
                 initialize();
-            },
-            function fail(data, status) {
-                console.log("Request failed.  Returned status of", status);
-            }
-        );
+            
+            // function fail(data, status) {
+            //     console.log("Request failed.  Returned status of", status);
+            // }
+        
     }
-    ipLookUp();
+    
 });
 
 var placesList = {};
