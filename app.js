@@ -304,6 +304,7 @@ $(document).ready(function () {
 
         // Create a way to mark a drink as a favorite if clicked.
         function favorites() {
+            var favoritesContainer = $("#favoritesContainer");
             var currentState = $(this).attr("state");
             var favoriteDrink = $(this).attr("name");
             var formattedFavoriteDrink = favoriteDrink.split(" ").join("-").replace("'","");
@@ -311,15 +312,15 @@ $(document).ready(function () {
                 $(this).attr("state", "filled").attr("title", "Remove From Favorites").removeClass("far").addClass("fas");  
                 var newDiv = $("<div id='" + formattedFavoriteDrink + "'>");
                 newDiv.text(favoriteDrink);
-               $("#favoritesContainer").append(newDiv);
-                localStorage.setItem("list", favoritesList);
+               favoritesContainer.append(newDiv);
+               localStorage.setItem("favorites", favoritesContainer.html());
             }
             else if (currentState == "filled") {
                 $(this).attr("state", "unfilled").attr("title", "Add To Favorites").removeClass("fas").addClass("far");
-                if($("#favoritesContainer").has("#" + formattedFavoriteDrink).length){
+                if(favoritesContainer.has("#" + formattedFavoriteDrink).length){
                     $("#" + formattedFavoriteDrink).remove();
                 }
-                localStorage.setItem("list", favoritesList);
+                localStorage.setItem("favorites", favoritesContainer.html());
             }
         }
 
@@ -331,6 +332,7 @@ $(document).ready(function () {
 
         getLiquor();
         $(document).on("click", ".fa-star", favorites);
+        $("#favoritesContainer").html(localStorage.getItem("favorites"));
     });
 
 
