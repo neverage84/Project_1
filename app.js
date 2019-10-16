@@ -51,7 +51,7 @@ $(document).ready(function () {
         service.nearbySearch(request, callback);
     }
 
-    // Creates a marker at returned place results and display place details
+    // Creates a marker at returned place results and displays place details
     function createMarker(place) {
         var detailsRequest = {
             placeId: place.place_id,
@@ -153,6 +153,10 @@ $(document).ready(function () {
                     searchDiv.append(nameText);
 
                     var star = $("<span class='fa-star far'>" + "</span>").attr("state", "unfilled").attr("name", name);
+                    // checks to see if a drink has already been added to favorites
+                    if($("#favoritesContainer:contains('" + name + "')").length !== 0){
+                        star.attr("state", "filled").attr("title", "Remove From Favorites").removeClass("far").addClass("fas");
+                    }
                     searchDiv.append(star);
 
                     var category = response.drinks[i].strCategory;
@@ -214,7 +218,6 @@ $(document).ready(function () {
 
 
 
-
     // ** COCKTAIL SEARCH CODE **
 
     $(document).ready(function () {
@@ -225,6 +228,7 @@ $(document).ready(function () {
         var maxResults = 3;  // Set this limit when ready for go live.
         var liquorURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + liquor;
         var idURL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
+        
 
         function getLiquor() {
             // AJAX call to gather liquor information
@@ -259,6 +263,10 @@ $(document).ready(function () {
                 searchDiv.append(nameText);
 
                 var star = $("<span class='fa-star far' title='Add To Favorites'>" + "</span>").attr("state", "unfilled").attr("name", name);
+                // checks to see if a drink has already been added to favorites
+                if($("#favoritesContainer:contains('" + name + "')").length !== 0){
+                    star.attr("state", "filled").attr("title", "Remove From Favorites").removeClass("far").addClass("fas");
+                }
                 searchDiv.append(star);
 
                 var category = response.drinks[0].strCategory;
@@ -311,7 +319,9 @@ $(document).ready(function () {
             if (currentState == "unfilled") {
                 $(this).attr("state", "filled").attr("title", "Remove From Favorites").removeClass("far").addClass("fas");  
                 var newDiv = $("<div id='" + formattedFavoriteDrink + "'>");
-                newDiv.text(favoriteDrink);
+                var newButton = $('<button type="button" class="btn btn-link">')
+                newButton.text(favoriteDrink);
+                newDiv.append(newButton)
                favoritesContainer.append(newDiv);
                localStorage.setItem("favorites", favoritesContainer.html());
             }
