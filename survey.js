@@ -16,7 +16,7 @@ pages: [
                 title: "Drink Choices",
                 hasOther: false,
                 isRequired: true,
-                choices: ["The stronger the better", "Something Fruity", "Smooth but dry", "Bitter but great", "Something simple - alcohol plus 1 or 2 ingredients"]
+                choices: ["The stronger the better", "Something Fruity", "Smooth but dry", "Bitter but great", "Sour or Tart","Something simple - alcohol plus 1 or 2 ingredients"]
             }
         ]
     }, {
@@ -106,21 +106,41 @@ window.survey = new Survey.Model(json);
 survey
 .onComplete
 .add(function (result) {
-    if (result.data.Drinks === "Something Fruity") { 
+    if (result.data.Drinks === "Something Fruity" && result.data.Relax === "Tropical beach with a sunset") { 
     document
        
-        .querySelector('#surveyResult')
-        .textContent = "Result JSON:\n" + JSON.stringify(result.data, null, 3);
+        $("#surveyElement").hide()
+         
+         $("#IMGID").html("<img src=images/MaiTai.jpeg>" + "<br>" + "<br>" + "<h2> Mai Tai </h2>");
+         
     }
+    if (result.data.Drinks === "Something Fruity" && result.data.Relax === "Around people I'm comfortable with") { 
+        document
+           
+            $("#surveyElement").hide()
+             
+             $("#IMGID").html("<img src=images/daiquiri.jpeg>" + "<br>" + "<br>" + "<h2> Daiquiri </h2>");
+             
+        }
+    if (result.data.Drinks === "Something Fruity" && result.data.Relax === "Cabin in the forest") { 
+            document
+               
+                $("#surveyElement").hide()
+                 
+                 $("#IMGID").html("<img src=images/MalibuSunset.jpeg>" + "<br>" + "<br>" + "<h2> Malibu Sunset </h2>");
+                 
+            }
+    
 
     else {
         document
-       
-        .querySelector('#surveyResult')
-        .textContent = "NOPE";
+        $("#surveyElement").hide()
+        $("#IMGID").html("<img src=images/LongIslandIceTea.jpeg>" + "<br>" + "<br>" + "<h2> Long Island Ice Tea </h2>");
     }
 });
 
 survey.showProgressBar = 'bottom';
 
 $("#surveyElement").Survey({model: survey});
+
+
