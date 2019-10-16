@@ -126,7 +126,7 @@ survey
     document
        
         $("#surveyElement").hide()
-        $("#IMGID").html("<img src=images/drinks/OldFashioned.jpeg>" + "<br>" + "<br>" + "<h2> Old Fashioned </h2>")
+        $("#IMGID").html("<img src=images/drinks/MaiTai.jpeg>" + "<br>" + "<br>" + "<h2> Mai Tai </h2>")
       
     }
     else if (result.data.Drinks === "Something Fruity" && result.data.Relax === "Around people I'm comfortable with") { 
@@ -153,16 +153,87 @@ survey
                      $("#IMGID").html("<img src=images/drinks/TequilaSunrise.jpeg>" + "<br>" + "<br>" + "<h2> Tequila Sunrise</h2>")
                      
                 }
-    else if (result.data.Drinks === "Something Fruity" && result.data.Relax === "Drifting aimlessly on a boat") { 
+    else if (result.data.Drinks === "Smooth but dry" && result.data.Stress === "Gonna squeeze in a nap") { 
                     document
                        
                         $("#surveyElement").hide()
                          
-                         $("#IMGID").html("<img src=images/drinks/TequilaSunrise.jpeg>" + "<br>" + "<br>" + "<h2> Tequila Sunrise</h2>")
+                         $("#IMGID").html("<img src=images/drinks/OldFashioned.jpeg>" + "<br>" + "<br>" + "<h2> Old Fashioned</h2>")
                          
                     }
+    else if (result.data.Drinks === "The stronger the better" && result.data.Liquor === "Bourbon") { 
+                        document
+                           
+                         $("#surveyElement").hide()
+                             
+                         $("#IMGID").html("<img src=images/drinks/OldFashioned.jpeg>" + "<br>" + "<br>" + "<h2> Old Fashioned</h2>")
+                             
+                        }
     
-
+    else if (result.data.Drinks === "Bitter but great" && result.data.Liquor === "Bourbon") { 
+                        document
+                               
+                        $("#surveyElement").hide()
+                                 
+                        $("#IMGID").html("<img src=images/drinks/Martinez.jpeg>" + "<br>" + "<br>" + "<h2> Martinez</h2>")
+                                 
+                            }
+    else if (result.data.Liquor === "Bourbon" && result.data.Drinks === "Something simple - alcohol plus 1 or 2 ingredients") { 
+                                document
+                                       
+            $("#surveyElement").hide()
+                                         
+            $("#IMGID").html("<img src=images/drinks/Manhattan.jpeg>" + "<br>" + "<br>" + "<h2> Manhattan</h2>")
+                                         
+            }
+    else if (result.data.Liquor === "Bourbon" && result.data.Drinks === "Smooth but dry") { 
+                document
+                       
+    $("#surveyElement").hide()
+                         
+    $("#IMGID").html("<img src=images/drinks/Brooklyn.jpeg>" + "<br>" + "<br>" + "<h2>Brooklyn</h2>")
+                         
+}
+else if (result.data.Drinks === "Sour or Tart" && result.data.Relax === "Around people I'm comfortable with") { 
+    document
+       
+        $("#surveyElement").hide()
+         
+         $("#IMGID").html("<img src=images/drinks/margarita.jpeg>" + "<br>" + "<br>" + "<h2> Margarita </h2>")
+         
+    }
+else if (result.data.Drinks === "Sour or Tart" && result.data.Relax === "Drifting aimlessly on a boat") { 
+        document
+           
+            $("#surveyElement").hide()
+             
+             $("#IMGID").html("<img src=images/drinks/Sidecar.jpeg>" + "<br>" + "<br>" + "<h2> Sidecar </h2>")
+             
+        }
+else if (result.data.Drinks === "Sour or Tart" && result.data.Relax === "Cabin in the forest") { 
+            document
+               
+                $("#surveyElement").hide()
+                 
+                 $("#IMGID").html("<img src=images/drinks/piscoSour.jpeg>" + "<br>" + "<br>" + "<h2> Pisco Sour </h2>")
+                 
+            }
+else if (result.data.Drinks === "Sour or Tart" && result.data.Relax === "Tropical beach with a sunset") { 
+                document
+                   
+                    $("#surveyElement").hide()
+                     
+                     $("#IMGID").html("<img src=images/drinks/JackRose.jpeg>" + "<br>" + "<br>" + "<h2> Jack Rose </h2>")
+                     
+                }
+else if (result.data.Drinks === "Sour or Tart" && result.data.Relax === "My own home is best place on earth") { 
+                    document
+                       
+                        $("#surveyElement").hide()
+                         
+                         $("#IMGID").html("<img src=images/drinks/WhiskeySour.jpeg>" + "<br>" + "<br>" + "<h2> Whiskey Sour </h2>")
+                         
+                    }
     else {
         document
         $("#surveyElement").hide()
