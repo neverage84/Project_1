@@ -269,6 +269,28 @@ a {
 }
 
 
+/* width and height */
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+
+/* Track */
+
+ ::-webkit-scrollbar-track {
+    background: lightgray;
+}
+
+
+/* Handle */
+
+ ::-webkit-scrollbar-thumb {
+    background: gray;
+}
+
+
 /*  */
 
 @media only screen and (max-width: 980px) {
