@@ -201,6 +201,11 @@ a {
     margin: 0 auto;
 }
 
+#cocktail-table {
+    width: fit-content;
+    margin: 0 auto;
+}
+
 .cocktail-info {
     border: none;
     margin-bottom: 115px;
@@ -210,15 +215,8 @@ a {
 
 .cocktail-search,
 .search-image {
-    display: inline-block;
-    padding: 20px;
     text-align: left;
     color: #007bff;
-    overflow: auto;
-}
-
-.cocktail-results {
-    max-width: 840px;
 }
 
 .search-text {
@@ -235,6 +233,7 @@ a {
     padding: 0 10px;
     font-size: 25px;
     color: gold;
+    vertical-align: middle;
 }
 
 .fa-star,

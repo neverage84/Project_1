@@ -231,10 +231,16 @@ $(document).ready(function() {
             $(".cocktail-image").empty();
 
             for (i = 0; i < response.drinks.length && i < maxResults; i++) {
+                var newTR = $("<tr>");
+                var newTD1 = $("<td>");
+                var newTD2 = $("<td>");
+
+
                 var searchImage = $("<div class='search-image'>");
                 var imgURL = response.drinks[i].strDrinkThumb;
                 var image = $("<img>").attr("src", imgURL).attr("height", "125px").attr("width", "125px");
-                searchImage.append(image);
+                searchImage.append(image)
+                newTD1.append(searchImage);
 
                 var searchDiv = $("<div class='cocktail-search'>");
                 var name = response.drinks[i].strDrink;
@@ -265,10 +271,15 @@ $(document).ready(function() {
                 var glassText = $("<p class='search-text'>").text("Glassware: " + glass);
                 searchDiv.append(glassText);
 
+                newTD2.append(searchDiv);
+                newTR.append(newTD1);
+                newTR.append(newTD2);
+                $(".cocktail-results").append(newTR);
+
                 // List each of the drinks displayed above.
                 $("#search-parameter").html("<p id='pstyle'>" + "Search Results for: '" + drinkName + "'" + "</p>");
-                $(".cocktail-results").append(searchImage);
-                $(".cocktail-results").append(searchDiv);
+                // $(".cocktail-results").append(searchImage);
+                // $(".cocktail-results").append(searchDiv);
                 $("#SearchField").val("");
             }
         });
@@ -317,10 +328,15 @@ $(document).ready(function() {
         if (response !== null) {
             // console.log(response);
 
+            var newTR = $("<tr>");
+            var newTD1 = $("<td>");
+            var newTD2 = $("<td>");
+
             var searchImage = $("<div class='search-image'>");
             var imgURL = response.drinks[0].strDrinkThumb;
             var image = $("<img>").attr("src", imgURL).attr("height", "125px").attr("width", "125px");
             searchImage.append(image);
+            newTD1.append(searchImage);
 
             var searchDiv = $("<div class='cocktail-search'>");
             var name = response.drinks[0].strDrink
@@ -353,8 +369,12 @@ $(document).ready(function() {
 
             // List each of the drinks displayed above.
             // $("#search-parameter").html("<p id='pstyle'>" + "Quiz Results for: '" + cocktailSearch + "'" + "</p>");
-            $(".cocktail-results").append(searchImage);
-            $(".cocktail-results").append(searchDiv);
+            // $(".cocktail-results").append(searchImage);
+            // $(".cocktail-results").append(searchDiv);
+            newTD2.append(searchDiv);
+            newTR.append(newTD1);
+            newTR.append(newTD2);
+            $(".cocktail-results").append(newTR);
         };
 
         // Reset the variable nextID.
