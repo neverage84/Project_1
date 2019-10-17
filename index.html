@@ -11,17 +11,11 @@
     <link rel="stylesheet" href="style.css" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Yellowtail&display=swap" rel="stylesheet">
     <!--Bootstrap-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!--Jquery-->
-    <script src="https://code.jquery.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/ee7864623d.js" crossorigin="anonymous"></script>
@@ -39,45 +33,45 @@
 </head>
 
 <body class="bg">
-    
-        <div id="myModal" class="modal">
 
-                <!-- Modal content -->
-                <div class="modal-content-custom">
-                  <span class="close">&times;</span>
-                  <p><h3 style = "text-align:center;", id="flash">Error: No text entered for bar or drink</h3></p>
-                </div>
-              
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content-custom">
+            <span class="close">&times;</span>
+            <p>
+                <h3 style="text-align:center;" , id="flash">Error: No text entered for bar or drink</h3>
+            </p>
         </div>
+
+    </div>
     <nav class="nav">
-            <!--<a class="nav-item nav-link" href="#">Quiz</a>
+        <!--<a class="nav-item nav-link" href="#">Quiz</a>
             <a class="nav-item nav-link" href="#">Cocktail Search</a>-->
-    
-    
-            <p id="title"><img class="happyHourIcons" src="images/Happy-Hour.png" width="50px" height="50px">Happy Hour<img
-                    class="happyHourIcons" src="images/Happy-Hour.png" width="50px" height="50px"></p>
-    
-    
-                    
-            <!--<a class="nav-item nav-link" href="#">Bars</a>-->
-            <div id="headerRight">
-                <form id="radioOptions">
-                    <p>I'm searching for a: </p>
-                    <label><input type="radio" name="searchType" id="barOption" value="bar" checked="checked">Bar</label>
-                    <label><input type="radio" name="searchType" id="drinkOption" value="drink">Drink</label>
-                </form>
-                <form class="form-inline my-2 my-lg-0 headerRightContents">
-                    <input id="SearchField" class="form-control mr-sm-2 controls" type="text"
-                        placeholder="Best Long Island Ice Tea">
-                    <button id="SubmitButton" class="btn btn-success my-2" type="submit">Search</button>
-                </form>
-            </div>
-    
-        </nav>
-    
-    
+
+
+        <p id="title"><img class="happyHourIcons" src="images/Happy-Hour.png" width="50px" height="50px">Happy Hour<img class="happyHourIcons" src="images/Happy-Hour.png" width="50px" height="50px"></p>
+
+
+
+        <!--<a class="nav-item nav-link" href="#">Bars</a>-->
+        <div id="headerRight">
+            <form id="radioOptions">
+                <p>I'm searching for a: </p>
+                <label><input type="radio" name="searchType" id="barOption" value="bar" checked="checked">Bar</label>
+                <label><input type="radio" name="searchType" id="drinkOption" value="drink">Drink</label>
+            </form>
+            <form class="form-inline my-2 my-lg-0 headerRightContents">
+                <input id="SearchField" class="form-control mr-sm-2 controls" type="text" placeholder="Best Long Island Ice Tea">
+                <button id="SubmitButton" class="btn btn-success my-2" type="submit">Search</button>
+            </form>
+        </div>
+
+    </nav>
+
+
     <div class="container-fluid">
-            
+
         <div class="row-no-margin MainContent">
 
             <div class="text-center col-xl-6 CenterLeftSection">
@@ -119,8 +113,7 @@
 
     <!-- Google Places API URL -->
     <script type="text/javascript" src="app.js"></script>
-    <script type="text/javascript"
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvcbnSMyaXIVUF_dAd85dXv0aGQb7GTYs&libraries=places"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvcbnSMyaXIVUF_dAd85dXv0aGQb7GTYs&libraries=places"></script>
 
     <!-- Noelle's Survey.JS-->
     <script type="text/javascript" src="survey.js"></script>
