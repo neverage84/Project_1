@@ -261,7 +261,7 @@ a {
         font-size: 24px;
         width: 100%;
         text-align: center;
-        height: 20%;
+        height: 23%;
     }
 
     #headerRight {
@@ -325,7 +325,7 @@ a {
             font-size: 24px;
             width: 100%;
             text-align: center;
-            height: 20%;
+            height: 23%;
         }
 
         #headerRight {
@@ -380,6 +380,24 @@ a {
 
     @media only screen and (max-width: 576px)  {
 
+
+        .CenterLeftSection {
+   
+            margin-right: 0px;
+            background-color: rgba(64, 224, 208, 0.8);
+            color: black;
+            padding-top: 20px;
+            border: solid white 1px;
+            height: 1250px;
+            width: 45%;
+            opacity: 1;
+            border-radius: 5px;
+            padding: 10px;
+            /*overflow: auto;*/
+            float:left;
+        }
+
+
         nav {
             background-color: rgba(109, 214, 255, 0.6);
             padding: 10px;
@@ -387,21 +405,21 @@ a {
             font-size: 24px;
             width: 100%;
             text-align: center;
-            height: 20%;
+            height: 27%;
         }
 
         #headerRight {
             position: absolute;
             height: 100%;
             bottom: -86px;
-           
+            right: 20%;
         }
         
         .headerRightContents {
             position: relative;
             top: 2%;
             right: 5%;
-           
+            
         }
 
         .modal {
