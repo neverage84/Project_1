@@ -36,42 +36,51 @@
     <link href="https://surveyjs.azureedge.net/1.1.15/survey.css" type="text/css" rel="stylesheet" />
 
 
-
-
 </head>
 
 <body class="bg">
+    
+        <div id="myModal" class="modal">
 
-
-    <nav class="nav ">
-        <!--<a class="nav-item nav-link" href="#">Quiz</a>
-        <a class="nav-item nav-link" href="#">Cocktail Search</a>-->
-
-
-        <p id="title"><img class="happyHourIcons" src="images/Happy-Hour.png" width="50px" height="50px">Happy Hour<img
-                class="happyHourIcons" src="images/Happy-Hour.png" width="50px" height="50px"></p>
-
-
-
-        <!--<a class="nav-item nav-link" href="#">Bars</a>-->
-        <div id="headerRight">
-            <form id="radioOptions">
-                <p>I'm searching for a: </p>
-                <label><input type="radio" name="searchType" id="barOption" value="bar" checked="checked">Bar</label>
-                <label><input type="radio" name="searchType" id="drinkOption" value="drink">Drink</label>
-            </form>
-            <form class="form-inline my-2 my-lg-0 headerRightContents">
-                <input id="SearchField" class="form-control mr-sm-2 controls" type="text"
-                    placeholder="Best Long Island Ice Tea">
-                <button id="SubmitButton" class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+                <!-- Modal content -->
+                <div class="modal-content-custom">
+                  <span class="close">&times;</span>
+                  <p><h3 style = "text-align:center;", id="flash">Error: No text entered for bar or drink</h3></p>
+                </div>
+              
         </div>
-
-    </nav>
+    <nav class="nav">
+            <!--<a class="nav-item nav-link" href="#">Quiz</a>
+            <a class="nav-item nav-link" href="#">Cocktail Search</a>-->
+    
+    
+            <p id="title"><img class="happyHourIcons" src="images/Happy-Hour.png" width="50px" height="50px">Happy Hour<img
+                    class="happyHourIcons" src="images/Happy-Hour.png" width="50px" height="50px"></p>
+    
+    
+                    
+            <!--<a class="nav-item nav-link" href="#">Bars</a>-->
+            <div id="headerRight">
+                <form id="radioOptions">
+                    <p>I'm searching for a: </p>
+                    <label><input type="radio" name="searchType" id="barOption" value="bar" checked="checked">Bar</label>
+                    <label><input type="radio" name="searchType" id="drinkOption" value="drink">Drink</label>
+                </form>
+                <form class="form-inline my-2 my-lg-0 headerRightContents">
+                    <input id="SearchField" class="form-control mr-sm-2 controls" type="text"
+                        placeholder="Best Long Island Ice Tea">
+                    <button id="SubmitButton" class="btn btn-success my-2" type="submit">Search</button>
+                </form>
+            </div>
+    
+        </nav>
+    
+    
     <div class="container-fluid">
+            
         <div class="row-no-margin MainContent">
 
-            <div class="text-center col-6 CenterLeftSection">
+            <div class="text-center col-xl-6 CenterLeftSection">
                 <img src="images/cocktail_blue_arrow-1 (1).png" class="Quiz">
                 <h3>Quiz: What kind of cocktail are you?</h3>
                 <div class="d-flex justify-content-center align-items-center ContentSections Noelle">
@@ -86,11 +95,12 @@
                     <div class="form-row justify-content-center cocktail-results"></div>
                 </div>
             </div>
-            <div class="text-center col-6 CenterRightSection">
+            <div class="text-center col-xl-6 CenterRightSection">
                 <img src="images/bar-open.png" class="MapImage">
                 <h3>Bars Near You</h3>
                 <div class="d-flex justify-content-center align-items-center ContentSections">
-
+                    <div id="startLat"></div>
+                    <div id="startLon"></div>
                     <div id="map"></div>
                 </div>
                 <div class="sidebar text-center FavoriteDrinks">
