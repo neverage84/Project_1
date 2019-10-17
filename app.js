@@ -255,7 +255,7 @@ function runFunFacts() {
 }
 function FunFacts(){
     count ++;
-    $("#FunFactsID").html(FunFactsArr[count]);
+    $("#FunFactsID").html("<h3>" + FunFactsArr[count] + "</h3>");
    
     
 }
