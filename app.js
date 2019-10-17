@@ -1,6 +1,6 @@
 // ** BAR SEARCH CODE **
 
-$(document).ready(function() {
+$(document).ready(function () {
 
     // Global Map Variables
     var latitude;
@@ -77,11 +77,11 @@ $(document).ready(function() {
     ];
 
     // Gets the user location on page load and displays nearby bars
-    window.onload = function() {
+    window.onload = function () {
         FunFacts();
         runFunFacts();
         var startPos;
-        var geoSuccess = function(position) {
+        var geoSuccess = function (position) {
             startPos = position;
             console.log("Geoposition gives " + startPos.coords.latitude + " for latitutde");
             console.log("Geoposition gives " + startPos.coords.longitude + " for longitude");
@@ -117,7 +117,7 @@ $(document).ready(function() {
             placeId: place.place_id,
             fields: ['name', 'formatted_address', 'place_id', 'geometry', "formatted_phone_number", "opening_hours", "website"]
         };
-        service.getDetails(detailsRequest, function(placeMarker, status) {
+        service.getDetails(detailsRequest, function (placeMarker, status) {
             if (status === google.maps.places.PlacesServiceStatus.OK) {
                 marker = new google.maps.Marker({
                     map: map,
@@ -132,7 +132,7 @@ $(document).ready(function() {
                     dayIndex = 6
                 }
                 console.log(placeMarker)
-                google.maps.event.addListener(marker, 'click', function() {
+                google.maps.event.addListener(marker, 'click', function () {
                     var br = "<br>"
                     infowindow.setContent('<div><strong>' + placeMarker.name + '</strong>' + br +
                         placeMarker.formatted_address + br + placeMarker.formatted_phone_number + br +
@@ -163,7 +163,7 @@ $(document).ready(function() {
         }
     }
 
-    $("#SubmitButton").on("click", function(event) {
+    $("#SubmitButton").on("click", function (event) {
         event.preventDefault();
         if ($("#SearchField").val().length === 0) {
             console.log("Modal should open");
@@ -179,12 +179,12 @@ $(document).ready(function() {
 
 
             // When the user clicks on <span> (x), close the modal
-            span.onclick = function() {
+            span.onclick = function () {
                 modal.style.display = "none";
             }
 
             // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
+            window.onclick = function (event) {
                 if (event.target == modal) {
                     modal.style.display = "none";
                 }
@@ -227,7 +227,7 @@ $(document).ready(function() {
         $.ajax({
             url: searchURL,
             method: "GET"
-        }).then(function(response) {
+        }).then(function (response) {
             $(".cocktail-results").empty();
             $(".cocktail-image").empty();
 
@@ -321,7 +321,7 @@ $(document).ready(function() {
         $.ajax({
             url: liquorURL,
             method: "GET"
-        }).then(function(response) {
+        }).then(function (response) {
             // console.log(response);
 
             for (i = 0; i < response.drinks.length && i < maxResults; i++) {
@@ -444,7 +444,7 @@ $(document).ready(function() {
     $("#favoritesContainer").html(localStorage.getItem("favorites")); // displays favorites container stored in local storage on page load
 
     // function to search for a favorited drink when clicked
-    $(document).on("click", ".favorite-button", function() {
+    $(document).on("click", ".favorite-button", function () {
         var favoriteButtonText = $(this).text();
         drinkSearch(favoriteButtonText);
     });
@@ -459,99 +459,99 @@ var json = {
     title: "Find your next cocktail",
 
     pages: [{
-            title: "Which of these liquors do you prefer?",
-            questions: [{
-                type: "radiogroup",
-                name: "Liquor",
-                title: "Liquor Type",
-                hasOther: false,
-                isRequired: true,
-                choices: ["Vodka", "Gin", "Rum", "Bourbon", "Whiskey", "Scotch"]
-            }]
-        },
-        {
-            title: "Which of these drinks do you typically go for?",
-            questions: [{
-                type: "radiogroup",
-                name: "Drinks",
-                title: "Drink Choices",
-                hasOther: false,
-                isRequired: true,
-                choices: ["The stronger the better", "Something Fruity", "Smooth but dry", "Bitter but great", "Sour or Tart", "Something simple - alcohol plus 1 or 2 ingredients"]
-            }]
-        },
+        title: "Which of these liquors do you prefer?",
+        questions: [{
+            type: "radiogroup",
+            name: "Liquor",
+            title: "Liquor Type",
+            hasOther: false,
+            isRequired: true,
+            choices: ["Vodka", "Gin", "Rum", "Bourbon", "Whiskey", "Scotch"]
+        }]
+    },
+    {
+        title: "Which of these drinks do you typically go for?",
+        questions: [{
+            type: "radiogroup",
+            name: "Drinks",
+            title: "Drink Choices",
+            hasOther: false,
+            isRequired: true,
+            choices: ["The stronger the better", "Something Fruity", "Smooth but dry", "Bitter but great", "Sour or Tart", "Something simple - alcohol plus 1 or 2 ingredients"]
+        }]
+    },
 
-        {
-            title: "Which of these appetizers would you order?",
-            questions: [{
-                type: "radiogroup",
-                name: "Appetizers",
-                title: "So tasty",
-                colCount: 3,
-                isRequired: true,
-                choices: [
-                    "Buffalo Wings",
-                    "Spinach Artichoke Dip",
-                    "Mozzerella Sticks",
-                    "Poke",
-                    "Nachos",
-                    "Light salad",
-                    "I'll wait for the entree",
-
-
-                ]
-            }]
-        }, {
-            title: "After a long stressful day, which one sounds like you?",
-            questions: [{
-                type: "radiogroup",
-                name: "Stress",
-                title: "Recovery time",
-                isRequired: true,
-                choices: [
-                    "Gonna squeeze in a nap",
-                    "What's on netflix tonight?",
-                    "Which friend can I vent to?",
-                    "I need a drink",
-                    "Gym time",
+    {
+        title: "Which of these appetizers would you order?",
+        questions: [{
+            type: "radiogroup",
+            name: "Appetizers",
+            title: "So tasty",
+            colCount: 3,
+            isRequired: true,
+            choices: [
+                "Buffalo Wings",
+                "Spinach Artichoke Dip",
+                "Mozzerella Sticks",
+                "Poke",
+                "Nachos",
+                "Light salad",
+                "I'll wait for the entree",
 
 
+            ]
+        }]
+    }, {
+        title: "After a long stressful day, which one sounds like you?",
+        questions: [{
+            type: "radiogroup",
+            name: "Stress",
+            title: "Recovery time",
+            isRequired: true,
+            choices: [
+                "Gonna squeeze in a nap",
+                "What's on netflix tonight?",
+                "Which friend can I vent to?",
+                "I need a drink",
+                "Gym time",
 
-                ]
-            }]
-        }, {
-            title: "What kind of person are you at a party?",
-            questions: [{
-                type: "radiogroup",
-                name: "Party",
-                title: "What's your personality?",
-                isRequired: true,
-                choices: [
-                    "Life of the party - I've got stories for days!",
-                    "I'm wherever the dance floor is",
-                    "I chime in with a clever comment and pick my moments",
-                    "Someone is usually crying on my shoulder",
-                    "Quietly waiting to make my exit",
 
-                ]
-            }]
-        }, {
-            title: "Where's the best place to relax?",
-            questions: [{
-                type: "radiogroup",
-                name: "Relax",
-                title: "Kumbaya",
-                isRequired: true,
-                choices: [
-                    "Tropical beach with a sunset",
-                    "Cabin in the forest",
-                    "My own home is best place on earth",
-                    "Drifting aimlessly on a boat",
-                    "Around people I'm comfortable with",
 
-                ]
-            }]
-        }
+            ]
+        }]
+    }, {
+        title: "What kind of person are you at a party?",
+        questions: [{
+            type: "radiogroup",
+            name: "Party",
+            title: "What's your personality?",
+            isRequired: true,
+            choices: [
+                "Life of the party - I've got stories for days!",
+                "I'm wherever the dance floor is",
+                "I chime in with a clever comment and pick my moments",
+                "Someone is usually crying on my shoulder",
+                "Quietly waiting to make my exit",
+
+            ]
+        }]
+    }, {
+        title: "Where's the best place to relax?",
+        questions: [{
+            type: "radiogroup",
+            name: "Relax",
+            title: "Kumbaya",
+            isRequired: true,
+            choices: [
+                "Tropical beach with a sunset",
+                "Cabin in the forest",
+                "My own home is best place on earth",
+                "Drifting aimlessly on a boat",
+                "Around people I'm comfortable with",
+
+            ]
+        }]
+    }
     ]
 };
 
@@ -563,7 +563,7 @@ window.survey = new Survey.Model(json);
 
 survey
     .onComplete
-    .add(function(result) {
+    .add(function (result) {
         console.log(result.data.Liquor);
         liquor = result.data.Liquor;
 
