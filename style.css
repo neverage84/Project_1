@@ -25,9 +25,9 @@ body, html {
   }
 
   @keyframes flash {
-    0% {color: gold;}
+    0% {color: #f86565}
             50% {color: black;}
-            100% {color: gold;}
+            100% {color: #f86565;}
 }
 
 #flash {
@@ -303,9 +303,9 @@ a {
       }
 
       @keyframes flash {
-        0% {color: gold;}
+        0% {color: #f86565;}
             50% {color: black;}
-            100% {color: gold;}
+            100% {color: #f86565;}
     }
     
     #flash {
@@ -365,9 +365,9 @@ a {
           }
 
           @keyframes flash {
-            0% {color: gold;}
+            0% {color: #f86565;}
             50% {color: black;}
-            100% {color: gold;}
+            100% {color: #f86565;}
             
         }
         
@@ -445,9 +445,9 @@ a {
           }
 
           @keyframes flash {
-            0% {color: gold;}
+            0% {color: #f86565;}
             50% {color: black;}
-            100% {color: gold;}
+            100% {color: #f86565;}
             
         }
         
