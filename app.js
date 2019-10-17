@@ -12,67 +12,68 @@ $(document).ready(function () {
     var infowindow = new google.maps.InfoWindow();
     var request;
     var marker;
+    var maxResults = 3;
 
     //Global Fun Facts Variables
     var IntervalID;
     var count = -1;
     var FunFactsArr = ["There exists a cocktail called a Ramboozle, popular in England in the mid 17th century.",
-     " Ernest Hemingway invented a cocktail named “Absinthe and Champagne” or, “Death in the Afternoon.",
-      "There’s an International Bartenders Association which sanctions an official cocktail list for use in the World Cocktail Competition.",
-      "There is a cocktail known as a “Sully,” named after the pilot of US Airways Flight 1549, which consists of two shots of Grey Goose and a splash of water.", 
-      "The “wake-up juice” in Back to the Future 3 is a real cocktail.", 
-      " A “Rich Dead Nazi” is actually a cocktail made of Goldschläger, Jägermeister, and peppermint schnapps. ", 
-      "In Utah, bartenders in restaurants have to mix cocktails behind a curtain.", 
-      "The Caesar is a cocktail only popular in Canada. It is a mixture of vodka and Clamato (clam broth + tomato juice).", 
-      "The Brandy Daisy, a cocktail of citrus juice and brandy, was the forerunner of the Margarita. Margarita is the Spanish name for Daisy.", 
-      "The cocktail “screwdriver” origins from Persian Oil Workers in the 1920s. When lacking a spoon to stir, they used screwdrivers.", 
-      "A martini cocktail should be stirred, and a shaken martini is called a Bradford. This is why Bond always has to specify his martini be made the wrong way. ",
-      "During prohibition, honey and fruit juices were heavily used to mask the poor quality of liquor.",
-      "The “Toronto Cocktail” was first recorded in 1922, at a time when alcohol was illegal in Ontario.",
-      "Cocktail glasses (tumblers) are thicker on the bottom so non-liquid ingredients can be “muddled” in the glass before liquids are added.",
-      "Cocktail umbrella’s contained hidden scrolls of Chinese newspaper which can be read like fortune cookies.",
-      "An attempt to set the Guinness World Record for the world’s most expensive cocktail was thwarted when a customer dropped and broke the bottle of Cognac that was worth $77,000.",
-      "There was a real, radium-based, alcoholic drink known as the “Atomic Cocktail” that was served in missile shaped bottles.",
-      "There exists a cocktail called a Ramboozle, popular in England in the mid 17th century.",
-     " Ernest Hemingway invented a cocktail named “Absinthe and Champagne” or, “Death in the Afternoon.",
-      "There’s an International Bartenders Association which sanctions an official cocktail list for use in the World Cocktail Competition.",
-      "There is a cocktail known as a “Sully,” named after the pilot of US Airways Flight 1549, which consists of two shots of Grey Goose and a splash of water.", 
-      "The “wake-up juice” in Back to the Future 3 is a real cocktail.", 
-      " A “Rich Dead Nazi” is actually a cocktail made of Goldschläger, Jägermeister, and peppermint schnapps. ", 
-      "In Utah, bartenders in restaurants have to mix cocktails behind a curtain.", 
-      "The Caesar is a cocktail only popular in Canada. It is a mixture of vodka and Clamato (clam broth + tomato juice).", 
-      "The Brandy Daisy, a cocktail of citrus juice and brandy, was the forerunner of the Margarita. Margarita is the Spanish name for Daisy.", 
-      "The cocktail “screwdriver” origins from Persian Oil Workers in the 1920s. When lacking a spoon to stir, they used screwdrivers.", 
-      "A martini cocktail should be stirred, and a shaken martini is called a Bradford. This is why Bond always has to specify his martini be made the wrong way. ",
-      "During prohibition, honey and fruit juices were heavily used to mask the poor quality of liquor.",
-      "The “Toronto Cocktail” was first recorded in 1922, at a time when alcohol was illegal in Ontario.",
-      "Cocktail glasses (tumblers) are thicker on the bottom so non-liquid ingredients can be “muddled” in the glass before liquids are added.",
-      "Cocktail umbrella’s contained hidden scrolls of Chinese newspaper which can be read like fortune cookies.",
-      "An attempt to set the Guinness World Record for the world’s most expensive cocktail was thwarted when a customer dropped and broke the bottle of Cognac that was worth $77,000.",
-      "There was a real, radium-based, alcoholic drink known as the “Atomic Cocktail” that was served in missile shaped bottles.",
-      "There exists a cocktail called a Ramboozle, popular in England in the mid 17th century.",
-     " Ernest Hemingway invented a cocktail named “Absinthe and Champagne” or, “Death in the Afternoon.",
-      "There’s an International Bartenders Association which sanctions an official cocktail list for use in the World Cocktail Competition.",
-      "There is a cocktail known as a “Sully,” named after the pilot of US Airways Flight 1549, which consists of two shots of Grey Goose and a splash of water.", 
-      "The “wake-up juice” in Back to the Future 3 is a real cocktail.", 
-      " A “Rich Dead Nazi” is actually a cocktail made of Goldschläger, Jägermeister, and peppermint schnapps. ", 
-      "In Utah, bartenders in restaurants have to mix cocktails behind a curtain.", 
-      "The Caesar is a cocktail only popular in Canada. It is a mixture of vodka and Clamato (clam broth + tomato juice).", 
-      "The Brandy Daisy, a cocktail of citrus juice and brandy, was the forerunner of the Margarita. Margarita is the Spanish name for Daisy.", 
-      "The cocktail “screwdriver” origins from Persian Oil Workers in the 1920s. When lacking a spoon to stir, they used screwdrivers.", 
-      "A martini cocktail should be stirred, and a shaken martini is called a Bradford. This is why Bond always has to specify his martini be made the wrong way. ",
-      "During prohibition, honey and fruit juices were heavily used to mask the poor quality of liquor.",
-      "The “Toronto Cocktail” was first recorded in 1922, at a time when alcohol was illegal in Ontario.",
-      "Cocktail glasses (tumblers) are thicker on the bottom so non-liquid ingredients can be “muddled” in the glass before liquids are added.",
-      "Cocktail umbrella’s contained hidden scrolls of Chinese newspaper which can be read like fortune cookies.",
-      "An attempt to set the Guinness World Record for the world’s most expensive cocktail was thwarted when a customer dropped and broke the bottle of Cognac that was worth $77,000.",
-      "There was a real, radium-based, alcoholic drink known as the “Atomic Cocktail” that was served in missile shaped bottles."
-       
-    
-    
-    
-    
-    
+        " Ernest Hemingway invented a cocktail named “Absinthe and Champagne” or, “Death in the Afternoon.",
+        "There’s an International Bartenders Association which sanctions an official cocktail list for use in the World Cocktail Competition.",
+        "There is a cocktail known as a “Sully,” named after the pilot of US Airways Flight 1549, which consists of two shots of Grey Goose and a splash of water.",
+        "The “wake-up juice” in Back to the Future 3 is a real cocktail.",
+        " A “Rich Dead Nazi” is actually a cocktail made of Goldschläger, Jägermeister, and peppermint schnapps. ",
+        "In Utah, bartenders in restaurants have to mix cocktails behind a curtain.",
+        "The Caesar is a cocktail only popular in Canada. It is a mixture of vodka and Clamato (clam broth + tomato juice).",
+        "The Brandy Daisy, a cocktail of citrus juice and brandy, was the forerunner of the Margarita. Margarita is the Spanish name for Daisy.",
+        "The cocktail “screwdriver” origins from Persian Oil Workers in the 1920s. When lacking a spoon to stir, they used screwdrivers.",
+        "A martini cocktail should be stirred, and a shaken martini is called a Bradford. This is why Bond always has to specify his martini be made the wrong way. ",
+        "During prohibition, honey and fruit juices were heavily used to mask the poor quality of liquor.",
+        "The “Toronto Cocktail” was first recorded in 1922, at a time when alcohol was illegal in Ontario.",
+        "Cocktail glasses (tumblers) are thicker on the bottom so non-liquid ingredients can be “muddled” in the glass before liquids are added.",
+        "Cocktail umbrella’s contained hidden scrolls of Chinese newspaper which can be read like fortune cookies.",
+        "An attempt to set the Guinness World Record for the world’s most expensive cocktail was thwarted when a customer dropped and broke the bottle of Cognac that was worth $77,000.",
+        "There was a real, radium-based, alcoholic drink known as the “Atomic Cocktail” that was served in missile shaped bottles.",
+        "There exists a cocktail called a Ramboozle, popular in England in the mid 17th century.",
+        " Ernest Hemingway invented a cocktail named “Absinthe and Champagne” or, “Death in the Afternoon.",
+        "There’s an International Bartenders Association which sanctions an official cocktail list for use in the World Cocktail Competition.",
+        "There is a cocktail known as a “Sully,” named after the pilot of US Airways Flight 1549, which consists of two shots of Grey Goose and a splash of water.",
+        "The “wake-up juice” in Back to the Future 3 is a real cocktail.",
+        " A “Rich Dead Nazi” is actually a cocktail made of Goldschläger, Jägermeister, and peppermint schnapps. ",
+        "In Utah, bartenders in restaurants have to mix cocktails behind a curtain.",
+        "The Caesar is a cocktail only popular in Canada. It is a mixture of vodka and Clamato (clam broth + tomato juice).",
+        "The Brandy Daisy, a cocktail of citrus juice and brandy, was the forerunner of the Margarita. Margarita is the Spanish name for Daisy.",
+        "The cocktail “screwdriver” origins from Persian Oil Workers in the 1920s. When lacking a spoon to stir, they used screwdrivers.",
+        "A martini cocktail should be stirred, and a shaken martini is called a Bradford. This is why Bond always has to specify his martini be made the wrong way. ",
+        "During prohibition, honey and fruit juices were heavily used to mask the poor quality of liquor.",
+        "The “Toronto Cocktail” was first recorded in 1922, at a time when alcohol was illegal in Ontario.",
+        "Cocktail glasses (tumblers) are thicker on the bottom so non-liquid ingredients can be “muddled” in the glass before liquids are added.",
+        "Cocktail umbrella’s contained hidden scrolls of Chinese newspaper which can be read like fortune cookies.",
+        "An attempt to set the Guinness World Record for the world’s most expensive cocktail was thwarted when a customer dropped and broke the bottle of Cognac that was worth $77,000.",
+        "There was a real, radium-based, alcoholic drink known as the “Atomic Cocktail” that was served in missile shaped bottles.",
+        "There exists a cocktail called a Ramboozle, popular in England in the mid 17th century.",
+        " Ernest Hemingway invented a cocktail named “Absinthe and Champagne” or, “Death in the Afternoon.",
+        "There’s an International Bartenders Association which sanctions an official cocktail list for use in the World Cocktail Competition.",
+        "There is a cocktail known as a “Sully,” named after the pilot of US Airways Flight 1549, which consists of two shots of Grey Goose and a splash of water.",
+        "The “wake-up juice” in Back to the Future 3 is a real cocktail.",
+        " A “Rich Dead Nazi” is actually a cocktail made of Goldschläger, Jägermeister, and peppermint schnapps. ",
+        "In Utah, bartenders in restaurants have to mix cocktails behind a curtain.",
+        "The Caesar is a cocktail only popular in Canada. It is a mixture of vodka and Clamato (clam broth + tomato juice).",
+        "The Brandy Daisy, a cocktail of citrus juice and brandy, was the forerunner of the Margarita. Margarita is the Spanish name for Daisy.",
+        "The cocktail “screwdriver” origins from Persian Oil Workers in the 1920s. When lacking a spoon to stir, they used screwdrivers.",
+        "A martini cocktail should be stirred, and a shaken martini is called a Bradford. This is why Bond always has to specify his martini be made the wrong way. ",
+        "During prohibition, honey and fruit juices were heavily used to mask the poor quality of liquor.",
+        "The “Toronto Cocktail” was first recorded in 1922, at a time when alcohol was illegal in Ontario.",
+        "Cocktail glasses (tumblers) are thicker on the bottom so non-liquid ingredients can be “muddled” in the glass before liquids are added.",
+        "Cocktail umbrella’s contained hidden scrolls of Chinese newspaper which can be read like fortune cookies.",
+        "An attempt to set the Guinness World Record for the world’s most expensive cocktail was thwarted when a customer dropped and broke the bottle of Cognac that was worth $77,000.",
+        "There was a real, radium-based, alcoholic drink known as the “Atomic Cocktail” that was served in missile shaped bottles."
+
+
+
+
+
+
     ];
 
     // Gets the user location on page load and displays nearby bars
@@ -82,14 +83,10 @@ $(document).ready(function () {
         var startPos;
         var geoSuccess = function (position) {
             startPos = position;
-            // document.getElementById('startLat').innerHTML = startPos.coords.latitude;
-            // document.getElementById('startLon').innerHTML = startPos.coords.longitude;
             console.log("Geoposition gives " + startPos.coords.latitude + " for latitutde");
             console.log("Geoposition gives " + startPos.coords.longitude + " for longitude");
             latitude = startPos.coords.latitude;
             longitude = startPos.coords.longitude;
-            // $("#startLat").attr("style", "display: none;");
-            // $("#startLon").attr("style", "display: none;");
             initialize();
         };
         navigator.geolocation.getCurrentPosition(geoSuccess);
@@ -114,7 +111,7 @@ $(document).ready(function () {
         service.nearbySearch(request, callback);
     }
 
-    // Creates a marker at returned place results and display place details
+    // Creates a marker at returned place results and displays place details
     function createMarker(place) {
         var detailsRequest = {
             placeId: place.place_id,
@@ -169,7 +166,6 @@ $(document).ready(function () {
     $("#SubmitButton").on("click", function (event) {
         event.preventDefault();
         if ($("#barOption").is(":checked")) {
-            
             // Function to take the user search input and display results on the map
             function initializeSearch() {
                 currentLocation = new google.maps.LatLng(latitude, longitude);
@@ -194,61 +190,11 @@ $(document).ready(function () {
             $("#SearchField").val("");
         } else if ($("#drinkOption").is(":checked")) {
             var cocktailSearch = $("#SearchField").val();
-
-            var searchURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + cocktailSearch;
-
-            $.ajax({
-                url: searchURL,
-                method: "GET"
-            }).then(function (response) {
-                $(".cocktail-results").empty();
-                $(".cocktail-image").empty();
-
-                for (i = 0; i < response.drinks.length && i < maxResults; i++) {
-                    var searchImage = $("<div class='search-image'>");
-                    var imgURL = response.drinks[i].strDrinkThumb;
-                    var image = $("<img>").attr("src", imgURL).attr("height", "125px").attr("width", "125px");
-                    searchImage.append(image);
-
-                    var searchDiv = $("<div class='cocktail-search'>");
-                    var name = response.drinks[i].strDrink;
-                    var nameText = $("<p class='search-text'>").text("Cocktail Name: " + name).css("font-weight", "bold");
-                    searchDiv.append(nameText);
-
-                    var category = response.drinks[i].strCategory;
-                    var categoryText = $("<p class='search-text'>").text("Category: " + category);
-                    searchDiv.append(categoryText);
-
-                    var ingredients = [response.drinks[i].strIngredient1 + ", " + response.drinks[i].strIngredient2 + ", " + response.drinks[i].strIngredient4 + ", " + response.drinks[i].strIngredient4];
-                    var ingredientsText = $("<p class='search-text'>").text("Ingredients: " + ingredients);
-                    searchDiv.append(ingredientsText);
-
-                    var instructions = response.drinks[i].strInstructions;
-                    var instructionsText = $("<p class='search-text'>").text("Instructions: " + instructions);
-                    searchDiv.append(instructionsText);
-
-                    var glass = response.drinks[i].strGlass;
-                    var glassText = $("<p class='search-text'>").text("Glassware: " + glass);
-                    searchDiv.append(glassText);
-
-                    // List each of the drinks displayed above.
-                    $("#search-parameter").html("<p id='pstyle'>" + "Search Results for: '" + cocktailSearch + "'" + "</p>");
-                    $(".cocktail-results").append(searchImage);
-                    $(".cocktail-results").append(searchDiv);
-                    $("#SearchField").val("");
-                }
-            });
-
-            // function quiz() {
-            //     liquor = [""];
-            //     // var userChoice = $()
-            //     liquor.push(userChoice);
-            // }
-
-            getLiquor();
+            drinkSearch(cocktailSearch);
         }
     });
 
+ FinalQuiz
     //Fun Fact functions
 function runFunFacts() {
     IntervalID = setInterval(FunFacts, 30000);
@@ -270,29 +216,73 @@ function FunFacts(){
 
 
 
+    // function that takes a drink name as an input and searches the cocktail API for that drink name
+    function drinkSearch(drinkName) {
+ master
 
+        var searchURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drinkName;
+        $.ajax({
+            url: searchURL,
+            method: "GET"
+        }).then(function (response) {
+            $(".cocktail-results").empty();
+            $(".cocktail-image").empty();
 
+            for (i = 0; i < response.drinks.length && i < maxResults; i++) {
+                var searchImage = $("<div class='search-image'>");
+                var imgURL = response.drinks[i].strDrinkThumb;
+                var image = $("<img>").attr("src", imgURL).attr("height", "125px").attr("width", "125px");
+                searchImage.append(image);
 
+                var searchDiv = $("<div class='cocktail-search'>");
+                var name = response.drinks[i].strDrink;
+                var nameText = $("<p class='search-text-name'>").text("Cocktail Name: " + name).css("font-weight", "bold");
+                searchDiv.append(nameText);
 
+                var star = $("<span class='fa-star far'>" + "</span>").attr("state", "unfilled").attr("name", name);
+                // checks to see if a drink has already been added to favorites
+                var favoriteDrinkID = name.split(" ").join("-").replace("'", "");
+                if ($("#favoritesContainer #" + favoriteDrinkID).length > 0) {
+                    star.attr("state", "filled").attr("title", "Remove From Favorites").removeClass("far").addClass("fas");
+                }
+                searchDiv.append(star);
 
+                var category = response.drinks[i].strCategory;
+                var categoryText = $("<p class='search-text'>").text("Category: " + category);
+                searchDiv.append(categoryText);
 
+                var ingredients = [response.drinks[i].strIngredient1 + ", " + response.drinks[i].strIngredient2 + ", " + response.drinks[i].strIngredient4 + ", " + response.drinks[i].strIngredient4];
+                var ingredientsText = $("<p class='search-text'>").text("Ingredients: " + ingredients);
+                searchDiv.append(ingredientsText);
 
+                var instructions = response.drinks[i].strInstructions;
+                var instructionsText = $("<p class='search-text'>").text("Instructions: " + instructions);
+                searchDiv.append(instructionsText);
 
+                var glass = response.drinks[i].strGlass;
+                var glassText = $("<p class='search-text'>").text("Glassware: " + glass);
+                searchDiv.append(glassText);
 
+                // List each of the drinks displayed above.
+                $("#search-parameter").html("<p id='pstyle'>" + "Search Results for: '" + drinkName + "'" + "</p>");
+                $(".cocktail-results").append(searchImage);
+                $(".cocktail-results").append(searchDiv);
+                $("#SearchField").val("");
+            }
+        });
+    }
 
-
-
-
-
-
-
-
-
-
+    //Fun Fact functions
+    function runFunFacts() {
+        IntervalID = setInterval(FunFacts, 30000);
+    }
+    function FunFacts() {
+        count++;
+        $("#FunFactsID").html(FunFactsArr[count]);
+    }
 
 
     // ** COCKTAIL SEARCH CODE **
-
 
     var liquor = ["bourbon"];
     var lookup = [];
@@ -300,6 +290,7 @@ function FunFacts(){
     var maxResults = 3;  // Set this limit when ready for go live.
     var liquorURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + liquor;
     var idURL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
+
 
     function getLiquor() {
         // AJAX call to gather liquor information
@@ -329,9 +320,17 @@ function FunFacts(){
             searchImage.append(image);
 
             var searchDiv = $("<div class='cocktail-search'>");
-            var name = response.drinks[0].strDrink;
-            var nameText = $("<p class='search-text'>").text("Cocktail Name: " + name).css("font-weight", "bold");
+            var name = response.drinks[0].strDrink
+            var nameText = $("<p class='search-text-name'>").text("Cocktail Name: " + name).css("font-weight", "bold");
             searchDiv.append(nameText);
+            console.log(name)
+            var star = $("<span class='fa-star far' title='Add To Favorites'>" + "</span>").attr("state", "unfilled").attr("name", name);
+            // checks to see if a drink has already been added to favorites
+            var favoriteDrinkID = name.split(" ").join("-").replace("'", "");
+            if ($("#favoritesContainer #" + favoriteDrinkID).length > 0) {
+                star.attr("state", "filled").attr("title", "Remove From Favorites").removeClass("far").addClass("fas");
+            }
+            searchDiv.append(star);
 
             var category = response.drinks[0].strCategory;
             var categoryText = $("<p class='search-text'>").text("Category: " + category);
@@ -373,6 +372,46 @@ function FunFacts(){
             // All done!
         }
     }
+
+    // Create a way to mark a drink as a favorite if clicked.
+    function favorites() {
+        var favoritesContainer = $("#favoritesContainer");
+        var currentState = $(this).attr("state");
+        var favoriteDrink = $(this).attr("name");
+        var formattedFavoriteDrinkID = favoriteDrink.split(" ").join("-").replace("'", "");
+        if (currentState == "unfilled") {
+            $(this).attr("state", "filled").attr("title", "Remove From Favorites").removeClass("far").addClass("fas")
+            var newDiv = $("<div id='" + formattedFavoriteDrinkID + "'>");
+            var newButton = $('<button type="button" class="btn btn-light my-1 favorite-button">')
+            newButton.text(favoriteDrink);
+            newDiv.append(newButton)
+            favoritesContainer.append(newDiv);
+            localStorage.setItem("favorites", favoritesContainer.html());
+        }
+        else if (currentState == "filled") {
+            $(this).attr("state", "unfilled").attr("title", "Add To Favorites").removeClass("fas").addClass("far");
+            if (favoritesContainer.has("#" + formattedFavoriteDrinkID).length) {
+                $("#" + formattedFavoriteDrinkID).remove();
+            }
+            localStorage.setItem("favorites", favoritesContainer.html());
+        }
+    }
+
+    // function quiz() {
+    //     liquor = [""];
+    //     // var userChoice = $()
+    //     liquor.push(userChoice);
+    // }
+
+    getLiquor();
+    $(document).on("click", ".fa-star", favorites);
+    $("#favoritesContainer").html(localStorage.getItem("favorites")); // displays favorites container stored in local storage on page load
+
+    // function to search for a favorited drink when clicked
+    $(document).on("click", ".favorite-button", function () {
+        var favoriteButtonText = $(this).text();
+        drinkSearch(favoriteButtonText);
+    });
 });
 
 
