@@ -442,11 +442,6 @@ $(document).ready(function () {
         }
     }
 
-    function quizReults() {
-        console.log("test");
-
-
-    }
     $(document).on("click", ".fa-star", favorites);
     $(document).on("click", ".sv_complete_btn", getLiquor);
     $("#favoritesContainer").html(localStorage.getItem("favorites")); // displays favorites container stored in local storage on page load
