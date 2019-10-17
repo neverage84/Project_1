@@ -165,46 +165,73 @@ $(document).ready(function () {
 
     $("#SubmitButton").on("click", function (event) {
         event.preventDefault();
-        if ($("#barOption").is(":checked")) {
-            // Function to take the user search input and display results on the map
-            function initializeSearch() {
-                currentLocation = new google.maps.LatLng(latitude, longitude);
-                map = new google.maps.Map(document.getElementById("map"), {
-                    center: currentLocation,
-                    zoom: 13
-                });
-                var searchInput = $("#SearchField")
-                    .val()
-                    .trim()
-                    .toLowerCase();
+        if ($("#SearchField").val().length === 0) {
+            console.log("Modal should open");
+            // Get the modal
+            var modal = document.getElementById("myModal");
 
-                request = {
-                    location: currentLocation,
-                    radius: "400",
-                    query: searchInput + " cocktail"
-                };
-                service = new google.maps.places.PlacesService(map);
-                service.textSearch(request, callback);
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // When the user clicks the button, open the modal 
+
+            modal.style.display = "block";
+
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function () {
+                modal.style.display = "none";
             }
-            initializeSearch();
-            $("#SearchField").val("");
-        } else if ($("#drinkOption").is(":checked")) {
-            var cocktailSearch = $("#SearchField").val();
-            drinkSearch(cocktailSearch);
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
         }
+        else {
+            if ($("#barOption").is(":checked")) {
+                // Function to take the user search input and display results on the map
+                function initializeSearch() {
+                    currentLocation = new google.maps.LatLng(latitude, longitude);
+                    map = new google.maps.Map(document.getElementById("map"), {
+                        center: currentLocation,
+                        zoom: 13
+                    });
+                    var searchInput = $("#SearchField")
+                        .val()
+                        .trim()
+                        .toLowerCase();
+
+                    request = {
+                        location: currentLocation,
+                        radius: "400",
+                        query: searchInput + " cocktail"
+                    };
+                    service = new google.maps.places.PlacesService(map);
+                    service.textSearch(request, callback);
+                }
+                initializeSearch();
+                $("#SearchField").val("");
+            } else if ($("#drinkOption").is(":checked")) {
+                var cocktailSearch = $("#SearchField").val();
+                drinkSearch(cocktailSearch);
+            }
+        }  
     });
 
- FinalQuiz
+    //FinalQuiz
     //Fun Fact functions
-function runFunFacts() {
-    IntervalID = setInterval(FunFacts, 30000);
-}
-function FunFacts(){
-    count ++;
-    $("#FunFactsID").html("<h3>" + FunFactsArr[count] + "</h3>");
-   
-    
-}
+    function runFunFacts() {
+        IntervalID = setInterval(FunFacts, 30000);
+    }
+    function FunFacts() {
+        count++;
+        $("#FunFactsID").html("<h3>" + FunFactsArr[count] + "</h3>");
+
+
+    }
 
 
 
@@ -218,7 +245,7 @@ function FunFacts(){
 
     // function that takes a drink name as an input and searches the cocktail API for that drink name
     function drinkSearch(drinkName) {
- master
+        //master
 
         var searchURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drinkName;
         $.ajax({
