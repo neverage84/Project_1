@@ -571,23 +571,29 @@ var json = {
     ]
 };
 
+
+
+
+
 window.survey = new Survey.Model(json);
-
+     
 survey
-    .onComplete
-    .add(function (result) {
-        LiquorType = result.data.Liquor
-        alert(LiquorType)
+.onComplete
+.add(function (result) {
+    console.log(result.data.Liquor);
+    liquor = result.data.Liquor;
+    
 
-        if (result.data.Drinks === "Something Fruity" && result.data.Relax === "Tropical beach with a sunset") {
-            document
-
-            $("#surveyElement").hide()
-            $("#IMGID").html("<img src=images/drinks/MaiTai.jpeg>" + "<br>" + "<br>" + "<h2> Mai Tai </h2>")
-
-        }
-        else if (result.data.Drinks === "Something Fruity" && result.data.Relax === "Around people I'm comfortable with") {
-            document
+    if (result.data.Drinks === "Something Fruity" && result.data.Relax === "Tropical beach with a sunset") { 
+    document
+       
+        $("#surveyElement").hide()
+        $("#IMGID").html("<img src=images/drinks/MaiTai.jpeg>" + "<br>" + "<br>" + "<h2> Mai Tai </h2>")
+      
+    }
+    else if (result.data.Drinks === "Something Fruity" && result.data.Relax === "Around people I'm comfortable with") { 
+        document
+           
 
             $("#surveyElement").hide()
 
