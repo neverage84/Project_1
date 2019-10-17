@@ -161,6 +161,14 @@ survey
                          $("#IMGID").html("<img src=images/drinks/OldFashioned.jpeg>" + "<br>" + "<br>" + "<h2> Old Fashioned</h2>")
                          
                     }
+    else if (result.data.Liquor === "Scotch") { 
+                        document
+                           
+                            $("#surveyElement").hide()
+                             
+                             $("#IMGID").html("<img src=images/drinks/OldFashioned.jpeg>" + "<br>" + "<br>" + "<h2> Old Fashioned</h2>")
+                             
+                        }
     else if (result.data.Drinks === "The stronger the better" && result.data.Liquor === "Bourbon") { 
                         document
                            
@@ -234,6 +242,14 @@ else if (result.data.Drinks === "Sour or Tart" && result.data.Relax === "My own 
                          $("#IMGID").html("<img src=images/drinks/WhiskeySour.jpeg>" + "<br>" + "<br>" + "<h2> Whiskey Sour </h2>")
                          
                     }
+else if (result.data.Drinks === "Something simple - alcohol plus 1 or 2 ingredients" && result.data.Liquor === "Whiskey") { 
+                        document
+                           
+                            $("#surveyElement").hide()
+                             
+                             $("#IMGID").html("<img src=images/drinks/WhiskeySour.jpeg>" + "<br>" + "<br>" + "<h2> Whiskey Sour </h2>")
+                             
+                        }
     else {
         document
         $("#surveyElement").hide()

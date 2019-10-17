@@ -194,8 +194,31 @@ $(document).ready(function () {
         }
     });
 
+ FinalQuiz
+    //Fun Fact functions
+function runFunFacts() {
+    IntervalID = setInterval(FunFacts, 30000);
+}
+function FunFacts(){
+    count ++;
+    $("#FunFactsID").html("<h3>" + FunFactsArr[count] + "</h3>");
+   
+    
+}
+
+
+
+
+
+
+
+
+
+
+
     // function that takes a drink name as an input and searches the cocktail API for that drink name
     function drinkSearch(drinkName) {
+ master
 
         var searchURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drinkName;
         $.ajax({
