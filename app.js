@@ -564,8 +564,9 @@ window.survey = new Survey.Model(json);
 survey
 .onComplete
 .add(function (result) {
-    LiquorType = result.data.Liquor
-    alert(LiquorType)
+    console.log(result.data.Liquor);
+    liquor = result.data.Liquor;
+    
 
     if (result.data.Drinks === "Something Fruity" && result.data.Relax === "Tropical beach with a sunset") { 
     document
