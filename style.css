@@ -1,7 +1,10 @@
 body, html {
     height: 100%;
+    background: url("Images/CocktailMain.jpg") no-repeat center center fixed;
+    background-size: cover;
    }
    
+
    .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -42,6 +45,7 @@ body, html {
        background-size: cover;
        height: 100%;
    }
+
 
    nav {
     background-color: rgba(109, 214, 255, 0.6);
