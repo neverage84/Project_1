@@ -161,6 +161,14 @@ survey
                          $("#IMGID").html("<img src=images/drinks/OldFashioned.jpeg>" + "<br>" + "<br>" + "<h2> Old Fashioned</h2>")
                          
                     }
+    else if (result.data.Liquor === "Scotch") { 
+                        document
+                           
+                            $("#surveyElement").hide()
+                             
+                             $("#IMGID").html("<img src=images/drinks/OldFashioned.jpeg>" + "<br>" + "<br>" + "<h2> Old Fashioned</h2>")
+                             
+                        }
     else if (result.data.Drinks === "The stronger the better" && result.data.Liquor === "Bourbon") { 
                         document
                            
