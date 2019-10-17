@@ -214,6 +214,7 @@ a {
     padding: 20px;
     text-align: left;
     color: #007bff;
+    overflow: auto;
 }
 
 .cocktail-results {

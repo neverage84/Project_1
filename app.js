@@ -1,7 +1,6 @@
-
 // ** BAR SEARCH CODE **
 
-$(document).ready(function () {
+$(document).ready(function() {
 
     // Global Map Variables
     var latitude;
@@ -77,11 +76,11 @@ $(document).ready(function () {
     ];
 
     // Gets the user location on page load and displays nearby bars
-    window.onload = function () {
+    window.onload = function() {
         FunFacts();
         runFunFacts();
         var startPos;
-        var geoSuccess = function (position) {
+        var geoSuccess = function(position) {
             startPos = position;
             console.log("Geoposition gives " + startPos.coords.latitude + " for latitutde");
             console.log("Geoposition gives " + startPos.coords.longitude + " for longitude");
@@ -117,7 +116,7 @@ $(document).ready(function () {
             placeId: place.place_id,
             fields: ['name', 'formatted_address', 'place_id', 'geometry', "formatted_phone_number", "opening_hours", "website"]
         };
-        service.getDetails(detailsRequest, function (placeMarker, status) {
+        service.getDetails(detailsRequest, function(placeMarker, status) {
             if (status === google.maps.places.PlacesServiceStatus.OK) {
                 marker = new google.maps.Marker({
                     map: map,
@@ -132,7 +131,7 @@ $(document).ready(function () {
                     dayIndex = 6
                 }
                 console.log(placeMarker)
-                google.maps.event.addListener(marker, 'click', function () {
+                google.maps.event.addListener(marker, 'click', function() {
                     var br = "<br>"
                     infowindow.setContent('<div><strong>' + placeMarker.name + '</strong>' + br +
                         placeMarker.formatted_address + br + placeMarker.formatted_phone_number + br +
@@ -163,7 +162,7 @@ $(document).ready(function () {
         }
     }
 
-    $("#SubmitButton").on("click", function (event) {
+    $("#SubmitButton").on("click", function(event) {
         event.preventDefault();
         if ($("#SearchField").val().length === 0) {
             console.log("Modal should open");
@@ -179,18 +178,17 @@ $(document).ready(function () {
 
 
             // When the user clicks on <span> (x), close the modal
-            span.onclick = function () {
+            span.onclick = function() {
                 modal.style.display = "none";
             }
 
             // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function (event) {
+            window.onclick = function(event) {
                 if (event.target == modal) {
                     modal.style.display = "none";
                 }
             }
-        }
-        else {
+        } else {
             if ($("#barOption").is(":checked")) {
                 // Function to take the user search input and display results on the map
                 function initializeSearch() {
@@ -218,40 +216,17 @@ $(document).ready(function () {
                 var cocktailSearch = $("#SearchField").val();
                 drinkSearch(cocktailSearch);
             }
-        }  
+        }
     });
-
-    //FinalQuiz
-    //Fun Fact functions
-    function runFunFacts() {
-        IntervalID = setInterval(FunFacts, 30000);
-    }
-    function FunFacts() {
-        count++;
-        $("#FunFactsID").html("<h3>" + FunFactsArr[count] + "</h3>");
-
-
-    }
-
-
-
-
-
-
-
-
-
-
 
     // function that takes a drink name as an input and searches the cocktail API for that drink name
     function drinkSearch(drinkName) {
-        //master
 
         var searchURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drinkName;
         $.ajax({
             url: searchURL,
             method: "GET"
-        }).then(function (response) {
+        }).then(function(response) {
             $(".cocktail-results").empty();
             $(".cocktail-image").empty();
 
@@ -303,6 +278,7 @@ $(document).ready(function () {
     function runFunFacts() {
         IntervalID = setInterval(FunFacts, 30000);
     }
+
     function FunFacts() {
         count++;
         $("#FunFactsID").html(FunFactsArr[count]);
@@ -314,7 +290,7 @@ $(document).ready(function () {
     var liquor = ["bourbon"];
     var lookup = [];
     var lookupIndex = 0;
-    var maxResults = 3;  // Set this limit when ready for go live.
+    var maxResults = 3; // Set this limit when ready for go live.
     var liquorURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + liquor;
     var idURL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
 
@@ -324,7 +300,7 @@ $(document).ready(function () {
         $.ajax({
             url: liquorURL,
             method: "GET"
-        }).then(function (response) {
+        }).then(function(response) {
             // console.log(response);
 
             for (i = 0; i < response.drinks.length && i < maxResults; i++) {
@@ -414,8 +390,7 @@ $(document).ready(function () {
             newDiv.append(newButton)
             favoritesContainer.append(newDiv);
             localStorage.setItem("favorites", favoritesContainer.html());
-        }
-        else if (currentState == "filled") {
+        } else if (currentState == "filled") {
             $(this).attr("state", "unfilled").attr("title", "Add To Favorites").removeClass("fas").addClass("far");
             if (favoritesContainer.has("#" + formattedFavoriteDrinkID).length) {
                 $("#" + formattedFavoriteDrinkID).remove();
@@ -435,10 +410,8 @@ $(document).ready(function () {
     $("#favoritesContainer").html(localStorage.getItem("favorites")); // displays favorites container stored in local storage on page load
 
     // function to search for a favorited drink when clicked
-    $(document).on("click", ".favorite-button", function () {
+    $(document).on("click", ".favorite-button", function() {
         var favoriteButtonText = $(this).text();
         drinkSearch(favoriteButtonText);
     });
 });
-
-
