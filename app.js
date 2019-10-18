@@ -1,4 +1,5 @@
 // ** BAR SEARCH CODE **
+var LiquorType;
 
 $(document).ready(function () {
     // Global Map Variables
@@ -11,7 +12,6 @@ $(document).ready(function () {
     var request;
     var marker;
     var maxResults = 5;
-    var LiquorType;
 
     //Global Fun Facts Variables
     var IntervalID;
@@ -311,11 +311,11 @@ $(document).ready(function () {
     var lookup = [];
     var lookupIndex = 0;
     var maxResults = 5; // Set this limit when ready for go live.
-    var liquorURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + LiquorType;
     var idURL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
 
 
     function getLiquor() {
+        var liquorURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + LiquorType;
         // AJAX call to gather liquor information
         $.ajax({
             url: liquorURL,
