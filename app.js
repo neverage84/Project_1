@@ -2,7 +2,6 @@
 // ** BAR SEARCH CODE **
 
 $(document).ready(function () {
-
     // Global Map Variables
     var latitude;
     var longitude;
