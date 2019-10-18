@@ -1,36 +1,51 @@
-body, html {
+body,
+html {
     height: 100%;
     background: url("Images/CocktailMain.jpg") no-repeat center center fixed;
     background-size: cover;
-   }
-   
+}
 
-   .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
 
-  .modal-content-custom {
+.modal-content-custom {
     background-color: #f86565;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-  }
+}
 
-  @keyframes flash {
-    0% {color: #f86565}
-            50% {color: black;}
-            100% {color: #f86565;}
+@keyframes flash {
+    0% {
+        color: #f86565
+    }
+    50% {
+        color: black;
+    }
+    100% {
+        color: #f86565;
+    }
 }
 
 #flash {
@@ -38,16 +53,8 @@ body, html {
     animation-duration: 1s;
     animation-iteration-count: infinite;
 }
-  
-   .bg {
-       background: url("Images/CocktailMain.jpg") no-repeat center center fixed;
-     
-       background-size: cover;
-       height: 100%;
-   }
 
-
-   nav {
+nav {
     background-color: rgba(109, 214, 255, 0.6);
     padding: 10px;
     border-bottom-color: black;
@@ -55,24 +62,21 @@ body, html {
     width: 100%;
     text-align: center;
     height: 15%;
-   }
+}
 
+.remove-all-margin {
+    margin: 0 ! important;
+}
 
-   .remove-all-margin{
-    margin:0 ! important;
-    }
+.row-no-margin {
+    margin-left: 0px;
+    margin-right: 0px;
+}
 
-    .row-no-margin {
-        margin-left: 0px;
-        margin-right: 0px;
-     } 
-    
 .MainContent {
     color: aliceblue;
     margin-top: 40px;
     width: 100%;
-    
-    
 }
 
 a {
@@ -84,13 +88,14 @@ a {
     font-size: 60px;
 }
 
-.Quiz{
+.Quiz {
     width: 100px;
     height: 100px;
 }
+
 .sidebar {
-	background-color: rgba(64, 224, 208, 0.8);
-	color: white;
+    background-color: rgba(64, 224, 208, 0.8);
+    color: white;
     padding-top: 20px;
     border: solid white 1px;
     opacity: 1;
@@ -101,7 +106,7 @@ a {
     margin-top: 10px;
     height: 45%;
     width: 48%;
-    float:right;
+    float: right;
 }
 
 .FavoriteDrinks {
@@ -109,8 +114,7 @@ a {
     height: 45%;
     width: 48%;
     margin-left: 0px;
-    float:left;
-    
+    float: left;
 }
 
 .img-circle {
@@ -128,26 +132,9 @@ a {
 }
 
 .CenterLeftSection {
-   
     margin-right: 0px;
     background-color: rgba(64, 224, 208, 0.8);
-	color: black;
-    padding-top: 20px;
-    border: solid white 1px;
-    height: 1200px;
-    width: 45%;
-    opacity: 1;
-    border-radius: 5px;
-    padding: 10px;
-    /*overflow: auto;*/
-    float:left;
-}
-
-.CenterRightSection {
-    
-    margin-right: 0px;
-    background-color: rgba(64, 224, 208, 0.8);
-	color: black;
+    color: black;
     padding-top: 20px;
     border: solid white 1px;
     height: 1200px;
@@ -159,7 +146,20 @@ a {
     float: left;
 }
 
-
+.CenterRightSection {
+    margin-right: 0px;
+    background-color: rgba(64, 224, 208, 0.8);
+    color: black;
+    padding-top: 20px;
+    border: solid white 1px;
+    height: 1200px;
+    width: 45%;
+    opacity: 1;
+    border-radius: 5px;
+    padding: 10px;
+    /*overflow: auto;*/
+    float: left;
+}
 
 .CenterImages {
     width: 50px;
@@ -172,9 +172,10 @@ a {
 }
 
 .BeerLogo {
-    width:75px;
+    width: 75px;
     height: 75px;
 }
+
 #map {
     height: 90%;
     width: 90%;
@@ -190,10 +191,14 @@ a {
     position: relative;
     top: 2%;
     right: 5%;
-    
 }
 
 #title {
+    margin: 0 auto;
+}
+
+#cocktail-table {
+    width: fit-content;
     margin: 0 auto;
 }
 
@@ -204,12 +209,12 @@ a {
     height: 385px;
 }
 
-.cocktail-search, .search-image {
-    display: inline-block;
-    padding: 20px;
+.cocktail-search,
+.search-image {
     text-align: left;
     color: #007bff;
 }
+
 .search-text {
     width: 475px;
     margin: 0;
@@ -224,9 +229,11 @@ a {
     padding: 0 10px;
     font-size: 25px;
     color: gold;
+    vertical-align: middle;
 }
 
-.fa-star, .search-text-name {
+.fa-star,
+.search-text-name {
     display: inline-block;
     margin: 0;
 }
@@ -256,7 +263,31 @@ a {
     vertical-align: text-bottom;
 }
 
+
+/* width and height */
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+
+/* Track */
+
+ ::-webkit-scrollbar-track {
+    background: lightgray;
+}
+
+
+/* Handle */
+
+ ::-webkit-scrollbar-thumb {
+    background: gray;
+}
+
+
 /*  */
+
 @media only screen and (max-width: 980px) {
     nav {
         background-color: rgba(109, 214, 255, 0.6);
@@ -267,202 +298,210 @@ a {
         text-align: center;
         height: 23%;
     }
-
     #headerRight {
         position: absolute;
         height: 100%;
         bottom: -86px;
         right: 30%;
-        
-        
     }
-    
     .headerRightContents {
         position: relative;
         top: 2%;
         right: 5%;
-        
     }
-
     .modal {
-        display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
-        z-index: 1; /* Sit on top */
-        padding-top: 100px; /* Location of the box */
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        padding-top: 100px;
+        /* Location of the box */
         left: 0;
         top: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-      }
-    
-      .modal-content-custom {
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
+    }
+    .modal-content-custom {
         background-color: #f86565;
         margin: auto;
         padding: 20px;
         border: 1px solid #888;
         width: 80%;
-      }
-
-      @keyframes flash {
-        0% {color: #f86565;}
-            50% {color: black;}
-            100% {color: #f86565;}
     }
-    
+    @keyframes flash {
+        0% {
+            color: #f86565;
+        }
+        50% {
+            color: black;
+        }
+        100% {
+            color: #f86565;
+        }
+    }
     #flash {
         animation-name: flash;
         animation-duration: 1s;
         animation-iteration-count: infinite;
     }
-
 }
-    
-    @media only screen and (max-width: 768px)  {
-    
-        nav {
-            background-color: rgba(109, 214, 255, 0.6);
-            padding: 10px;
-            border-bottom-color: black;
-            font-size: 24px;
-            width: 100%;
-            text-align: center;
-            height: 23%;
-        }
 
-        #headerRight {
-            position: absolute;
-            height: 100%;
-            bottom: -86px;
-            right: 25%;
-        }
-        
-        .headerRightContents {
-            position: relative;
-            top: 2%;
-            right: 5%;
-            
-        }
-
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            padding-top: 100px; /* Location of the box */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-          }
-        
-          .modal-content-custom {
-            background-color: #f86565;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-          }
-
-          @keyframes flash {
-            0% {color: #f86565;}
-            50% {color: black;}
-            100% {color: #f86565;}
-            
-        }
-        
-        #flash {
-            animation-name: flash;
-            animation-duration: 1s;
-            animation-iteration-count: infinite;
-        }
+@media only screen and (max-width: 768px) {
+    nav {
+        background-color: rgba(109, 214, 255, 0.6);
+        padding: 10px;
+        border-bottom-color: black;
+        font-size: 24px;
+        width: 100%;
+        text-align: center;
+        height: 23%;
     }
-
-    @media only screen and (max-width: 576px)  {
-
-
-        .CenterLeftSection {
-   
-            margin-right: 0px;
-            background-color: rgba(64, 224, 208, 0.8);
+    #headerRight {
+        position: absolute;
+        height: 100%;
+        bottom: -86px;
+        right: 25%;
+    }
+    .headerRightContents {
+        position: relative;
+        top: 2%;
+        right: 5%;
+    }
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        padding-top: 100px;
+        /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
+    }
+    .modal-content-custom {
+        background-color: #f86565;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+    @keyframes flash {
+        0% {
+            color: #f86565;
+        }
+        50% {
             color: black;
-            padding-top: 20px;
-            border: solid white 1px;
-            height: 1250px;
-            width: 45%;
-            opacity: 1;
-            border-radius: 5px;
-            padding: 10px;
-            /*overflow: auto;*/
-            float:left;
         }
-
-
-        nav {
-            background-color: rgba(109, 214, 255, 0.6);
-            padding: 10px;
-            border-bottom-color: black;
-            font-size: 24px;
-            width: 100%;
-            text-align: center;
-            height: 27%;
+        100% {
+            color: #f86565;
         }
-
-        #headerRight {
-            position: absolute;
-            height: 100%;
-            bottom: -86px;
-            right: 20%;
-        }
-        
-        .headerRightContents {
-            position: relative;
-            top: 2%;
-            right: 5%;
-            
-        }
-
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            padding-top: 100px; /* Location of the box */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-          }
-        
-          .modal-content-custom {
-            background-color: #f86565;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-          }
-
-          @keyframes flash {
-            0% {color: #f86565;}
-            50% {color: black;}
-            100% {color: #f86565;}
-            
-        }
-        
-        #flash {
-            animation-name: flash;
-            animation-duration: 1s;
-            animation-iteration-count: infinite;
-        }
-
-       
-
-
     }
-    
+    #flash {
+        animation-name: flash;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .CenterLeftSection {
+        margin-right: 0px;
+        background-color: rgba(64, 224, 208, 0.8);
+        color: black;
+        padding-top: 20px;
+        border: solid white 1px;
+        height: 1250px;
+        width: 45%;
+        opacity: 1;
+        border-radius: 5px;
+        padding: 10px;
+        /*overflow: auto;*/
+        float: left;
+    }
+    nav {
+        background-color: rgba(109, 214, 255, 0.6);
+        padding: 10px;
+        border-bottom-color: black;
+        font-size: 24px;
+        width: 100%;
+        text-align: center;
+        height: 27%;
+    }
+    #headerRight {
+        position: absolute;
+        height: 100%;
+        bottom: -86px;
+        right: 20%;
+    }
+    .headerRightContents {
+        position: relative;
+        top: 2%;
+        right: 5%;
+    }
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        padding-top: 100px;
+        /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
+    }
+    .modal-content-custom {
+        background-color: #f86565;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+    @keyframes flash {
+        0% {
+            color: #f86565;
+        }
+        50% {
+            color: black;
+        }
+        100% {
+            color: #f86565;
+        }
+    }
+    #flash {
+        animation-name: flash;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+    }
+}
