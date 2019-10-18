@@ -39,45 +39,47 @@
 </head>
 
 <body class="bg">
-    
-        <div id="myModal" class="modal">
 
-                <!-- Modal content -->
-                <div class="modal-content-custom">
-                  <span class="close">&times;</span>
-                  <p><h3 style = "text-align:center;", id="flash">Error: No text entered for bar or drink</h3></p>
-                </div>
-              
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content-custom">
+            <span class="close">&times;</span>
+            <p>
+                <h3 style="text-align:center;" , id="flash">Error: No text entered for bar or drink</h3>
+            </p>
         </div>
+
+    </div>
     <nav class="nav">
-            <!--<a class="nav-item nav-link" href="#">Quiz</a>
+        <!--<a class="nav-item nav-link" href="#">Quiz</a>
             <a class="nav-item nav-link" href="#">Cocktail Search</a>-->
-    
-    
-            <p id="title"><img class="happyHourIcons" src="images/Happy-Hour.png" width="50px" height="50px">Happy Hour<img
-                    class="happyHourIcons" src="images/Happy-Hour.png" width="50px" height="50px"></p>
-    
-    
-                    
-            <!--<a class="nav-item nav-link" href="#">Bars</a>-->
-            <div id="headerRight">
-                <form id="radioOptions">
-                    <p>I'm searching for a: </p>
-                    <label><input type="radio" name="searchType" id="barOption" value="bar" checked="checked">Bar</label>
-                    <label><input type="radio" name="searchType" id="drinkOption" value="drink">Drink</label>
-                </form>
-                <form class="form-inline my-2 my-lg-0 headerRightContents">
-                    <input id="SearchField" class="form-control mr-sm-2 controls" type="text"
-                        placeholder="Best Long Island Ice Tea">
-                    <button id="SubmitButton" class="btn btn-success my-2" type="submit">Search</button>
-                </form>
-            </div>
-    
-        </nav>
-    
-    
+
+
+        <p id="title"><img class="happyHourIcons" src="images/Happy-Hour.png" width="50px" height="50px">Happy Hour<img
+                class="happyHourIcons" src="images/Happy-Hour.png" width="50px" height="50px"></p>
+
+
+
+        <!--<a class="nav-item nav-link" href="#">Bars</a>-->
+        <div id="headerRight">
+            <form id="radioOptions">
+                <p>I'm searching for a: </p>
+                <label><input type="radio" name="searchType" id="barOption" value="bar" checked="checked">Bar</label>
+                <label><input type="radio" name="searchType" id="drinkOption" value="drink">Drink</label>
+            </form>
+            <form class="form-inline my-2 my-lg-0 headerRightContents">
+                <input id="SearchField" class="form-control mr-sm-2 controls" type="text"
+                    placeholder="Best Long Island Ice Tea">
+                <button id="SubmitButton" class="btn btn-success my-2" type="submit">Search</button>
+            </form>
+        </div>
+
+    </nav>
+
+
     <div class="container-fluid">
-            
+
         <div class="row-no-margin MainContent">
 
             <div class="text-center col-xl-6 CenterLeftSection">
@@ -90,9 +92,13 @@
                 </div>
                 <img src="images/cocktailsvariety.png" class="MapImage">
                 <h3 class="pt-3">Cocktail Info</h3>
-                <div class=" justify-content-center align-items-start overflow-auto cocktail-info ContentSections">
+                <div class="justify-content-center align-items-start overflow-auto cocktail-info ContentSections">
                     <div id="search-parameter"></div>
-                    <div class="form-row justify-content-center cocktail-results"></div>
+                    <div class="form-row justify-content-center"></div>
+                    <table class="table table-borderless" id="cocktail-table">
+                        <tbody class="cocktail-results">
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="text-center col-xl-6 CenterRightSection">
@@ -122,9 +128,11 @@
     <script type="text/javascript"
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvcbnSMyaXIVUF_dAd85dXv0aGQb7GTYs&libraries=places"></script>
 
+
         <audio autoplay>
             <source src="images/PinaColada.mp3" type="audio/mpeg">
         </audio> 
+
 
 </body>
 
